@@ -52,6 +52,8 @@ body::after{width:460px;height:460px;background:radial-gradient(circle,#00d4a0,t
 .lang{background:rgba(13,22,41,.7);border:1px solid var(--line);border-radius:12px;padding:7px 10px;color:var(--muted);cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;max-width:86px;backdrop-filter:blur(8px);transition:.2s;display:inline-flex;align-items:center;gap:6px;line-height:1}
 .lang:focus,.lang:hover{border-color:var(--primary);color:var(--text);box-shadow:var(--glow)}
 #langFlag{font-size:16px}
+.kurd{position:relative;display:inline-block;width:22px;height:14px;border-radius:2px;overflow:hidden;vertical-align:-2px;background:repeating-linear-gradient(180deg,#0f7a40 0px, #0f7a40 4.66px, #fdfdfd 4.66px, #fdfdfd 9.33px, #da0f21 9.33px, #da0f21 14px)}
+.kurd::before{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:7px;height:7px;background:#fcca1b;border-radius:50%}
 #langCode{letter-spacing:.6px}
 .lang-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .lang-btn{display:flex;align-items:center;gap:12px;background:linear-gradient(170deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:16px;padding:13px 15px;cursor:pointer;transition:.2s;font-family:inherit}
@@ -792,8 +794,9 @@ function openSettings(){
 /* ============ init ============ */
 function daily(){const d=new Date().toDateString();if(S.lastDay!==d){S.lastDay=d;S.streak++;addPts(10);toast('⭐ +10')}}
 let countDown=null;
-function setLang(code){L=code;localStorage.setItem('jibLang',L);document.documentElement.dir=(RTL.indexOf(L)>=0)?'rtl':'ltr';$('#langFlag').textContent=LANGS[L][0];$('#langCode').textContent=L.toUpperCase();$('#lblLang').textContent=t('lang');render()}
-function buildLangGrid(){$('#langGrid').innerHTML=Object.keys(LANGS).map(c=>{const[fl,n]=LANGS[c];return `<div class="lang-btn ${c===L?'active':''}" data-l="${c}"><span class="lf">${fl}</span><span class="lt"><b>${n}</b></span></div>`}).join('');$('#langGrid').querySelectorAll('.lang-btn').forEach(b=>b.onclick=()=>{setLang(b.dataset.l);document.getElementById('langModal').classList.remove('show')})}
+function flagHTML(c){return (c==='ckb'||c==='kmr')?'<span class="kurd"></span>':LANGS[c][0]}
+function setLang(code){L=code;localStorage.setItem('jibLang',L);document.documentElement.dir=(RTL.indexOf(L)>=0)?'rtl':'ltr';$('#langFlag').innerHTML=flagHTML(L);$('#langCode').textContent=L.toUpperCase();$('#lblLang').textContent=t('lang');render()}
+function buildLangGrid(){$('#langGrid').innerHTML=Object.keys(LANGS).map(c=>{const[fl,n]=LANGS[c];return `<div class="lang-btn ${c===L?'active':''}" data-l="${c}"><span class="lf">${flagHTML(c)}</span><span class="lt"><b>${n}</b></span></div>`}).join('');$('#langGrid').querySelectorAll('.lang-btn').forEach(b=>b.onclick=()=>{setLang(b.dataset.l);document.getElementById('langModal').classList.remove('show')})}
 $('#langBtn').onclick=()=>{buildLangGrid();document.getElementById('langModal').classList.add('show')};
 $('#langModal').addEventListener('click',e=>{if(e.target.id==='langModal')document.getElementById('langModal').classList.remove('show')});
 $('#settingsBtn').onclick=openSettings;
@@ -804,7 +807,7 @@ function loadApp(){daily();setGreet();render();fetchFX();fetchGold();fetchCrypto
 function setGreet(){const gd=new Date();const j=toJalali(gd.getFullYear(),gd.getMonth()+1,gd.getDate());let dateStr=(L==='fa'||L==='ckb'||L==='ar')?(MONTHS_FA[j.m-1]+' '+j.d+'، '+j.j):gd.toLocaleDateString(LOCALE[L]||'en-US',{weekday:'long',day:'numeric',month:'long'});$('#greetDate').textContent=dateStr}
 if('serviceWorker' in navigator&&location.protocol.indexOf('http')===0){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})})}
 let beforeInstallPrompt=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();beforeInstallPrompt=e;toast(t('install'))});
-$('#langFlag').textContent=LANGS[L]?LANGS[L][0]:'🌐';$('#langCode').textContent=L.toUpperCase();$('#lblLang').textContent=t('lang');
+$('#langFlag').innerHTML=flagHTML(L);$('#langCode').textContent=L.toUpperCase();$('#lblLang').textContent=t('lang');
 loadApp();
 </script>
 </body>
