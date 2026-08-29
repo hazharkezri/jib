@@ -80,10 +80,22 @@ body::after{width:460px;height:460px;background:radial-gradient(circle,#00d4a0,t
 .stitle .more:hover{color:var(--accent)}
 .kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .kpi{background:linear-gradient(170deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:18px;padding:16px;position:relative;overflow:hidden;transition:.25s}
+.kpi::after{content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,var(--kpc,rgba(108,92,255,.18)),transparent 70%);opacity:.6;transition:.3s}
 .kpi:hover{transform:translateY(-3px);border-color:var(--primary);box-shadow:var(--glow)}
 .kpi small{color:var(--muted);font-size:12px;display:flex;align-items:center;gap:5px}
-.kpi b{font-size:21px;display:block;margin-top:6px;font-family:'Sora',sans-serif}
+.kpi b{font-size:21px;display:block;margin-top:6px;font-family:'Sora',sans-serif;position:relative}
 .kpi .chg{font-size:12px;font-weight:700;display:inline-block;margin-top:4px}
+.hero-card{position:relative;overflow:hidden;border-radius:26px;padding:24px 22px;margin-bottom:16px;background:linear-gradient(135deg,#4a3bd8,#7a5cff 55%,#00c9a0);box-shadow:0 22px 52px rgba(90,70,255,.38);animation:popIn .55s ease both}
+.hero-card::before{content:"";position:absolute;right:-60px;top:-70px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.12);animation:spin 26s linear infinite}
+.hero-card::after{content:"";position:absolute;left:-30px;bottom:-70px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.08)}
+.hero-card .hc-row{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1;gap:10px}
+.hero-card .hc-lab{font-size:13px;opacity:.9;font-weight:600}
+.hero-card .hc-big{font-size:34px;font-family:'Sora',sans-serif;font-weight:800;letter-spacing:1px;display:block;margin:2px 0}
+.hero-card .hc-sub{font-size:12px;opacity:.85}
+.hero-card .hc-chip{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.28);padding:7px 13px;border-radius:14px;font-size:12px;font-weight:700;backdrop-filter:blur(4px);white-space:nowrap}
+.hero-card .hc-btns{display:flex;gap:9px;margin-top:22px;position:relative;z-index:1}
+.hero-card .hc-btn{flex:1;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:15px;padding:13px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;backdrop-filter:blur(6px)}
+.hero-card .hc-btn:hover{background:rgba(255,255,255,.28);transform:translateY(-2px)}
 .green{color:var(--accent)}.red{color:var(--red)}.gold{color:var(--gold)}.blue{color:var(--blue)}.pink{color:var(--pink)}.orange{color:var(--orange)}
 .quick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .qa{background:linear-gradient(170deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:18px;padding:16px 4px;text-align:center;cursor:pointer;transition:.22s;position:relative;overflow:hidden}
@@ -131,16 +143,22 @@ body::after{width:460px;height:460px;background:radial-gradient(circle,#00d4a0,t
 .news .nbody .cat{font-size:11px;color:var(--primary2);font-weight:700;text-transform:uppercase}
 .news .nbody b{font-size:15px;display:block;margin:5px 0}
 .news .nbody small{color:var(--muted);font-size:12px}
-.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:520px;max-width:100%;background:rgba(10,15,30,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--line);display:flex;z-index:40;padding:10px 6px calc(10px + env(safe-area-inset-bottom));overflow-x:auto;scrollbar-width:none;box-shadow:0 -14px 40px rgba(0,0,0,.5)}
-.bnav::-webkit-scrollbar{display:none}
-.bnav button{flex:0 0 auto;min-width:50px;background:none;border:none;color:var(--muted2);font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:4px;padding:7px 6px;cursor:pointer;position:relative;transition:.2s;border-radius:14px}
+.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:520px;max-width:100%;background:rgba(10,15,30,.82);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-top:1px solid rgba(120,140,220,.22);display:flex;z-index:40;padding:8px 8px calc(10px + env(safe-area-inset-bottom));box-shadow:0 -14px 44px rgba(0,0,0,.55);border-radius:22px 22px 0 0}
+.bnav button{flex:1;min-width:0;background:none;border:none;color:var(--muted2);font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:8px 4px;cursor:pointer;position:relative;transition:.22s;border-radius:16px}
+.bnav button .e{font-size:21px;line-height:1;transition:.22s;filter:drop-shadow(0 2px 6px rgba(108,92,255,.18))}
+.bnav button small{font-size:10px;font-weight:700;white-space:nowrap;letter-spacing:.2px;transition:.22s}
 .bnav button:hover{color:var(--text)}
-.bnav button .e{font-size:21px;line-height:1;filter:drop-shadow(0 2px 6px rgba(108,92,255,.2))}
-.bnav button small{font-size:9px;font-weight:700;white-space:nowrap;letter-spacing:.2px}
-.bnav button.active{color:var(--primary)}
-.bnav button.active .e{transform:translateY(-2px) scale(1.12)}
-.bnav button.active small{color:var(--primary)}
-.bnav button.active::before{content:"";position:absolute;top:-10px;width:30px;height:4px;border-radius:4px;background:var(--grad);box-shadow:0 0 16px rgba(108,92,255,.8)}
+.bnav button.active{color:#fff;background:linear-gradient(135deg,rgba(108,92,255,.28),rgba(0,212,160,.22));box-shadow:inset 0 0 0 1px rgba(108,92,255,.35)}
+.bnav button.active .e{transform:translateY(-2px) scale(1.14);filter:drop-shadow(0 4px 10px rgba(108,92,255,.6))}
+.bnav button.active small{color:var(--text)}
+.bnav button.active::after{content:"";position:absolute;top:2px;width:22px;height:3px;border-radius:3px;background:var(--grad);box-shadow:0 0 12px rgba(108,92,255,.8);animation:popIn .3s ease}
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.mcell{display:flex;flex-direction:column;align-items:center;gap:9px;background:linear-gradient(170deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:18px;padding:18px 8px;cursor:pointer;transition:.22s;position:relative;overflow:hidden}
+.mcell::before{content:"";position:absolute;inset:0;background:var(--grad-soft);opacity:0;transition:.22s}
+.mcell:hover,.mcell:active{transform:translateY(-3px);border-color:var(--primary);box-shadow:var(--glow)}
+.mcell:hover::before{opacity:1}
+.mcell .e{font-size:26px;position:relative;filter:drop-shadow(0 3px 8px rgba(108,92,255,.25))}
+.mcell small{font-size:12px;color:var(--muted);font-weight:600;position:relative}
 .modal{position:fixed;inset:0;background:rgba(3,5,10,.78);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;z-index:60;animation:fade .25s ease}
 .modal.show{display:flex}
 .sheet{background:linear-gradient(180deg,var(--card2),#0a1020);width:520px;max-width:100%;border-radius:26px 26px 0 0;padding:8px 22px 26px;max-height:88vh;overflow:auto;animation:up .32s cubic-bezier(.2,.8,.3,1);border-top:1px solid var(--line2)}
@@ -164,6 +182,9 @@ body::after{width:460px;height:460px;background:radial-gradient(circle,#00d4a0,t
 @keyframes popIn{0%{opacity:0;transform:scale(.9)}60%{transform:scale(1.03)}100%{opacity:1;transform:scale(1)}}
 @keyframes slideDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
 @keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(108,92,255,.55)}70%{box-shadow:0 0 0 16px rgba(108,92,255,0)}100%{box-shadow:0 0 0 0 rgba(108,92,255,0)}}
+@keyframes shimmer{to{transform:translateX(100%)}}
+.fab{animation:pulse 2.6s ease-out infinite}
 .fade-in{animation:fade .45s ease both}
 
 /* ===== budget chart ===== */
@@ -255,7 +276,7 @@ en:{
   greetM:"Good morning",greetA:"Good afternoon",greetE:"Good evening",
   points:"Your points",lv:"Level",streak:"🔥 {n}-day streak",
   quick:"Quick actions",
-  money:"Money",payments:"Payments",markets:"Markets",schedule:"Schedule",health:"Health",news:"News",rewards:"Rewards",list:"List",ai:"AI",
+  money:"Money",payments:"Payments",markets:"Markets",schedule:"Schedule",health:"Health",news:"News",rewards:"Rewards",list:"List",ai:"AI",home:"Home",more:"More",
   balance:"Balance",gold:"Gold",savings:"Savings",debt:"Debt",inc:"Income",exp:"Expense",transfer:"Transfer",
   addTrans:"Add transaction",addTask:"Add task",addHabit:"Add habit",addItem:"Add item",addReminder:"Add reminder",
   amount:"Amount",type:"Type",desc:"Description",time:"Time",date:"Date",label:"Label",category:"Category",
@@ -276,7 +297,7 @@ fa:{
   greetM:"صبح بخیر",greetA:"ظهر بخیر",greetE:"عصر بخیر",
   points:"امتیاز شما",lv:"سطح",streak:"🔥 {n} روز پیاپی",
   quick:"عملیات سریع",
-  money:"پول",payments:"پرداخت‌ها",markets:"بازارها",schedule:"برنامه",health:"سلامت",news:"خبر",rewards:"جایزه",list:"خرید",ai:"هوش",
+  money:"پول",payments:"پرداخت‌ها",markets:"بازارها",schedule:"برنامه",health:"سلامت",news:"خبر",rewards:"جایزه",list:"خرید",ai:"هوش",home:"خانه",more:"بیشتر",
   balance:"موجودی",gold:"طلا",savings:"پس‌انداز",debt:"بدهی",inc:"درآمد",exp:"هزینه",transfer:"انتقال",
   addTrans:"افزودن تراکنش",addTask:"افزودن کار",addHabit:"افزودن عادت",addItem:"افزودن کالا",addReminder:"افزودن یادآور",
   amount:"مبلغ (تومان)",type:"نوع",desc:"توضیح",time:"زمان",date:"تاریخ",label:"برچسب",category:"دسته",
@@ -296,7 +317,7 @@ fa:{
 ar:{
   greetM:"صباح الخير",greetA:"مساء الخير",greetE:"مساء الخير",
   points:"نقاطك",lv:"المستوى",streak:"🔥 {n} أيام متتالية",
-  quick:"إجراءات سريعة",money:"المال",payments:"المدفوعات",markets:"الأسواق",schedule:"الجدول",health:"الصحة",news:"الأخبار",rewards:"المكافآت",list:"القائمة",ai:"الذكاء",
+  quick:"إجراءات سريعة",money:"المال",payments:"المدفوعات",markets:"الأسواق",schedule:"الجدول",health:"الصحة",news:"الأخبار",rewards:"المكافآت",list:"القائمة",ai:"الذكاء",home:"الرئيسية",more:"المزيد",
   balance:"الرصيد",gold:"الذهب",savings:"ادخار",debt:"الدين",inc:"دخل",exp:"مصروف",transfer:"تحويل",
   addTrans:"إضافة معاملة",addTask:"إضافة مهمة",addHabit:"إضافة عادة",addItem:"إضافة عنصر",addReminder:"إضافة تذكير",
   amount:"المبلغ",type:"النوع",desc:"الوصف",time:"الوقت",date:"التاريخ",label:"التسمية",category:"الفئة",
@@ -316,7 +337,7 @@ ar:{
 ckb:{
   greetM:"بەیانی باش",greetA:"نیوەڕۆی باش",greetE:"ئێوارەی باش",
   points:"خاڵەکانت",lv:"ئاست",streak:"🔥 {n} ڕۆژی لەسەریەک",
-  quick:"کردەوە خێراکان",money:"پارە",payments:"پارەدانەکان",markets:"بازارەکان",schedule:"بەرنامە",health:"تەندروستی",news:"هەواڵ",rewards:"خەڵات",list:"کڕین",ai:"هوشمەند",
+  quick:"کردەوە خێراکان",money:"پارە",payments:"پارەدانەکان",markets:"بازارەکان",schedule:"بەرنامە",health:"تەندروستی",news:"هەواڵ",rewards:"خەڵات",list:"کڕین",ai:"هوشمەند",home:"ماڵەوە",more:"زیاتر",
   balance:"ماوە",gold:"زێڕ",savings:"پاشەکەوت",debt:"قەرز",inc:"داهات",exp:"خەرجی",transfer:"گواستنەوە",
   addTrans:"زیادکردنی مامەڵە",addTask:"زیادکردنی کار",addHabit:"زیادکردنی خوو",addItem:"زیادکردنی کەرەستە",addReminder:"زیادکردنی بیرخستنەوە",
   amount:"بڕ (تۆمار)",type:"جۆر",desc:"وەسف",time:"کات",date:"بەروار",label:"ناونیشان",category:"بەش",
@@ -336,7 +357,7 @@ ckb:{
 kmr:{
   greetM:"Beyanîbaş",greetA:"Nîvroybaş",greetE:"Êvarbaş",
   points:"Xalên te",lv:"Ast",streak:"🔥 {n} rojên li pey hev",
-  quick:"Kiryarên bilez",money:"Pere",payments:"Derdan",markets:"Bazar",schedule:"Bername",health:"Tenduristî",news:"Nûçe",rewards:"Xelat",list:"Lîste",ai:"Zîrek",
+  quick:"Kiryarên bilez",money:"Pere",payments:"Derdan",markets:"Bazar",schedule:"Bername",health:"Tenduristî",news:"Nûçe",rewards:"Xelat",list:"Lîste",ai:"Zîrek",home:"Mal",more:"Zêdetir",
   balance:"Hesab",gold:"Zêr",savings:"Teserûf",debt:"Deyn",inc:"Dahat",exp:"Lêçûn",transfer:"Veguheztin",
   addTrans:"Zêdekirina bikaranînê",addTask:"Zêdekirina karekî",addHabit:"Zêdekirina adetekê",addItem:"Zêdekirina tiştekî",addReminder:"Zêdekirina bîrxistinê",
   amount:"Bend (Tomen)",type:"Cure",desc:"Danasîn",time:"Dem",date:"Dîrok",label:"Nav",category:"Beş",
@@ -356,7 +377,7 @@ kmr:{
 ru:{
   greetM:"Доброе утро",greetA:"Добрый день",greetE:"Добрый вечер",
   points:"Ваши баллы",lv:"Уровень",streak:"🔥 {n} дней подряд",
-  quick:"Быстрые действия",money:"Деньги",payments:"Платежи",markets:"Рынки",schedule:"Расписание",health:"Здоровье",news:"Новости",rewards:"Награды",list:"Список",ai:"ИИ",
+  quick:"Быстрые действия",money:"Деньги",payments:"Платежи",markets:"Рынки",schedule:"Расписание",health:"Здоровье",news:"Новости",rewards:"Награды",list:"Список",ai:"ИИ",home:"Главная",more:"Ещё",
   balance:"Баланс",gold:"Золото",savings:"Сбережения",debt:"Долг",inc:"Доход",exp:"Расход",transfer:"Перевод",
   addTrans:"Добавить операцию",addTask:"Добавить задачу",addHabit:"Добавить привычку",addItem:"Добавить товар",addReminder:"Добавить напоминание",
   amount:"Сумма",type:"Тип",desc:"Описание",time:"Время",date:"Дата",label:"Метка",category:"Категория",
@@ -376,7 +397,7 @@ ru:{
 es:{
   greetM:"Buenos días",greetA:"Buenas tardes",greetE:"Buenas noches",
   points:"Tus puntos",lv:"Nivel",streak:"🔥 {n} días seguidos",
-  quick:"Acciones rápidas",money:"Dinero",payments:"Pagos",markets:"Mercados",schedule:"Horario",health:"Salud",news:"Noticias",rewards:"Recompensas",list:"Lista",ai:"IA",
+  quick:"Acciones rápidas",money:"Dinero",payments:"Pagos",markets:"Mercados",schedule:"Horario",health:"Salud",news:"Noticias",rewards:"Recompensas",list:"Lista",ai:"IA",home:"Inicio",more:"Más",
   balance:"Saldo",gold:"Oro",savings:"Ahorros",debt:"Deuda",inc:"Ingreso",exp:"Gasto",transfer:"Transferencia",
   addTrans:"Añadir transacción",addTask:"Añadir tarea",addHabit:"Añadir hábito",addItem:"Añadir artículo",addReminder:"Añadir recordatorio",
   amount:"Monto",type:"Tipo",desc:"Descripción",time:"Hora",date:"Fecha",label:"Etiqueta",category:"Categoría",
@@ -396,7 +417,7 @@ es:{
 fr:{
   greetM:"Bonjour",greetA:"Bon après-midi",greetE:"Bonsoir",
   points:"Vos points",lv:"Niveau",streak:"🔥 {n} jours d'affilée",
-  quick:"Actions rapides",money:"Argent",payments:"Paiements",markets:"Marchés",schedule:"Agenda",health:"Santé",news:"Actualités",rewards:"Récompenses",list:"Liste",ai:"IA",
+  quick:"Actions rapides",money:"Argent",payments:"Paiements",markets:"Marchés",schedule:"Agenda",health:"Santé",news:"Actualités",rewards:"Récompenses",list:"Liste",ai:"IA",home:"Accueil",more:"Plus",
   balance:"Solde",gold:"Or",savings:"Épargne",debt:"Dette",inc:"Revenu",exp:"Dépense",transfer:"Virement",
   addTrans:"Ajouter une transaction",addTask:"Ajouter une tâche",addHabit:"Ajouter une habitude",addItem:"Ajouter un article",addReminder:"Ajouter un rappel",
   amount:"Montant",type:"Type",desc:"Description",time:"Heure",date:"Date",label:"Libellé",category:"Catégorie",
@@ -416,7 +437,7 @@ fr:{
 de:{
   greetM:"Guten Morgen",greetA:"Guten Tag",greetE:"Guten Abend",
   points:"Deine Punkte",lv:"Level",streak:"🔥 {n} Tage in Folge",
-  quick:"Schnellaktionen",money:"Geld",payments:"Zahlungen",markets:"Märkte",schedule:"Zeitplan",health:"Gesundheit",news:"Nachrichten",rewards:"Belohnungen",list:"Liste",ai:"KI",
+  quick:"Schnellaktionen",money:"Geld",payments:"Zahlungen",markets:"Märkte",schedule:"Zeitplan",health:"Gesundheit",news:"Nachrichten",rewards:"Belohnungen",list:"Liste",ai:"KI",home:"Start",more:"Mehr",
   balance:"Kontostand",gold:"Gold",savings:"Ersparnisse",debt:"Schulden",inc:"Einkommen",exp:"Ausgabe",transfer:"Überweisung",
   addTrans:"Transaktion hinzufügen",addTask:"Aufgabe hinzufügen",addHabit:"Gewohnheit hinzufügen",addItem:"Artikel hinzufügen",addReminder:"Erinnerung hinzufügen",
   amount:"Betrag",type:"Typ",desc:"Beschreibung",time:"Zeit",date:"Datum",label:"Bezeichnung",category:"Kategorie",
@@ -436,7 +457,7 @@ de:{
 zh:{
   greetM:"早上好",greetA:"下午好",greetE:"晚上好",
   points:"你的积分",lv:"等级",streak:"🔥 连续 {n} 天",
-  quick:"快捷操作",money:"钱包",payments:"支付",markets:"行情",schedule:"日程",health:"健康",news:"资讯",rewards:"奖励",list:"清单",ai:"智能",
+  quick:"快捷操作",money:"钱包",payments:"支付",markets:"行情",schedule:"日程",health:"健康",news:"资讯",rewards:"奖励",list:"清单",ai:"智能",home:"首页",more:"更多",
   balance:"余额",gold:"黄金",savings:"储蓄",debt:"负债",inc:"收入",exp:"支出",transfer:"转账",
   addTrans:"添加交易",addTask:"添加任务",addHabit:"添加习惯",addItem:"添加物品",addReminder:"添加提醒",
   amount:"金额",type:"类型",desc:"说明",time:"时间",date:"日期",label:"标签",category:"分类",
@@ -674,8 +695,9 @@ function openAI(){openSheet(chatBox());addBubble('👋 '+t('ask'),'ai');
 const VIEWS=document.getElementById('views');
 let cur='money';
 function show(v){cur=v;render()}
-function navHighlight(){const order=['money','payments','markets','schedule','health','news','rewards','list'];const bs=document.querySelectorAll('#bnav button');bs.forEach((b,i)=>b.classList.toggle('active',order[i]===cur))}
-function renderNav(){const it=[['money','💰',t('money')],['payments','🧾',t('payments')],['markets','📈',t('markets')],['schedule','📅',t('schedule')],['health','❤️',t('health')],['news','📰',t('news')],['rewards','🏆',t('rewards')],['list','🛒',t('list')]];$('#bnav').innerHTML=it.map(x=>`<button data-v="${x[0]}"><span class="e">${x[1]}</span><small>${x[2]}</small></button>`).join('');document.querySelectorAll('#bnav button').forEach(b=>b.onclick=()=>show(b.dataset.v));navHighlight()}
+function navHighlight(){const bs=document.querySelectorAll('#bnav button');bs.forEach(b=>{let act=false;if(b.dataset.v==='more'){act=(['schedule','news','rewards','list'].indexOf(cur)>=0)}else{act=(b.dataset.v==='home'?cur==='money':b.dataset.v===cur)}b.classList.toggle('active',act)})}
+function renderNav(){const it=[['home','🏠',t('home')],['markets','📈',t('markets')],['payments','🧾',t('payments')],['health','❤️',t('health')],['more','☰',t('more')]];$('#bnav').innerHTML=it.map(x=>`<button data-v="${x[0]}"><span class="e">${x[1]}</span><small>${x[2]}</small></button>`).join('');document.querySelectorAll('#bnav button').forEach(b=>b.onclick=()=>{if(b.dataset.v==='more'){showMore()}else{show(b.dataset.v==='home'?'money':b.dataset.v)}});navHighlight()}
+function showMore(){const items=[['schedule','📅',t('schedule')],['news','📰',t('news')],['rewards','🏆',t('rewards')],['list','🛒',t('list')],['ai','🤖',t('ai')],['settings','⚙️',t('settings')]];openSheet(`<h3>☰ ${t('more')}</h3><div class="mgrid">${items.map(i=>`<div class="mcell" data-m="${i[0]}"><div class="e">${i[1]}</div><small>${i[2]}</small></div>`).join('')}</div>`);document.querySelectorAll('#sheet .mcell').forEach(c=>c.onclick=()=>{const m=c.dataset.m;closeModal();if(m==='ai')openAI();else if(m==='settings')openSettings();else show(m)})}
 function renderQuick(){const a=[['bill','🧾',t('bills')],['charge','📶',t('charge')],['toll','🛣️',t('tollW')],['fine','👮',t('fineW')]];$('#quickBar').innerHTML=a.map(x=>`<div class="qa fade-in" data-a="${x[0]}"><div class="e">${x[1]}</div><small>${x[2]}</small></div>`).join('');document.querySelectorAll('#quickBar .qa').forEach(q=>q.onclick=()=>openPay(q.dataset.a))}
 
 function catOf(x){if(x.inc||x.trans)return null;if(x.ic)return x.ic;const l=(x.label||'')+' '+(x.desc||'');if(/food|غذا|ناهار|شام|قهوه|کافه|restaurant|caf/.test(l))return '🍔';if(/bill|قبض|برق|اب|گاز|شارژ|اینترنت|internet|phone|تلفن/.test(l))return '🧾';if(/fuel|سوخت|بنزین|gas|transport|تاکسی|taxi|حمل|metro|رفتوآمد/.test(l))return '⛽';if(/shop|خرید|سوپرمارکت|supermarket|market|فروشگاه/.test(l))return '🛒';if(/health|دارو|بیمارستان|doctor|دکتر|درمان/.test(l))return '💊';if(/rent|اجاره|خانه|خانه/.test(l))return '🏠';return '💸';}
@@ -684,13 +706,13 @@ function renderMoney(){
   const m=S.money;const month=new Date().getMonth();
   const expMonth=S.txn.filter(x=>x.exp&&x.mt===month).reduce((a,x)=>a+x.amt,0);
   const incMonth=S.txn.filter(x=>x.inc&&x.mt===month).reduce((a,x)=>a+x.amt,0);
-  const kpis=`<div class="kpis fade-in">
-    <div class="kpi"><small>💵 ${t('balance')}</small><b style="color:var(--accent)">${fmt(m.balance)}</b></div>
-    <div class="kpi"><small>🥇 ${t('gold')}</small><b style="color:var(--gold)">${fmt(m.gold)}</b></div>
-    <div class="kpi"><small>📈 ${t('savings')}</small><b style="color:var(--blue)">${fmt(m.savings)}</b></div>
-    <div class="kpi"><small>💳 ${t('debt')}</small><b style="color:var(--red)">${fmt(m.debt)}</b></div>
-    <div class="kpi"><small>⬆ ${t('inc')}</small><b style="color:var(--accent)">${fmt(incMonth)}</b></div>
-    <div class="kpi"><small>⬇ ${t('exp')}</small><b style="color:var(--red)">${fmt(expMonth)}</b></div></div>`;
+  const kpis=`<div class="hero-card fade-in"><div class="hc-row"><div><div class="hc-lab">💵 ${t('balance')}</div><b class="hc-big">${fmt(m.balance)}</b><span class="hc-sub">IRR · ${t('toman')}</span></div><span class="hc-chip">🏅 ${level()}</span></div><div class="hc-btns"><button class="hc-btn" id="hcAdd">+ ${t('add')}</button><button class="hc-btn" id="hcSend">${t('transfer')} ⇄</button></div></div>
+    <div class="kpis fade-in">
+    <div class="kpi" style="--kpc:rgba(0,212,160,.25)"><small>🥇 ${t('gold')}</small><b style="color:var(--gold)">${fmt(m.gold)}</b></div>
+    <div class="kpi" style="--kpc:rgba(77,163,255,.25)"><small>📈 ${t('savings')}</small><b style="color:var(--blue)">${fmt(m.savings)}</b></div>
+    <div class="kpi" style="--kpc:rgba(255,92,122,.25)"><small>💳 ${t('debt')}</small><b style="color:var(--red)">${fmt(m.debt)}</b></div>
+    <div class="kpi" style="--kpc:rgba(0,212,160,.25)"><small>⬆ ${t('inc')}</small><b style="color:var(--accent)">${fmt(incMonth)}</b></div>
+    <div class="kpi" style="--kpc:rgba(255,92,122,.25)"><small>⬇ ${t('exp')}</small><b style="color:var(--red)">${fmt(expMonth)}</b></div></div>`;
   let budgetHTML='';
   if(S.budget>0){const pct=Math.min(100,Math.round(expMonth/S.budget*100));const left=Math.max(0,S.budget-expMonth);budgetHTML=`<div class="budget-box fade-in"><b style="font-size:15px">📊 ${t('budget')}</b><div class="budget-prog"><i style="width:${pct}%;background:${pct>90?'var(--red)':'var(--grad)'}"></i></div><small style="color:var(--muted)">${fmt(expMonth)} ${t('budgetUsed')} ${fmt(S.budget)} · ${t('budgetLeft')}: <b style="color:var(--accent)">${fmt(left)}</b></small></div>`}
   let txn=S.txn.slice().reverse().slice(0,8).map(x=>{const c=x.exp?'var(--red)':x.trans?'var(--blue)':'var(--accent)';const s=x.exp?'−':(x.trans?'⇄':'+');return `<div class="row fade-in"><div class="ic">${x.ic||'💸'}</div><div class="t"><b>${esc(x.label||'')}</b><small>${esc(x.desc||'')}</small></div><div class="val" style="color:${c}">${s}${fmt(x.amt)}</div></div>`}).join('')||`<div class="empty">${t('noMoney')}</div>`;
@@ -705,6 +727,8 @@ function renderMoney(){
   ${top?`<div class="stitle" style="margin:14px 0 4px">${t('topCat')}</div>${top}`:''}</div>`}
   VIEWS.innerHTML=kpis+budgetHTML+chart+stats+`<div class="stitle"><span>${t('inc')} / ${t('exp')}</span><span class="more" id="addTransBtn">+ ${t('add')}</span></div>${txn}`;
   $('#addTransBtn').onclick=()=>openTrans();
+  const hcAdd=document.getElementById('hcAdd');if(hcAdd)hcAdd.onclick=()=>openTrans();
+  const hcSend=document.getElementById('hcSend');if(hcSend)hcSend.onclick=()=>openSheet(`<h3>⇄ ${t('transfer')}</h3><div class="field"><label>${t('amount')}</label><input type="number" id="trAmt2"></div><button class="btn" id="trSv2">${t('save')}</button><button class="btn btn-ghost" onclick="closeModal()">${t('cancel')}</button>`);if(document.getElementById('trSv2'))document.getElementById('trSv2').onclick=()=>{const amt=+document.getElementById('trAmt2').value||0;if(amt){S.money.balance-=amt;S.txn.push({ic:'⇄',amt,exp:true,trans:true,label:t('transfer'),desc:t('transfer'),ts:Date.now(),mt:new Date().getMonth()});addPts(3);save();closeModal();render();toast(t('saved')+' ⭐+3')}}
 }
 function renderPayments(){let hist=S.payments.slice().reverse().slice(0,10).map(p=>`<div class="row fade-in"><div class="ic">${p.ic||'🧾'}</div><div class="t"><b>${esc(p.label)}</b><small>${esc(p.desc||'')} · ${p.time||''}</small></div><div class="val" style="color:var(--accent)">− ${fmt(p.amt)}</div></div>`).join('')||`<div class="empty">${t('emptyHistory')}</div>`;const a=[['bill','🧾',t('bills')],['charge','📶',t('charge')],['toll','🛣️',t('tollW')],['fine','👮',t('fineW')]];VIEWS.innerHTML=`<div class="quick fade-in" id="q2">${a.map(x=>`<div class="qa" data-a="${x[0]}"><div class="e">${x[1]}</div><small>${x[2]}</small></div>`).join('')}</div><div class="stitle"><span>${t('payments')}</span></div>${hist}`;$('#q2').querySelectorAll('.qa').forEach(q=>q.onclick=()=>openPay(q.dataset.a))}
 function renderMarkets(){const fb=`<div class="tk"><div class="s"><span>💱 ${t('markets')}</span></div><b>…</b></div>`;

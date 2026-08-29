@@ -50,15 +50,35 @@ main,footer{position:relative;z-index:1}
 .btn-ghost:hover{background:var(--card);border-color:var(--primary)}
 .btn-sm{padding:10px 18px;font-size:14px}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s;background:rgba(5,7,13,.85);backdrop-filter:blur(14px);border-bottom:1px solid transparent}
-nav.scrolled{border-bottom:1px solid var(--line);background:rgba(5,7,13,.92)}
-.nav-in{max-width:1180px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s;background:rgba(5,7,13,.6);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid transparent}
+nav.scrolled{border-bottom:1px solid var(--line);background:rgba(5,7,13,.88)}
+.nav-in{max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .logo{display:flex;align-items:center;gap:10px;font-family:'Sora',sans-serif;font-weight:800;font-size:22px;letter-spacing:.5px}
-.logo-badge{width:36px;height:36px;border-radius:10px;background:var(--grad);display:grid;place-items:center;font-size:18px;box-shadow:0 4px 14px rgba(108,92,255,.45)}
-.nav-links{display:flex;gap:28px;align-items:center}
-.nav-links a{color:var(--muted);font-size:14.5px;font-weight:500;transition:.2s}
-.nav-links a:hover{color:#fff}
+.logo-badge{width:36px;height:36px;border-radius:10px;background:var(--grad);display:grid;place-items:center;font-size:18px;box-shadow:0 4px 14px rgba(108,92,255,.45);animation:floatY 4s ease-in-out infinite}
+.nav-links{display:flex;gap:6px;align-items:center}
+.nav-links a{color:var(--muted);font-size:14.5px;font-weight:500;transition:.2s;padding:9px 14px;border-radius:10px;position:relative}
+.nav-links a::after{content:"";position:absolute;left:14px;right:14px;bottom:4px;height:2px;border-radius:2px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .28s ease}
+.nav-links a:hover{color:#fff;background:rgba(108,92,255,.08)}
+.nav-links a:hover::after{transform:scaleX(1)}
+[dir=rtl] .nav-links a::after{transform-origin:right}
 .nav-cta{display:flex;gap:10px;align-items:center}
+.btn-grad-border{position:relative;background:rgba(108,92,255,.12);border:1px solid transparent;
+  background-clip:padding-box;box-shadow:inset 0 0 0 1.5px transparent;
+  border-radius:14px;padding:10px 20px;font-weight:700;font-size:14px;color:#fff;font-family:inherit;cursor:pointer;transition:.25s}
+.btn-grad-border::before{content:"";position:absolute;inset:-1.5px;border-radius:15px;padding:1.5px;background:var(--grad);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.7;transition:.25s}
+.btn-grad-border:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(108,92,255,.35)}
+.btn-grad-border:hover::before{opacity:1}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+.burger span{width:24px;height:2.5px;border-radius:2px;background:var(--text);transition:.3s}
+.burger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+.mnav{display:none;position:fixed;top:64px;left:12px;right:12px;background:rgba(10,15,30,.97);backdrop-filter:blur(20px);border:1px solid var(--line2);border-radius:22px;padding:16px;z-index:51;box-shadow:0 30px 70px rgba(0,0,0,.6);flex-direction:column;gap:4px;animation:slideDown .3s ease}
+.mnav.show{display:flex}
+.mnav a{padding:14px 16px;border-radius:14px;color:var(--muted);font-weight:600;font-size:15px;transition:.2s}
+.mnav a:hover{background:rgba(108,92,255,.1);color:#fff}
+@media(max-width:900px){.nav-links{display:none}.burger{display:flex}}
+@media(max-width:900px){.nav-cta .btn.btn-primary{display:none}}
 .lang-pill{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px 8px}
 .lang-pill select{background:transparent;border:none;color:var(--muted);font-family:inherit;font-size:12px;cursor:pointer;outline:none}
 .lang{background:rgba(13,22,41,.7);border:1px solid var(--line);border-radius:12px;padding:7px 10px;color:var(--muted);cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;max-width:86px;backdrop-filter:blur(8px);transition:.2s;display:inline-flex;align-items:center;gap:6px;line-height:1}
@@ -101,6 +121,7 @@ nav.scrolled{border-bottom:1px solid var(--line);background:rgba(5,7,13,.92)}
 .f2{bottom:12%;left:-10%;animation-delay:1.2s}
 .f3{top:38%;left:-16%;animation-delay:.6s}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .phone{max-width:330px;margin:0 auto;position:relative;z-index:2;background:linear-gradient(180deg,#0e1730,#0a0f1e);border:1px solid var(--line2);border-radius:44px;padding:16px;box-shadow:0 40px 90px rgba(0,0,0,.6),inset 0 0 0 2px rgba(255,255,255,.03)}
 .phone-notch{width:120px;height:26px;background:#070a14;border-radius:0 0 16px 16px;margin:-16px auto 14px}
 .phone-top{display:flex;align-items:center;gap:10px;margin-bottom:16px}
@@ -243,10 +264,19 @@ footer{border-top:1px solid var(--line);padding:60px 0 30px}
     </div>
     <div class="nav-cta">
       <button class="lang" id="langBtn" title="Language"><span id="langFlag">🌐</span><span id="langCode">EN</span></button>
-      <a href="app.html" class="btn btn-primary btn-sm" data-l8n="navOpen">Open App</a>
+      <a href="app.html" class="btn-grad-border" data-l8n="navOpen">Open App ↗</a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
+<div class="mnav" id="mnav">
+  <a href="#features" data-l8n="navF">Features</a>
+  <a href="#superapp" data-l8n="navS">Super-App</a>
+  <a href="#markets" data-l8n="navM">Markets</a>
+  <a href="#pricing" data-l8n="navP">Pricing</a>
+  <a href="#faq" data-l8n="navQ">FAQ</a>
+  <a href="app.html" class="btn btn-primary" style="justify-content:center;margin-top:8px" data-l8n="navOpen">Open App ↗</a>
+</div>
 
 <header class="hero">
   <div class="container hero-grid">
@@ -918,6 +948,9 @@ function buildGrid(){const g=document.getElementById('langGrid');g.innerHTML=Obj
 function applyL(){const d=CL[LV]||CL.en;document.documentElement.lang=LV;document.documentElement.dir=(RTL.indexOf(LV)>=0)?'rtl':'ltr';document.querySelectorAll('[data-l8n]').forEach(el=>{const k=el.getAttribute('data-l8n');if(d[k]!=null)el.textContent=d[k]});const h1=document.getElementById('heroH1');if(h1&&d.h1)h1.innerHTML=d.h1;const ch=document.getElementById('ctaH1');if(ch&&d.ctaH)ch.innerHTML=d.ctaH;const fe=document.getElementById('feH1');if(fe&&d.feH)fe.innerHTML=d.feH;const lf=document.getElementById('langFlag');if(lf)lf.innerHTML=flagHTML(LV);const lc=document.getElementById('langCode');if(lc)lc.textContent=LV.toUpperCase();const ll=document.getElementById('lblLang');if(ll)ll.textContent=d.ln}
 document.getElementById('langBtn').addEventListener('click',()=>{buildGrid();document.getElementById('langModal').classList.add('show')});
 document.getElementById('langModal').addEventListener('click',e=>{if(e.target.id==='langModal')document.getElementById('langModal').classList.remove('show')});
+const burger=document.getElementById('burger'),mnav=document.getElementById('mnav');
+burger.addEventListener('click',()=>{burger.classList.toggle('open');mnav.classList.toggle('show')});
+mnav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');mnav.classList.remove('show')}));
 applyL();
 
 if('serviceWorker' in navigator&&location.protocol.indexOf('http')===0){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})})}
