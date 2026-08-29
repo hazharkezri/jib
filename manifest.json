@@ -1,0 +1,38 @@
+{
+  "name": "JIB — Super-App",
+  "short_name": "JIB",
+  "description": "One super-app for your money, gold, schedule, health and daily life — جیب",
+  "start_url": "./app.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#05070d",
+  "theme_color": "#05070d",
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    { "name": "Money", "url": "./app.html#money", "icons": [{ "src": "icon.svg", "sizes": "any" }] },
+    { "name": "Markets", "url": "./app.html#markets", "icons": [{ "src": "icon.svg", "sizes": "any" }] },
+    { "name": "Rewards", "url": "./app.html#rewards", "icons": [{ "src": "icon.svg", "sizes": "any" }] }
+  ]
+}

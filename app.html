@@ -1,0 +1,718 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05070d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="JIB">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>JIB — Super-App</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@700;800&family=Vazirmatn&family=Noto+Naskh+Arabic&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05070d;--bg2:#0a0f1e;--card:#101828;--card2:#0b1224;--card3:#141d38;
+  --line:#1c2740;--line2:#243154;
+  --primary:#6c5cff;--primary2:#8b7bff;--accent:#00d4a0;--gold:#ffc94d;
+  --red:#ff5c7a;--blue:#4da3ff;--text:#eef2ff;--muted:#9aa4c0;--muted2:#6b7594;
+  --grad:linear-gradient(135deg,#6c5cff,#00d4a0);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,'Vazirmatn','Noto Naskh Arabic','Noto Sans SC',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+[dir=rtl] body{font-family:'Vazirmatn','Inter','Noto Naskh Arabic',sans-serif}
+.app{max-width:520px;margin:0 auto;padding:20px 18px 130px;min-height:100vh}
+.top{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.av{width:44px;height:44px;border-radius:50%;background:var(--grad);display:grid;place-items:center;font-weight:800;font-size:18px;flex-shrink:0}
+.greet{flex:1;min-width:0}
+.greet b{font-size:17px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.greet small{color:var(--muted);font-size:12px;display:block}
+.top-right{display:flex;align-items:center;gap:8px}
+.lang{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:7px 9px;color:var(--muted);cursor:pointer;font-family:inherit;font-size:12px;font-weight:600;max-width:70px}
+.icon-btn{background:var(--card);border:1px solid var(--line);border-radius:10px;width:32px;height:32px;color:var(--muted);cursor:pointer;font-size:15px;display:grid;place-items:center}
+.pts-badge{background:rgba(0,212,160,.1);border:1px solid rgba(0,212,160,.3);color:var(--accent);font-size:12px;font-weight:700;padding:6px 10px;border-radius:20px;white-space:nowrap}
+.points-card{position:relative;overflow:hidden;border-radius:20px;padding:20px;margin-bottom:6px;background:linear-gradient(135deg,#6c5cff,#8a6cff 55%,#00d4a0)}
+.points-card::after{content:"";position:absolute;right:-40px;top:-40px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}
+.points-card small{opacity:.9;font-size:13px;font-weight:500}
+.points-card b{font-size:38px;font-family:'Sora',sans-serif;display:block;margin:4px 0}
+.pq-row{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
+.pq{background:rgba(0,0,0,.22);border-radius:10px;padding:5px 11px;font-size:12px;font-weight:600}
+.stitle{font-size:13px;color:var(--muted);letter-spacing:.4px;text-transform:uppercase;font-weight:600;margin:22px 4px 12px;display:flex;align-items:center;gap:8px}
+.stitle::after{content:"";flex:1;height:1px;background:var(--line)}
+.stitle .more{margin-left:auto;color:var(--primary2);font-size:12px;text-transform:none;letter-spacing:0;cursor:pointer}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.kpi small{color:var(--muted);font-size:12px;display:flex;align-items:center;gap:5px}
+.kpi b{font-size:20px;display:block;margin-top:6px}
+.kpi .chg{font-size:12px;font-weight:700;display:inline-block;margin-top:4px}
+.green{color:var(--accent)}.red{color:var(--red)}.gold{color:var(--gold)}.blue{color:var(--blue)}
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.qa{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 4px;text-align:center;cursor:pointer;transition:.2s}
+.qa:hover,.qa:active{background:var(--card3);border-color:var(--primary);transform:scale(.97)}
+.qa .e{font-size:22px}
+.qa small{font-size:11px;color:var(--muted);display:block;margin-top:6px;font-weight:500}
+.ticker{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 8px;scrollbar-width:none}
+.ticker::-webkit-scrollbar{display:none}
+.tk{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;min-width:130px;flex-shrink:0}
+.tk .s{font-size:12px;color:var(--muted);display:flex;justify-content:space-between}.tk .s .upd{color:var(--accent)}
+.tk b{font-size:18px;display:block;margin:5px 0}
+.tk .chg{font-size:12px;font-weight:700}
+.row{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:8px}
+.row .ic{width:40px;height:40px;border-radius:11px;background:var(--card3);border:1px solid var(--line);display:grid;place-items:center;font-size:19px;flex-shrink:0}
+.row .t{flex:1;min-width:0}
+.row .t b{font-size:14.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .t small{color:var(--muted);font-size:12px}
+.row .val{font-weight:700;font-size:15px;flex-shrink:0}
+.task{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:8px;cursor:pointer;transition:.2s}
+.task input{width:20px;height:20px;accent-color:var(--accent);flex-shrink:0}
+.task .t{flex:1}.task .t b{font-size:14px;display:block}.task .t small{color:var(--muted);font-size:11px}
+.task.done .t b{text-decoration:line-through;opacity:.5}
+.task .del{color:var(--muted2);border:none;background:none;font-size:16px;cursor:pointer;padding:4px}
+.health-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.h-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.h-card .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px}
+.h-card b{font-size:24px}
+.circle{--p:60;--c:var(--accent);width:62px;height:62px;border-radius:50%;background:conic-gradient(var(--c) calc(var(--p)*1%),#1c2740 0);display:grid;place-items:center;position:relative;flex-shrink:0}
+.circle::before{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--card)}
+.circle span{position:relative;font-size:13px;font-weight:700}
+.news{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:8px}
+.news .nimg{height:120px;background:linear-gradient(135deg,var(--card3),var(--line2));display:grid;place-items:center;font-size:38px}
+.news .nbody{padding:14px 16px}
+.news .nbody .cat{font-size:11px;color:var(--primary2);font-weight:700;text-transform:uppercase}
+.news .nbody b{font-size:15px;display:block;margin:5px 0}
+.news .nbody small{color:var(--muted);font-size:12px}
+.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:520px;max-width:100%;background:rgba(10,15,30,.92);backdrop-filter:blur(16px);border-top:1px solid var(--line);display:flex;z-index:40;padding:8px 4px calc(8px + env(safe-area-inset-bottom));overflow-x:auto;scrollbar-width:none}
+.bnav::-webkit-scrollbar{display:none}
+.bnav button{flex:0 0 auto;min-width:46px;background:none;border:none;color:var(--muted2);font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 5px;cursor:pointer;position:relative;transition:.2s}
+.bnav button .e{font-size:20px;line-height:1}
+.bnav button small{font-size:9px;font-weight:600;white-space:nowrap}
+.bnav button.active{color:var(--primary)}
+.bnav button.active::before{content:"";position:absolute;top:-8px;width:28px;height:3px;border-radius:3px;background:var(--grad)}
+.modal{position:fixed;inset:0;background:rgba(3,5,10,.75);backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center;z-index:60}
+.modal.show{display:flex}
+.sheet{background:var(--card);width:520px;max-width:100%;border-radius:24px 24px 0 0;padding:8px 22px 26px;max-height:88vh;overflow:auto;animation:up .3s ease}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.sheet .grab{width:40px;height:4px;border-radius:2px;background:var(--line2);margin:0 auto 16px}
+.sheet h3{font-size:18px;margin-bottom:18px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;background:var(--card3);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:13px;font-family:inherit;font-size:15px}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--primary)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{width:100%;background:var(--grad);color:#fff;border:none;border-radius:14px;padding:15px;font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;margin-top:6px}
+.btn-ghost{background:var(--card3);border:1px solid var(--line2)}
+.toast{position:fixed;bottom:130px;left:50%;transform:translateX(-50%);background:var(--card3);border:1px solid var(--primary);color:#fff;padding:13px 22px;border-radius:14px;z-index:70;font-size:14px;font-weight:600;box-shadow:0 12px 40px rgba(0,0,0,.5);transition:.3s;opacity:0;pointer-events:none}
+.toast.show{opacity:1;bottom:140px}
+.empty{color:var(--muted2);text-align:center;font-size:13px;padding:26px 16px;border:1px dashed var(--line);border-radius:14px}
+.fade-in{animation:fade .4s ease}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ===== budget chart ===== */
+.chartbar{display:flex;align-items:flex-end;gap:6px;height:100px;margin-top:10px}
+.chartbar .cb{flex:1;background:var(--grad);border-radius:4px 4px 0 0;opacity:.85;min-height:4px;position:relative}
+.chartbar .cb b{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);font-size:9px;color:var(--muted);white-space:nowrap}
+
+/* ===== shopping ===== */
+.budget-box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:10px}
+.budget-prog{height:10px;border-radius:5px;background:var(--card3);overflow:hidden;margin:8px 0}
+.budget-prog>i{display:block;height:100%;background:var(--grad);border-radius:5px;transition:.4s}
+.switch-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:8px}
+.switch-row .t{flex:1}
+
+/* ===== AI chat ===== */
+.fab{position:fixed;bottom:150px;right:max(12px,calc(50% - 260px + 18px));z-index:45;width:56px;height:56px;border-radius:50%;background:var(--grad);border:none;color:#fff;font-size:24px;cursor:pointer;box-shadow:0 10px 30px rgba(108,92,255,.5);display:grid;place-items:center}
+[dir=rtl] .fab{right:auto;left:max(12px,calc(50% - 260px + 18px))}
+.chat{display:flex;flex-direction:column;height:70vh}
+.chat-msgs{flex:1;overflow-y:auto;padding:6px 2px;display:flex;flex-direction:column;gap:10px}
+.bubble{max-width:82%;padding:11px 14px;border-radius:16px;font-size:14px;line-height:1.6;white-space:pre-wrap;word-break:break-word}
+.bubble.user{align-self:flex-end;background:var(--grad);color:#fff;border-bottom-right-radius:6px}
+.bubble.ai{align-self:flex-start;background:var(--card3);border:1px solid var(--line);border-bottom-left-radius:6px}
+.chat-input{display:flex;gap:8px;margin-top:10px}
+.chat-input input{flex:1;background:var(--card3);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:12px;font-family:inherit;font-size:14px}
+.chat-input input:focus{outline:none;border-color:var(--primary)}
+.chat-input button{background:var(--grad);border:none;color:#fff;border-radius:12px;width:46px;font-size:18px;cursor:pointer}
+.typing{color:var(--muted);font-size:13px;padding:4px 2px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.chipq{background:var(--card3);border:1px solid var(--line);color:var(--muted);border-radius:20px;padding:7px 14px;font-size:12px;cursor:pointer}
+
+/* ===== share card ===== */
+.share-card{background:linear-gradient(135deg,#151c3a,#0d1326);border:1px solid var(--line2);border-radius:20px;padding:26px;text-align:center;margin:10px 0}
+.share-card .slogo{font-family:'Sora';font-size:30px;font-weight:800;color:var(--accent)}
+.share-card .spts{font-size:46px;font-family:'Sora';font-weight:800;color:var(--gold);margin:6px 0}
+.share-card .slv{font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="app" id="appView">
+  <div class="top">
+    <div class="av">ج</div>
+    <div class="greet">
+      <b id="greetName">Good morning 👋</b>
+      <small id="greetDate"></small>
+    </div>
+    <div class="top-right">
+      <button class="icon-btn" id="bellBtn" title="Notifications">🔔</button>
+      <button class="icon-btn" id="settingsBtn" title="Settings">⚙️</button>
+      <span class="pts-badge">⭐ <span id="ptsToday">+0</span></span>
+      <select class="lang" id="langSel">
+        <option value="en">English</option><option value="fa">فارسی</option><option value="ar">العربية</option><option value="ckb">کوردی</option><option value="kmr">Kurmancî</option><option value="ru">Русский</option><option value="es">Español</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="zh">中文</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="points-card fade-in">
+    <small id="lblPoints">Your points</small>
+    <b id="points">0</b>
+    <div class="pq-row">
+      <span class="pq" id="lblLv"></span>
+      <span class="pq" id="lblStreak"></span>
+      <span class="pq" id="lblChallenge"></span>
+    </div>
+  </div>
+
+  <div class="stitle"><span id="lblQuick">⚡ Quick actions</span></div>
+  <div class="quick" id="quickBar"></div>
+
+  <div id="views"></div>
+</div>
+
+<button class="fab" id="aiFab">💬</button>
+<div class="bnav" id="bnav"></div>
+<div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ i18n ============ */
+const I18N={
+en:{
+  greetM:"Good morning",greetA:"Good afternoon",greetE:"Good evening",
+  points:"Your points",lv:"Level",streak:"🔥 {n}-day streak",
+  quick:"Quick actions",
+  money:"Money",payments:"Payments",markets:"Markets",schedule:"Schedule",health:"Health",news:"News",rewards:"Rewards",list:"List",ai:"AI",
+  balance:"Balance",gold:"Gold",savings:"Savings",debt:"Debt",inc:"Income",exp:"Expense",transfer:"Transfer",
+  addTrans:"Add transaction",addTask:"Add task",addHabit:"Add habit",addItem:"Add item",addReminder:"Add reminder",
+  amount:"Amount",type:"Type",desc:"Description",time:"Time",date:"Date",label:"Label",category:"Category",
+  toll:"Toll",fine:"Fine",pay:"Pay",save:"Save",add:"Add",cancel:"Cancel",send:"Send",ask:"Ask me anything...",
+  saved:"Saved ✓",noMoney:"No transactions yet. Add your first one!",noTasks:"No tasks today.",
+  setGoal:"Set goal",steps:"Steps",goal:"Goal",water:"Water",sleep:"Sleep",
+  noNews:"News will appear here.",refresh:"↻ updated",today:"Today",
+  bills:"Bills",charge:"Top-up",tollW:"Tolls",fineW:"Fines",emptyHistory:"No payments yet.",
+  noList:"Shopping list is empty.",noRem:"No reminders.",
+  budget:"Monthly budget",budgetUsed:"spent of",budgetLeft:"left",chart:"Spending",
+  challenge:"Daily challenge",challengeDone:"Done",claim:"Claim",challengeClaim:"Challenge completed ✓",share:"Share",
+  notifOn:"Notifications on",notifOff:"Notifications off",remDue:"Reminder:",backup:"Backup",
+  export:"Export data",import:"Import data",importBtn:"Choose file",backupDone:"Backup saved",restored:"Data restored",
+  jalali:"Persian date",aiTitle:"JIB Assistant",aiOff:"AI works offline too",goldLive:"Gold (live)",offline:"offline",
+  settings:"Settings",notifications:"Notifications",permissions:"Allow notifications",install:"Install JIB app 🔽"
+},
+fa:{
+  greetM:"صبح بخیر",greetA:"ظهر بخیر",greetE:"عصر بخیر",
+  points:"امتیاز شما",lv:"سطح",streak:"🔥 {n} روز پیاپی",
+  quick:"عملیات سریع",
+  money:"پول",payments:"پرداخت‌ها",markets:"بازارها",schedule:"برنامه",health:"سلامت",news:"خبر",rewards:"جایزه",list:"خرید",ai:"هوش",
+  balance:"موجودی",gold:"طلا",savings:"پس‌انداز",debt:"بدهی",inc:"درآمد",exp:"هزینه",transfer:"انتقال",
+  addTrans:"افزودن تراکنش",addTask:"افزودن کار",addHabit:"افزودن عادت",addItem:"افزودن کالا",addReminder:"افزودن یادآور",
+  amount:"مبلغ (تومان)",type:"نوع",desc:"توضیح",time:"زمان",date:"تاریخ",label:"برچسب",category:"دسته",
+  toll:"عوارض",fine:"جریمه",pay:"پرداخت",save:"ذخیره",add:"افزودن",cancel:"انصراف",send:"ارسال",ask:"هر سوالی بپرس...",
+  saved:"ذخیره شد ✓",noMoney:"هنوز تراکنشی نیست. اولین را اضافه کن!",noTasks:"کاری برای امروز نیست.",
+  setGoal:"تنظیم هدف",steps:"قدم",goal:"هدف",water:"آب",sleep:"خواب",
+  noNews:"خبرها اینجا نمایش داده می‌شوند.",refresh:"↻ به‌روزرسانی شد",today:"امروز",
+  bills:"قبض",charge:"شارژ",tollW:"عوارض",fineW:"جریمه",emptyHistory:"هنوز پرداختی نیست.",
+  noList:"لیست خرید خالی است.",noRem:"یادآوری نیست.",
+  budget:"بودجه ماهانه",budgetUsed:"خرج شده از",budgetLeft:"باقی‌مانده",chart:"نمودار هزینه",
+  challenge:"چالش روزانه",challengeDone:"انجام شد",claim:"دریافت",challengeClaim:"چالش انجام شد ✓",share:"اشتراک",
+  notifOn:"اعلان روشن",notifOff:"اعلان خاموش",remDue:"یادآور:",backup:"پشتیبان‌گیری",
+  export:"خروجی داده",import:"ورود داده",importBtn:"انتخاب فایل",backupDone:"پشتیبان ذخیره شد",restored:"داده بازیابی شد",
+  jalali:"تقویم شمسی",aiTitle:"دستیار جیب",aiOff:"AI آفلاین هم جواب می‌دهد",goldLive:"طلا (زنده)",offline:"آفلاین",
+  settings:"تنظیمات",notifications:"اعلان‌ها",permissions:"اجازه اعلان",install:"نصب اپ جیب 🔽"
+},
+ar:{
+  greetM:"صباح الخير",greetA:"مساء الخير",greetE:"مساء الخير",
+  points:"نقاطك",lv:"المستوى",streak:"🔥 {n} أيام متتالية",
+  quick:"إجراءات سريعة",money:"المال",payments:"المدفوعات",markets:"الأسواق",schedule:"الجدول",health:"الصحة",news:"الأخبار",rewards:"المكافآت",list:"القائمة",ai:"الذكاء",
+  balance:"الرصيد",gold:"الذهب",savings:"ادخار",debt:"الدين",inc:"دخل",exp:"مصروف",transfer:"تحويل",
+  addTrans:"إضافة معاملة",addTask:"إضافة مهمة",addHabit:"إضافة عادة",addItem:"إضافة عنصر",addReminder:"إضافة تذكير",
+  amount:"المبلغ",type:"النوع",desc:"الوصف",time:"الوقت",date:"التاريخ",label:"التسمية",category:"الفئة",
+  toll:"طريق",fine:"غرامة",pay:"ادفع",save:"حفظ",add:"إضافة",cancel:"إلغاء",send:"إرسال",ask:"اسألني أي شيء...",
+  saved:"تم الحفظ ✓",noMoney:"لا توجد معاملات بعد!",noTasks:"لا مهام اليوم.",
+  setGoal:"اضبط الهدف",steps:"خطوات",goal:"الهدف",water:"ماء",sleep:"نوم",
+  noNews:"ستظهر الأخبار هنا.",refresh:"↻ تم التحديث",today:"اليوم",
+  bills:"فاتورة",charge:"شحن",tollW:"طرق",fineW:"غرامة",emptyHistory:"لا مدفوعات بعد.",
+  noList:"قائمة التسوق فارغة.",noRem:"لا تذكيرات.",
+  budget:"الميزانية الشهرية",budgetUsed:"تم صرف من",budgetLeft:"متبقي",chart:"الإنفاق",
+  challenge:"تحدي اليوم",challengeDone:"تم",claim:"استلام",challengeClaim:"اكتمل التحدي ✓",share:"مشاركة",
+  notifOn:"التنبيهات مفعلة",notifOff:"التنبيهات مطفأة",remDue:"تذكير:",backup:"نسخ احتياطي",
+  export:"تصدير البيانات",import:"استيراد البيانات",importBtn:"اختر ملف",backupDone:"تم حفظ النسخة",restored:"تمت الاستعادة",
+  jalali:"التقويم الفارسي",aiTitle:"مساعد جيب",aiOff:"يعمل AI في وضع عدم الاتصال أيضًا",goldLive:"الذهب (مباشر)",offline:"غير متصل",
+  settings:"الإعدادات",notifications:"التنبيهات",permissions:"السماح بالتنبيهات",install:"ثبّت تطبيق جيب 🔽"
+},
+ckb:{
+  greetM:"بەیانی باش",greetA:"نیوەڕۆی باش",greetE:"ئێوارەی باش",
+  points:"خاڵەکانت",lv:"ئاست",streak:"🔥 {n} ڕۆژی لەسەریەک",
+  quick:"کردەوە خێراکان",money:"پارە",payments:"پارەدانەکان",markets:"بازارەکان",schedule:"بەرنامە",health:"تەندروستی",news:"هەواڵ",rewards:"خەڵات",list:"کڕین",ai:"هوشمەند",
+  balance:"ماوە",gold:"زێڕ",savings:"پاشەکەوت",debt:"قەرز",inc:"داهات",exp:"خەرجی",transfer:"گواستنەوە",
+  addTrans:"زیادکردنی مامەڵە",addTask:"زیادکردنی کار",addHabit:"زیادکردنی خوو",addItem:"زیادکردنی کەرەستە",addReminder:"زیادکردنی بیرخستنەوە",
+  amount:"بڕ (تۆمار)",type:"جۆر",desc:"وەسف",time:"کات",date:"بەروار",label:"ناونیشان",category:"بەش",
+  toll:"باجی ڕێگا",fine:"سزا",pay:"پارەدان",save:"پاشەکەوت",add:"زیادکردن",cancel:"هەڵوەشاندنەوە",send:"ناردن",ask:"هەر پرسیارێک بکە...",
+  saved:"پاشەکەوت کرا ✓",noMoney:"هێشتا مامەڵە نییە. یەکەم زیاد بکە!",noTasks:"ئەمڕۆ کارێک نییە.",
+  setGoal:"دانانی ئامانج",steps:"هەنگاو",goal:"ئامانج",water:"ئاو",sleep:"خەو",
+  noNews:"هەواڵەکان لێرە دەردەکەون.",refresh:"↻ نوێکرایەوە",today:"ئەمڕۆ",
+  bills:"قبوڵ",charge:"پڕکردنەوە",tollW:"باجی ڕێگا",fineW:"سزاکان",emptyHistory:"هێشتا پارەدان نییە.",
+  noList:"لیستی کڕین بەتاڵە.",noRem:"بیرخستنەوە نییە.",
+  budget:"بودجەی مانگانە",budgetUsed:"خەرجکراو لە",budgetLeft:"ماوە",chart:"خەرجی",
+  challenge:"چالێنجی ڕۆژانە",challengeDone:"کرا",claim:"وەرگرتن",challengeClaim:"چالێنج تەواو بوو ✓",share:"بڵاوکردنەوە",
+  notifOn:"ئاگاداری کراوە",notifOff:"ئاگاداری کوژاوە",remDue:"بیرخستنەوە:",backup:"پاشەکەوت",
+  export:"هەناردەی داتا",import:"هاوردەی داتا",importBtn:"هەڵبژاردنی فایل",backupDone:"پاشەکەوت کرا",restored:"داتا گەڕایەوە",
+  jalali:"ڕۆژژمێری شمسی",aiTitle:"یارمەتیدەری جیب",aiOff:"AI ئۆفلاینیش وەڵام دەدات",goldLive:"زێڕ (ڕاستەوخۆ)",offline:"ئۆفلاین",
+  settings:"ڕێکخستنەکان",notifications:"ئاگادارییەکان",permissions:"ڕێگەدان بە ئاگاداری",install:"دامەزراندنی ئەپی جیب 🔽"
+},
+kmr:{
+  greetM:"Beyanîbaş",greetA:"Nîvroybaş",greetE:"Êvarbaş",
+  points:"Xalên te",lv:"Ast",streak:"🔥 {n} rojên li pey hev",
+  quick:"Kiryarên bilez",money:"Pere",payments:"Derdan",markets:"Bazar",schedule:"Bername",health:"Tenduristî",news:"Nûçe",rewards:"Xelat",list:"Lîste",ai:"Zîrek",
+  balance:"Hesab",gold:"Zêr",savings:"Teserûf",debt:"Deyn",inc:"Dahat",exp:"Lêçûn",transfer:"Veguheztin",
+  addTrans:"Zêdekirina bikaranînê",addTask:"Zêdekirina karekî",addHabit:"Zêdekirina adetekê",addItem:"Zêdekirina tiştekî",addReminder:"Zêdekirina bîrxistinê",
+  amount:"Bend (Tomen)",type:"Cure",desc:"Danasîn",time:"Dem",date:"Dîrok",label:"Nav",category:"Beş",
+  toll:"Baca rê",fine:"Ceza",pay:"Bide",save:"Tomar bike",add:"Zêde bike",cancel:"Betal bike",send:"Bişîne",ask:"Tiştekî bipirse...",
+  saved:"Hat tomar kirin ✓",noMoney:"Hê bikaranîn tune. Ya pêşîn zêde bike!",noTasks:"Îro kar tune.",
+  setGoal:"Armanc danîn",steps:"Gav",goal:"Armanc",water:"Av",sleep:"Xew",
+  noNews:"Nûçe li vir derdikevin.",refresh:"↻ hate nûkirin",today:"Îro",
+  bills:"Fatûre",charge:"Dagirtin",tollW:"Baca rê",fineW:"Ceza",emptyHistory:"Hê derdan tune.",
+  noList:"Lîsteya kirînê vala ye.",noRem:"Bîrxistin tune.",
+  budget:"Budceya mehane",budgetUsed:"xerckirî ji",budgetLeft:"mayî",chart:"Xerckirin",
+  challenge:"Kêşeya rojane",challengeDone:"Qediya",claim:"Wergirtin",challengeClaim:"Kêşe qediya ✓",share:"Parvekirin",
+  notifOn:"Agahdarî vekirî",notifOff:"Agahdarî girtî",remDue:"Bîrxistin:",backup:"Yedek",
+  export:"Derxistina dane",import:"Anîna dane",importBtn:"Dosye hilbijêre",backupDone:"Yedek hat tomar kirin",restored:"Dane hatin vegerandin",
+  jalali:"Salnameya farisî",aiTitle:"Alîkarê JIB",aiOff:"AI offline jî bersiv dide",goldLive:"Zêr (zindî)",offline:"offline",
+  settings:"Mîhengan",notifications:"Agahdarî",permissions:"Destûra agahdariyê",install:"JIB saz bike 🔽"
+},
+ru:{
+  greetM:"Доброе утро",greetA:"Добрый день",greetE:"Добрый вечер",
+  points:"Ваши баллы",lv:"Уровень",streak:"🔥 {n} дней подряд",
+  quick:"Быстрые действия",money:"Деньги",payments:"Платежи",markets:"Рынки",schedule:"Расписание",health:"Здоровье",news:"Новости",rewards:"Награды",list:"Список",ai:"ИИ",
+  balance:"Баланс",gold:"Золото",savings:"Сбережения",debt:"Долг",inc:"Доход",exp:"Расход",transfer:"Перевод",
+  addTrans:"Добавить операцию",addTask:"Добавить задачу",addHabit:"Добавить привычку",addItem:"Добавить товар",addReminder:"Добавить напоминание",
+  amount:"Сумма",type:"Тип",desc:"Описание",time:"Время",date:"Дата",label:"Метка",category:"Категория",
+  toll:"Плата за дорогу",fine:"Штраф",pay:"Оплатить",save:"Сохранить",add:"Добавить",cancel:"Отмена",send:"Отправить",ask:"Спроси меня что-нибудь...",
+  saved:"Сохранено ✓",noMoney:"Операций пока нет.",noTasks:"На сегодня задач нет.",
+  setGoal:"Задать цель",steps:"Шаги",goal:"Цель",water:"Вода",sleep:"Сон",
+  noNews:"Новости появятся здесь.",refresh:"↻ обновлено",today:"Сегодня",
+  bills:"Счета",charge:"Пополнение",tollW:"Дороги",fineW:"Штрафы",emptyHistory:"Платежей пока нет.",
+  noList:"Список покупок пуст.",noRem:"Нет напоминаний.",
+  budget:"Месячный бюджет",budgetUsed:"потрачено из",budgetLeft:"осталось",chart:"Расходы",
+  challenge:"Ежедневное испытание",challengeDone:"Готово",claim:"Получить",challengeClaim:"Испытание пройдено ✓",share:"Делиться",
+  notifOn:"Уведомления вкл",notifOff:"Уведомления выкл",remDue:"Напоминание:",backup:"Резервная копия",
+  export:"Экспорт данных",import:"Импорт данных",importBtn:"Выбрать файл",backupDone:"Копия сохранена",restored:"Данные восстановлены",
+  jalali:"Персидская дата",aiTitle:"Помощник JIB",aiOff:"ИИ работает и офлайн",goldLive:"Золото (живое)",offline:"офлайн",
+  settings:"Настройки",notifications:"Уведомления",permissions:"Разрешить уведомления",install:"Установить приложение JIB 🔽"
+},
+es:{
+  greetM:"Buenos días",greetA:"Buenas tardes",greetE:"Buenas noches",
+  points:"Tus puntos",lv:"Nivel",streak:"🔥 {n} días seguidos",
+  quick:"Acciones rápidas",money:"Dinero",payments:"Pagos",markets:"Mercados",schedule:"Horario",health:"Salud",news:"Noticias",rewards:"Recompensas",list:"Lista",ai:"IA",
+  balance:"Saldo",gold:"Oro",savings:"Ahorros",debt:"Deuda",inc:"Ingreso",exp:"Gasto",transfer:"Transferencia",
+  addTrans:"Añadir transacción",addTask:"Añadir tarea",addHabit:"Añadir hábito",addItem:"Añadir artículo",addReminder:"Añadir recordatorio",
+  amount:"Monto",type:"Tipo",desc:"Descripción",time:"Hora",date:"Fecha",label:"Etiqueta",category:"Categoría",
+  toll:"Peaje",fine:"Multa",pay:"Pagar",save:"Guardar",add:"Añadir",cancel:"Cancelar",send:"Enviar",ask:"Pregúntame lo que sea...",
+  saved:"Guardado ✓",noMoney:"Aún no hay transacciones.",noTasks:"No hay tareas hoy.",
+  setGoal:"Fijar objetivo",steps:"Pasos",goal:"Objetivo",water:"Agua",sleep:"Sueño",
+  noNews:"Las noticias aparecerán aquí.",refresh:"↻ actualizado",today:"Hoy",
+  bills:"Facturas",charge:"Recarga",tollW:"Peajes",fineW:"Multas",emptyHistory:"Aún no hay pagos.",
+  noList:"La lista de compras está vacía.",noRem:"No hay recordatorios.",
+  budget:"Presupuesto mensual",budgetUsed:"gastado de",budgetLeft:"restante",chart:"Gastos",
+  challenge:"Desafío diario",challengeDone:"Hecho",claim:"Reclamar",challengeClaim:"Desafío completado ✓",share:"Compartir",
+  notifOn:"Notificaciones activas",notifOff:"Notificaciones inactivas",remDue:"Recordatorio:",backup:"Copia",
+  export:"Exportar datos",import:"Importar datos",importBtn:"Elegir archivo",backupDone:"Copia guardada",restored:"Datos restaurados",
+  jalali:"Fecha persa",aiTitle:"Asistente JIB",aiOff:"La IA funciona también sin conexión",goldLive:"Oro (vivo)",offline:"sin conexión",
+  settings:"Ajustes",notifications:"Notificaciones",permissions:"Permitir notificaciones",install:"Instalar la aplicación JIB 🔽"
+},
+fr:{
+  greetM:"Bonjour",greetA:"Bon après-midi",greetE:"Bonsoir",
+  points:"Vos points",lv:"Niveau",streak:"🔥 {n} jours d'affilée",
+  quick:"Actions rapides",money:"Argent",payments:"Paiements",markets:"Marchés",schedule:"Agenda",health:"Santé",news:"Actualités",rewards:"Récompenses",list:"Liste",ai:"IA",
+  balance:"Solde",gold:"Or",savings:"Épargne",debt:"Dette",inc:"Revenu",exp:"Dépense",transfer:"Virement",
+  addTrans:"Ajouter une transaction",addTask:"Ajouter une tâche",addHabit:"Ajouter une habitude",addItem:"Ajouter un article",addReminder:"Ajouter un rappel",
+  amount:"Montant",type:"Type",desc:"Description",time:"Heure",date:"Date",label:"Libellé",category:"Catégorie",
+  toll:"Péage",fine:"Amende",pay:"Payer",save:"Enregistrer",add:"Ajouter",cancel:"Annuler",send:"Envoyer",ask:"Demandez-moi ce que vous voulez...",
+  saved:"Enregistré ✓",noMoney:"Aucune transaction.",noTasks:"Aucune tâche aujourd'hui.",
+  setGoal:"Définir un objectif",steps:"Pas",goal:"Objectif",water:"Eau",sleep:"Sommeil",
+  noNews:"Les actualités apparaîtront ici.",refresh:"↻ mis à jour",today:"Aujourd'hui",
+  bills:"Factures",charge:"Recharge",tollW:"Péages",fineW:"Amendes",emptyHistory:"Aucun paiement.",
+  noList:"La liste de courses est vide.",noRem:"Aucun rappel.",
+  budget:"Budget mensuel",budgetUsed:"dépensé de",budgetLeft:"restant",chart:"Dépenses",
+  challenge:"Défi quotidien",challengeDone:"Fait",claim:"Réclamer",challengeClaim:"Défi terminé ✓",share:"Partager",
+  notifOn:"Notifications activées",notifOff:"Notifications désactivées",remDue:"Rappel :",backup:"Sauvegarde",
+  export:"Exporter les données",import:"Importer les données",importBtn:"Choisir un fichier",backupDone:"Sauvegarde enregistrée",restored:"Données restaurées",
+  jalali:"Date persane",aiTitle:"Assistant JIB",aiOff:"L'IA fonctionne aussi hors ligne",goldLive:"Or (en direct)",offline:"hors ligne",
+  settings:"Paramètres",notifications:"Notifications",permissions:"Autoriser les notifications",install:"Installer l'app JIB 🔽"
+},
+de:{
+  greetM:"Guten Morgen",greetA:"Guten Tag",greetE:"Guten Abend",
+  points:"Deine Punkte",lv:"Level",streak:"🔥 {n} Tage in Folge",
+  quick:"Schnellaktionen",money:"Geld",payments:"Zahlungen",markets:"Märkte",schedule:"Zeitplan",health:"Gesundheit",news:"Nachrichten",rewards:"Belohnungen",list:"Liste",ai:"KI",
+  balance:"Kontostand",gold:"Gold",savings:"Ersparnisse",debt:"Schulden",inc:"Einkommen",exp:"Ausgabe",transfer:"Überweisung",
+  addTrans:"Transaktion hinzufügen",addTask:"Aufgabe hinzufügen",addHabit:"Gewohnheit hinzufügen",addItem:"Artikel hinzufügen",addReminder:"Erinnerung hinzufügen",
+  amount:"Betrag",type:"Typ",desc:"Beschreibung",time:"Zeit",date:"Datum",label:"Bezeichnung",category:"Kategorie",
+  toll:"Maut",fine:"Strafe",pay:"Bezahlen",save:"Speichern",add:"Hinzufügen",cancel:"Abbrechen",send:"Senden",ask:"Frag mich etwas...",
+  saved:"Gespeichert ✓",noMoney:"Noch keine Transaktionen.",noTasks:"Heute keine Aufgaben.",
+  setGoal:"Ziel setzen",steps:"Schritte",goal:"Ziel",water:"Wasser",sleep:"Schlaf",
+  noNews:"Nachrichten erscheinen hier.",refresh:"↻ aktualisiert",today:"Heute",
+  bills:"Rechnungen",charge:"Aufladen",tollW:"Maut",fineW:"Strafen",emptyHistory:"Noch keine Zahlungen.",
+  noList:"Die Einkaufsliste ist leer.",noRem:"Keine Erinnerungen.",
+  budget:"Monatsbudget",budgetUsed:"ausgegeben von",budgetLeft:"übrig",chart:"Ausgaben",
+  challenge:"Tägliche Herausforderung",challengeDone:"Erledigt",claim:"Einlösen",challengeClaim:"Herausforderung geschafft ✓",share:"Teilen",
+  notifOn:"Benachrichtigungen an",notifOff:"Benachrichtigungen aus",remDue:"Erinnerung:",backup:"Sicherung",
+  export:"Daten exportieren",import:"Daten importieren",importBtn:"Datei wählen",backupDone:"Sicherung gespeichert",restored:"Daten wiederhergestellt",
+  jalali:"Persisches Datum",aiTitle:"JIB Assistent",aiOff:"KI funktioniert auch offline",goldLive:"Gold (live)",offline:"offline",
+  settings:"Einstellungen",notifications:"Benachrichtigungen",permissions:"Benachrichtigungen erlauben",install:"JIB-App installieren 🔽"
+},
+zh:{
+  greetM:"早上好",greetA:"下午好",greetE:"晚上好",
+  points:"你的积分",lv:"等级",streak:"🔥 连续 {n} 天",
+  quick:"快捷操作",money:"钱包",payments:"支付",markets:"行情",schedule:"日程",health:"健康",news:"资讯",rewards:"奖励",list:"清单",ai:"智能",
+  balance:"余额",gold:"黄金",savings:"储蓄",debt:"负债",inc:"收入",exp:"支出",transfer:"转账",
+  addTrans:"添加交易",addTask:"添加任务",addHabit:"添加习惯",addItem:"添加物品",addReminder:"添加提醒",
+  amount:"金额",type:"类型",desc:"说明",time:"时间",date:"日期",label:"标签",category:"分类",
+  toll:"过路费",fine:"罚款",pay:"支付",save:"保存",add:"添加",cancel:"取消",send:"发送",ask:"随便问我...",
+  saved:"已保存 ✓",noMoney:"暂无交易。",noTasks:"今天没有任务。",
+  setGoal:"设定目标",steps:"步数",goal:"目标",water:"饮水",sleep:"睡眠",
+  noNews:"资讯将在此显示。",refresh:"↻ 已更新",today:"今天",
+  bills:"账单",charge:"充值",tollW:"过路费",fineW:"罚款",emptyHistory:"暂无支付记录。",
+  noList:"购物清单为空。",noRem:"暂无提醒。",
+  budget:"月度预算",budgetUsed:"已花费",budgetLeft:"剩余",chart:"支出",
+  challenge:"每日挑战",challengeDone:"完成",claim:"领取",challengeClaim:"挑战完成 ✓",share:"分享",
+  notifOn:"通知开启",notifOff:"通知关闭",remDue:"提醒：",backup:"备份",
+  export:"导出数据",import:"导入数据",importBtn:"选择文件",backupDone:"备份已保存",restored:"数据已恢复",
+  jalali:"波斯日期",aiTitle:"JIB 助手",aiOff:"AI 离线也能回答",goldLive:"黄金（实时）",offline:"离线",
+  settings:"设置",notifications:"通知",permissions:"允许通知",install:"安装 JIB 应用 🔽"
+}
+};
+let L='en';
+const t=k=>(I18N[L]&&I18N[L][k])||(I18N.en[k]||k);
+const RTL=['fa','ar','ckb'];
+
+/* ============ state ============ */
+let S={pts:0,lastDay:null,streak:0,lastChallenge:null,challengeDone:false,
+  money:{balance:0,gold:0,savings:0,debt:0},txn:[],tasks:[],reminders:[],list:[],
+  habits:{steps:0,goal:6000,water:0,sleep:0},payments:[],budget:0,usedMonth:0};
+try{const saved=JSON.parse(localStorage.getItem('jib')||'{}');for(const k in saved)S[k]=saved[k]}catch(e){}
+const save=()=>localStorage.setItem('jib',JSON.stringify(S));
+
+const $=s=>document.querySelector(s);
+const fmt=n=>(n||0).toLocaleString('en-US');
+let toastT;
+function toast(m){const el=$('#toast');el.textContent=m;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),1700)}
+function addPts(n){S.pts+=n;$('#ptsToday').textContent='+'+n;$('#points').textContent=fmt(S.pts);save()}
+function level(){return S.pts>=500?'Gold':(S.pts>=200?'Silver':'Bronze')}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+/* ============ jalali ============ */
+function toJalali(gy,gm,gd){
+  const gdm=[0,31,59,90,120,151,181,212,243,273,304,334];
+  let jy=gy<=1600?0:979;gy-=gy<=1600?621:1600;
+  const gy2=(jy>0)?(gy+621):gy;let day=(gy2%4===0&&(gy2%100!==0||gy2%400===0))?366:365;
+  day=(gy2-1)*365+Math.floor((gy2-1)/4)-Math.floor((gy2-1)/100)+Math.floor((gy2-1)/400)+(gdm[gm-1]+gd);
+  gy=0;const le=jy<0||jy>0;
+  let jdn=day+79;jy=33*(jdn/979);const jy2=Math.floor(jy);let leap=(jy2-((jy2/33)*33))*4/33;
+  if(leap>=0&&leap<0.5)jy2++;jy=jy2;
+  let dayj=jdn-979*jy/33;jy++;const jm=(dayj>=365)?0:(dayj-365);
+  leap=((jy-1)%4===0)?(dayj<186?1:(dayj<366?0:1)):((dayj<186)?1:(dayj<366?0:1));
+  let jd=dayj;if(leap)jd++;jm=Math.floor(jd/31);const jm2=(jd%31)+1;jm++;
+  return {j:jy,m:jm,d:jm2};
+}
+const MONTHS_FA=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+
+/* ============ notifications ============ */
+function notifEnabled(){return 'Notification' in window && Notification.permission==='granted'}
+function askNotif(){if(!('Notification' in window))return toast(t('notifOff'));if(Notification.permission==='default'){Notification.requestPermission().then(p=>{toast(p==='granted'?t('notifOn'):t('notifOff'))})}}
+function fireNotif(title,body){if(notifEnabled()){try{const n=new Notification(title,{body});setTimeout(()=>n.close(),5000)}catch(e){}}}
+function checkReminders(){if(!notifEnabled()||!S.reminders)return;const now=Date.now();S.reminders.forEach((r,i)=>{if(!r.done&&r.t&&r.t<=now){fireNotif(t('remDue')+r.desc,'JIB');S.reminders[i].done=true;save()}})}
+
+/* ============ live data ============ */
+let fxCards=null,goldCard='',cryptoCard='';
+async function fetchFX(){try{const d=await(await fetch('https://open.er-api.com/v6/latest/USD')).json();const irr=d.rates.IRR;if(!irr)return;const it=[[0,'USD',1,'💵'],[1,'EUR',d.rates.EUR||1.09,'💶'],[2,'GBP',d.rates.GBP||0.79,'💷'],[3,'AED',d.rates.AED||3.67,'💱']];fxCards=it.map(a=>{const v=Math.round(irr/a[2]/1000);return `<div class="tk"><div class="s"><span>${a[3]} ${a[1]}</span><span class="upd">●</span></div><b>${v.toLocaleString('en-US')}k</b><span class="chg green">${t('refresh')}</span></div>`}).join('');globalIRR=irr;myMarkets();}catch(e){}}
+let globalIRR=0;
+async function fetchGold(){try{const g=await(await fetch('https://api.gold-api.com/price/XAU')).json();const gUsd=g.price;const gramUsd=gUsd/31.1035;const toman=globalIRR?gramUsd*globalIRR:gramUsd*621000;goldCard=`<div class="tk"><div class="s"><span>🥇 ${t('gold')}</span><span class="upd">●</span></div><b style="color:var(--gold)">${L==='fa'||RTL.indexOf(L)>=0?Math.round(toman).toLocaleString('en-US'):'$'+gUsd.toFixed(2)}</b><span class="chg green">${t('goldLive')}</span></div>`;myMarkets();}catch(e){}}
+async function fetchCrypto(){try{const c=await(await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd',{headers:{'User-Agent':'Mozilla/5.0'}})).json();cryptoCard=`<div class="tk"><div class="s"><span>₿ BTC</span><span class="upd">●</span></div><b>$${fmt(c.bitcoin.usd)}</b><span class="chg green">▲</span></div><div class="tk"><div class="s"><span>Ξ ETH</span></div><b>$${fmt(c.ethereum.usd)}</b><span class="chg green">▲</span></div>`;myMarkets();}catch(e){}}
+function myMarkets(){if(cur==='markets')renderMarkets()}
+
+/* ============ AI ============ */
+const AI_OFF={en:'',fa:''};
+let aiMsgs=[];
+function offlineAI(q){
+  q=q.toLowerCase();
+  const KB={
+    save:{en:'Saving 10% of your income first makes building wealth much easier. In JIB, set a monthly budget (Settings → Budget) so you can see what is spent and what is left, then decide. Small, regular savings beat occasional big ones.',
+      fa:'توصیه مالی: اول ۱۰٪ درآمدت رو کنار بذار. تو تنظیمات جیب بودجه ماهانه رو تعیین کن تا ببینی چقدر خرج شده و چقدر مونده. پس‌انداز کوچیک و منظم بهتر از مبلغ زیاد و گاه‌به‌گاهه.',
+      ar:'نصيحة مالية: ادّخر 10% من دخلك أولاً. في جيب حدّد ميزانية شهرية (الإعدادات ← الميزانية) لترى ما تم إنفاقه وما تبقّى. الادخار الصغير المنتظم أفضل من الكبير المتقطع.',
+      ckb:'ڕاوێژی دارایی: یەکەم جار ٪۱۰ی داهاتەکەت لەبەر بکە. لە ڕێکخستنەکانی جیب بودجەی مانگانە دابنێ بۆ ئەوەی ببینی چەند خەرج کراوە و چەند ماوەتەوە.',
+      kmr:'Şîreta darayî: pêşî %10-ê dahata xwe hilîne. Di JIB-ê de budceya mehane danî (Mîheng → Budce) da ku bibînî çiqas hatiye xerckirin û çiqas maye.',
+      ru:'Совет: откладывайте 10% дохода в первую очередь. В JIB задайте месячный бюджет (Настройки → Бюджет), чтобы видеть расходы и остаток. Регулярные небольшие сбережения лучше редких больших.',
+      es:'Consejo: ahorra el 10% de tus ingresos primero. En JIB fija un presupuesto mensual (Ajustes → Presupuesto) para ver gastos y saldo. Ahorrar poco y constante supera a hacerlo de golpe.',
+      fr:'Conseil : épargnez d\'abord 10% de vos revenus. Dans JIB définissez un budget mensuel (Paramètres → Budget) pour voir les dépenses et le reste. Mieux vaut épargner un peu et régulièrement.',
+      de:'Tipp: Sparen Sie zuerst 10% Ihres Einkommens. Legen Sie in JIB ein Monatsbudget fest (Einstellungen → Budget), um Ausgaben und Rest zu sehen. Kleine, regelmäßige Ersparnisse schlagen große seltene.',
+      zh:'建议：先存下收入的10%。在 JIB 中设置月度预算（设置→预算），了解已花费和剩余。小额定期储蓄胜过偶尔大额储蓄。'},
+    gold:{en:'Gold prices move with the US dollar, inflation, global crises and central-bank policy. In the Markets tab you have a live gold card (USD per ounce) plus fellow FX rates. Expect gold to rise in uncertain times and be pressured when the dollar is strong.',
+      fa:'قیمت طلا با دلار، تورم، بحران‌های جهانی و سیاست بانک مرکزی حرکت می‌کنه. تو بخش بازارها کارت طلای زنده (دلار بر اونس) و نرخ ارزها رو داری. انتظار برو طلا در بحران‌ها بالا بره و وقتی دلار قوی‌ه فشار بیاد.',
+      ar:'يتحرك الذهب مع الدولار والتضخم والأزمات العالمية وسياسة البنك المركزي. في تبويب الأسواق لديك بطاقة الذهب الحية (دولار/أونصة) وعروض أسعار العملات. يزداد الذهب في الأزمات ويتراجع مع قوة الدولار.',
+      ckb:'نرخی زێڕ لەگەڵ دۆلار، هەڵاوسان، قەیرانە جیهانییەکان و سیاسەتی بانکی ناوەندی دەجوڵێت. لە بەشی بازارەکان کارتی زێڕی ڕاستەوخۆت هەیە (دۆلار بۆ ئۆنس).',
+      kmr:'Bihaya zêr bi dolar, enflasyon, qeyran û siyaseta banka navendî ve diguhere. Di tabloya Bazar de karta zêr a zindî heye (dolar/ons).',
+      ru:'Цена золота зависит от доллара, инфляции, мировых кризисов и политики центробанка. Во вкладке Рынки есть живая карта золота (долл./унция) и курсы валют.',
+      es:'El oro se mueve con el dólar, la inflación, las crisis mundiales y la política del banco central. En Mercados tienes la tarjeta de oro en vivo (USD/onza) y los tipos de cambio.',
+      fr:'Le cours de l\'or suit le dollar, l\'inflation, les crises et la politique des banques centrales. Dans l\'onglet Marchés vous avez la carte or en direct (USD/once) et les cours des devises.',
+      de:'Der Goldpreis folgt Dollar, Inflation, globalen Krisen und Zentralbankpolitik. Im Tab Märkte gibt es die Live-Goldkarte (USD/Unze) und Währungskurse.',
+      zh:'黄金价格随美元、通胀、全球危机和央行政策波动。在行情页有实时金价卡（美元/盎司）和外汇汇率。'},
+    plan:{en:'Start your day by checking JIB — review money, schedule and one main goal. Use the Schedule tab to add tasks and reminders. Small daily habits beat big plans: pick ONE priority and defend it.',
+      fa:'روزت رو با جیب شروع کن: پول، برنامه و یک هدف اصلی. از تب برنامه برای افزودن کار و یادآور استفاده کن. عادت‌های کوچک روزانه بهتر از برنامه‌های بزرگن؛ یک اولویت انتخاب کن و روش بایست.',
+      ar:'ابدأ يومك بجيب: راجع المال والجدول وهدف رئيسي واحد. استخدم تبويب الجدول لإضافة مهام وتذكيرات. العادات الصغيرة اليومية أفضل من الخطط الكبيرة.',
+      ckb:'ڕۆژەکەت بە جیب دەست پێ بکە: پارە، بەرنامە و یەک ئامانجی سەرەکی. لە بەشی بەرنامە کار و بیرخستنەوە زیاد بکە.',
+      kmr:'Roja xwe bi JIB dest pê bike: pere, bername û yek armanc. Di tabloya Bername de kar û bîrxistinan zêde bike.',
+      ru:'Начните день с JIB: деньги, расписание и одна главная цель. Во вкладке Расписание добавляйте задачи и напоминания. Маленькие ежедневные привычки лучше больших планов.',
+      es:'Empieza el día en JIB: dinero, horario y un objetivo principal. En la pestaña Horario añade tareas y recordatorios. Los hábitos pequeños diarios ganan a los grandes planes.',
+      fr:'Commencez la journée avec JIB : argent, agenda et un objectif principal. Dans l\'onglet Agenda ajoutez tâches et rappels. Les petites habitudes quotidiennes surpassent les grands plans.',
+      de:'Beginnen Sie den Tag mit JIB: Geld, Zeitplan und ein Hauptziel. Im Tab Zeitplan Aufgaben und Erinnerungen hinzufügen. Kleine tägliche Gewohnheiten schlagen große Pläne.',
+      zh:'用 JIB 开始新的一天：钱包、日程和一个主要目标。在日程页添加任务和提醒。小习惯胜过大计划。'},
+    health:{en:'Good health = plenty of water (about 2L), 7–8h of sleep and 7000+ steps daily. In the Health tab you can log steps, water and sleep and watch your progress. Stay consistent — small habits compound.',
+      fa:'سلامتی خوب یعنی آب کافی (حدود ۲ لیتر)، ۷–۸ ساعت خواب و روزانه ۷۰۰۰+ قدم. تو بخش سلامت می‌تونی قدم، آب و خواب رو ثبت و پیشرفتت رو ببینی. پیوستگی مهمه — عادت‌های کوچک جمع می‌شن.',
+      ar:'الصحة الجيدة = ماء كافٍ (نحو 2 لتر) و7–8 ساعات نوم و7000+ خطوة يوميًا. في تبويب الصحة سجّل الخطوات والماء والنوم وتابع تقدمك.',
+      ckb:'تەندروستی باش = ئاوی پێویست (نزیکەی ٢ لیتر)، ٧–٨ کاتژمێر خەو و ڕۆژانە ٧٠٠٠+ هەنگاو. لە بەشی تەندروستی bazûkan تۆمار بکە.',
+      kmr:'Tenduristiya baş = ava pêwîst (2 L), 7–8 saet xew û rojane 7000+ gav. Di tabloya Tenduristî de gav, av û xewê tomar bike.',
+      ru:'Хорошее здоровье = много воды (около 2 л), 7–8 часов сна и 7000+ шагов в день. Во вкладке Здоровье отмечайте шаги, воду и сон.',
+      es:'Buena salud = mucha agua (2 L), 7–8 h de sueño y 7000+ pasos al día. En Salud registra pasos, agua y sueño y mira tu progreso.',
+      fr:'Bonne santé = eau en abondance (2 L), 7–8 h de sommeil et 7000+ pas par jour. Dans l\'onglet Santé enregistrez pas, eau et sommeil.',
+      de:'Gute Gesundheit = viel Wasser (2 L), 7–8 h Schlaf und 7000+ Schritte täglich. Im Tab Gesundheit Schritte, Wasser und Schlaf erfassen.',
+      zh:'好健康 = 充足饮水（约2升）、7–8小时睡眠、每天7000+步。在健康页记录步数、饮水、睡眠。'},
+    list:{en:'Use the List tab as your shopping list. Add items, then tick them off as you buy — each completes a step and earns points. A written list stops impulse buying.',
+      fa:'از تب خرید به‌عنوان لیست خریدت استفاده کن. کالاها رو اضافه کن و موقع خرید تیک بزن — هر بار امتیاز می‌گیری. لیست نوشته جلوی خرید احساسی رو می‌گیره.',
+      ar:'استخدم تبويب القائمة كقائمة تسوقك. أضف العناصر وعلّم عليها عند الشراء. القائمة المكتوبة تمنع الشراء الاندفاعي.',
+      ckb:'بەشی کڕین وەک لیستی کڕینەکەت بەکاربهێنە. کەرەستە زیاد بکە و کە کڕیت علامەتی بکە.',
+      kmr:'Tabloya Lîste wek lîsteya kirînê bi kar bîne. Tiştan zêde bike û dema dikirî nîşan bike.',
+      ru:'Используйте вкладку Список как список покупок. Добавляйте товары и отмечайте при покупке. Записанный список уберегает от спонтанных покупок.',
+      es:'Usa la pestaña Lista como tu lista de compras. Añade artículos y márcalos al comprar. Una lista evita compras impulsivas.',
+      fr:'Utilisez l\'onglet Liste comme liste de courses. Ajoutez des articles et cochez-les. Une liste écrite évite les achats impulsifs.',
+      de:'Nutzen Sie den Tab Liste als Einkaufsliste. Artikel hinzufügen und beim Kauf abhaken. Eine Liste verhindert Impulskäufe.',
+      zh:'用清单页作为购物清单。添加物品，购买时勾选。写清单可避免冲动消费。'},
+    currency:{en:'You can check live exchange rates in the Markets tab: USD, gold, plus BTC and ETH. Rates come from free sources. For the Rial, watch the bank-announced rate and the market rate — they can differ.',
+      fa:'نرخ ارز زنده رو تو بازارها می‌تونی ببینی: دلار، طلا، بیت‌کوین و اتریوم. نرخ‌ها از منبع رایگان می‌آن. درباره تومان، نرخ اعلامی بانک و نرخ بازار رو با هم مقایسه کن — ممکنه فرق داشته باشن.',
+      ar:'تحققّ من أسعار الصرف الحية في تبويب الأسواق: الدولار والذهب وبيتكوين وإيثيريوم. الأسعار من مصادر مجانية.',
+      ckb:'لە بەشی بازارەکان نرخی ئاڵوگۆڕی ڕاستەوخۆ ببینە: دۆلار، زێڕ، بیت‌کۆین و ئیتێریۆم.',
+      kmr:'Di tabloya Bazar de nirxê guhertina zindî bibîne: dolar, zêr, BTC û ETH.',
+      ru:'Живые курсы валют вы найдёте во вкладке Рынки: доллар, золото, BTC и ETH. Курсы — из бесплатных источников.',
+      es:'Consulta tipos de cambio en vivo en Mercados: USD, oro, BTC y ETH. Los precios vienen de fuentes gratuitas.',
+      fr:'Consultez les taux de change en direct dans l\'onglet Marchés : USD, or, BTC et ETH. Les cours proviennent de sources gratuites.',
+      de:'Live-Wechselkurse finden Sie im Tab Märkte: USD, Gold, BTC und ETH. Die Kurse stammen aus freien Quellen.',
+      zh:'在行情页查看实时汇率：美元、黄金、BTC 和 ETH。数据来自免费来源。'},
+    crypto:{en:'Crypto (BTC, ETH) updates live in Markets, in USD. Crypto is volatile — only invest what you can afford to lose, and diversify. JIB shows the price so you can follow trends.',
+      fa:'کریپتو (بیت‌کوین و اتریوم) تو بازارها به‌صورت زنده با دلار به‌روزرسانی می‌شه. کریپتو نوسان داره — فقط اون مقدار که می‌تونی از دست بدی سرمایه‌گذاری کن و تنوع بده.',
+      ar:'يتم تحديث العملات المشفرة (BTC, ETH) مباشرة في الأسواق بالدولار. العملات المشفرة متقلبة — استثمر ما يمكنك تحمّل خسارته.',
+      ckb:'کرپتۆ (BTC و ETH) لە بازارەکان بە دۆلار ڕاستەوخۆ نوێ دەکرێتەوە. کرپتۆ بەرهەڵستی هەیە.',
+      kmr:'Kripto (BTC, ETH) di Bazar de bi dolar zindî tê nûkirin. Kripto volatil e.',
+      ru:'Крипта (BTC, ETH) обновляется вживую в Рынках в долларах. Криптовалюта волатильна — вкладывайте только то, что можете потерять.',
+      es:'Las criptos (BTC, ETH) se actualizan en vivo en Mercados, en USD. Son volátiles: invierte solo lo que puedas perder.',
+      fr:'Les cryptos (BTC, ETH) se mettent à jour en direct dans Marchés, en USD. Elles sont volatiles : n\'investissez que ce que vous pouvez perdre.',
+      de:'Crypto (BTC, ETH) wird im Tab Märkte live in USD aktualisiert. Crypto ist volatil — investieren Sie nur, was Sie verlieren können.',
+      zh:'加密货币（BTC、ETH）在行情页以美元实时更新。加密货币波动大——只投入你能承受损失的金额。'},
+    news:{en:'The News tab shows the day\'s headlines across world, finance, sports, tech and economy so you can stay informed in one place. Headlines refresh daily.',
+      fa:'تب خبر مهم‌ترین تیترهای روز رو در دنیا، مالی، ورزش، فناوری و اقتصاد نشون می‌ده تا همه رو یه‌جا دنبال کنی. تیترها روزانه به‌روز می‌شن.',
+      ar:'يعرض تبويب الأخبار عناوين اليوم في العالم والمال والرياضة والتقنية والاقتصاد في مكان واحد.',
+      ckb:'بەشی هەواڵ گرنگترین سەرنووسەکانی ڕۆژ لە جیهان، دارایی، وەرزش، تەکنۆلۆژیا و ئابووری نیشان دەدات.',
+      kmr:'Tabloya Nûçe sernavên rojê di cîhan, darayî, werzîş, teknolojî û aborî de nîşan dide.',
+      ru:'Вкладка Новости показывает заголовки дня по миру, финансам, спорту, технологиям и экономике в одном месте.',
+      es:'La pestaña Noticias muestra los titulares del día en mundo, dinero, deportes, tecnología y economía.',
+      fr:'L\'onglet Actualités affiche les titres du jour en monde, finance, sport, tech et économie au même endroit.',
+      de:'Der Tab Nachrichten zeigt die Tagesschlagzeilen zu Welt, Finanzen, Sport, Technik und Wirtschaft an einem Ort.',
+      zh:'资讯页在一个地方展示世界、财经、体育、科技、经济的当日头条。'},
+    rewards:{en:'You earn points in JIB for logging transactions, finishing tasks, reminders and habits, and completing the daily challenge. Points build your level (Bronze → Silver → Gold). Open Rewards to claim the daily +20 and share your card.',
+      fa:'تو جیب برای ثبت تراکنش، انجام کارها، یادآورها و عادت‌ها و تکمیل چالش روزانه امتیاز می‌گیری. امتیازها سطحت رو می‌برن بالا (برنز → نقره → طلا). تو بخش جایزه چالش روزانه +۲۰ رو بگیر و کارتت رو به اشتراک بذار.',
+      ar:'تكسب نقاطًا في جيب عند تسجيل المعاملات وإتمام المهام والتذكيرات والعادات والتحدي اليومي. النقاط ترفع مستواك. افتح المكافآت لاستلام +20 يوميًا ومشاركة بطاقتك.',
+      ckb:'لە جیب خاڵ بۆ تۆمارکردنی مامەڵە، تەواوکردنی کار، بیرخستنەوە و خووەکان و چالێنجی ڕۆژانە وەردەگریت. لە بەشی خەڵات چالێنجی ڕۆژانە +٢٠ وەربگرە.',
+      kmr:'Di JIB-ê de ji bo tomarkirina bikaranîn, qedandina kar, bîrxistin û adetan xal distînî. Di tabloya Xelat de kêşeya rojane +20 bigire.',
+      ru:'В JIB вы получаете баллы за операции, задачи, напоминания, привычки и ежедневное испытание. Баллы повышают уровень. Откройте Награды, чтобы получить +20 и поделиться.',
+      es:'Ganas puntos en JIB por registrar transacciones, completar tareas, recordatorios y hábitos y el desafío diario. Abre Recompensas para el +20 diario.',
+      fr:'Vous gagnez des points dans JIB pour transactions, tâches, rappels, habitudes et le défi quotidien. Ouvrez Récompenses pour le +20 et le partage.',
+      de:'In JIB sammeln Sie Punkte für Transaktionen, Aufgaben, Erinnerungen, Gewohnheiten und die Tages-Herausforderung. Öffnen Sie Belohnungen für die täglichen +20.',
+      zh:'在 JIB 中，记录交易、完成任务、提醒和习惯、完成每日挑战可获得积分。打开奖励页领取每日+20。'},
+    reminder:{en:'Use the Schedule tab to add reminders. Allow notifications (bell icon) so JIB can alert you at the set time. Reminders keep your day on track.',
+      fa:'برای افزودن یادآور از تب برنامه استفاده کن. اجازه اعلان بده (آیکون زنگ) تا جیب سر وقت بهت هشدار بده. یادآورها روزت رو منظم می‌کنن.',
+      ar:'استخدم تبويب الجدول لإضافة تذكيرات، واسمح بالتنبيهات لتنبيهك في الوقت المحدد.',
+      ckb:'بۆ زیادکردنی بیرخستنەوە لە بەشی بەرنامە بەکاربهێنە و ڕێگە بە ئاگاداری بدە.',
+      kmr:'Ji bo zêdekirina bîrxistinan tabloya Bername bikar bîne û destûrê bide agahdariyan.',
+      ru:'Добавляйте напоминания во вкладке Расписание и разрешите уведомления, чтобы JIB напоминал вовремя.',
+      es:'Usa la pestaña Horario para añadir recordatorios y permite notificaciones para que JIB te avise.',
+      fr:'Utilisez l\'onglet Agenda pour ajouter des rappels et autorisez les notifications.',
+      de:'Nutzen Sie den Tab Zeitplan für Erinnerungen und erlauben Sie Benachrichtigungen.',
+      zh:'用日程页添加提醒，并允许通知，JIB 会在设定时间提醒你。'},
+    welcome:{en:'Hi! 👋 I am JIB Assistant. I can answer about money, budget, gold, currency, crypto, shopping, health, schedule, reminders, news and rewards — in your language. Try asking "How can I save money?"',
+      fa:'سلام! 👋 من دستیار جیب هستم. می‌تونم درباره پول، بودجه، طلا، ارز، کریپتو، خرید، سلامت، برنامه، یادآور، خبر و جایزه — به زبان خودت — جواب بدم.',
+      ar:'مرحبا! 👋 أنا مساعد جيب. أستطيع الإجابة عن المال والباقة والذهب والعملات والتسوق والصحة والجدول والتذكيرات بلغتك.',
+      ckb:'سڵاو! 👋 من یارمەتیدەری جیبم. دەتوانم لەبارەی پارە، بودجە، زێڕ، کڕین، تەندروستی، بەرنامە و خەڵات بە زمانی خۆت وەڵام بدەمەوە.',
+      kmr:'Silav! 👋 Ez alîkarê JIB im. Dikarim li ser pere, budce, zêr, kirîn, tenduristî û bername bi zimanê te bersiv bidim.',
+      ru:'Привет! 👋 Я помощник JIB. Могу отвечать о деньгах, бюджете, золоте, крипте, покупках, здоровье и планах на вашем языке.',
+      es:'¡Hola! 👋 Soy el Asistente JIB. Puedo responder sobre dinero, presupuesto, oro, cripto, compras, salud y planes en tu idioma.',
+      fr:'Bonjour ! 👋 Je suis l\'assistant JIB. Je peux répondre sur l\'argent, le budget, l\'or, les crypto, les achats, la santé et les plans dans votre langue.',
+      de:'Hallo! 👋 Ich bin der JIB-Assistent. Ich kann zu Geld, Budget, Gold, Crypto, Einkauf, Gesundheit und Plan auf Ihrer Sprache antworten.',
+      zh:'你好！👋 我是 JIB 助手。我可以用你的语言回答关于钱包、预算、黄金、加密货币、购物、健康和日程的问题。'}};
+  const pick=(m)=>{const v=KB[m];return v[L]||v.en};
+  if(/(?:save|saving|پس‌انداز|پس|هزینه|خرج|إدخار|ادخار|budget|بودجه|ميزانية|بهدج)/i.test(q))return pick('save');
+  if(/(?:gold|طلا|ذهب|زێڕ|zêr|złoto|أونصة|اونس|美元|黄金)/i.test(q))return pick('gold');
+  if(/(?:plan|schedule|morning|برنامه|صبح|جدول|بەرنامە|بهرنامه|tag|список|agenda|horario|日程)/i.test(q))return pick('plan');
+  if(/(?:health|water|sleep|step|سلامت|آب|خواب|صحة|ماء|نوم|تەندروستی|tendurist|здор|salud|sant|gesund|健康)/i.test(q))return pick('health');
+  if(/(?:shopp|list|buy|خرید|شراء|کڕین|kirîn|покуп|compra|achat|einkauf|购物|清单)/i.test(q))return pick('list');
+  if(/(?:curren|exchange|fx|money|dollar|usd|ارز|دلار|عملات|نرخ|currency)/i.test(q))return pick('currency');
+  if(/(?:crypto|bitcoin|btc|ether|eth|کریپتو|بت[\u200c ]?کوین|عملات\s*رقمية|کرپت|加密货币|虚拟货币)/i.test(q))return pick('crypto');
+  if(/(?:news|خبر|أخبار|هەواڵ|nûçe|новост|noticia|actualit|nachricht|资讯)/i.test(q))return pick('news');
+  if(/(?:reward|point|level|challenge|امتیاز|جایزه|جائزة|خاڵ|xal|балл|recompensa|récompense|belohnung|积分|奖励)/i.test(q))return pick('rewards');
+  if(/(?:remind|reminder|یادآور|تذكير|بیرخستنەوە|bîrxistin|напомин|recordatorio|rappel|erinnerung|提醒)/i.test(q))return pick('reminder');
+  return pick('welcome');
+}
+async function aiChat(userMsg){
+  addBubble(userMsg,'user');addTyping();
+  const system='You are JIB assistant, a helpful finance & daily-life assistant inside a super-app. IMPORTANT: Always answer in the language of the user: '+(({fa:'Persian (فارسی)',ar:'Arabic',ckb:'Kurdish Sorani',kmr:'Kurdish Kurmanji',ru:'Russian',es:'Spanish',fr:'French',de:'German',zh:'Chinese'})[L]||'English')+'. Be concise, friendly, practical.';
+  let text='';
+  try{
+    const r=await fetch('https://text.pollinations.ai/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:[{role:'system',content:system},{role:'user',content:userMsg}],model:'openai'}),signal:AbortSignal.timeout(25000)});
+    text=(await r.text()).trim();
+  }catch(e){text=offlineAI(userMsg);}
+  if(!text||text.includes('Error'))text=offlineAI(userMsg);
+  removeTyping();addBubble(text,'ai');addPts(2);
+}
+const chatBox=()=>`<h3>🤖 ${t('aiTitle')}</h3><div style="font-size:12px;color:var(--muted);margin:-8px 0 12px">${t('aiOff')}</div>
+<div class="chips"><div class="chipq" data-q="${t('save')}">💰</div><div class="chipq" data-q="gold">🥇</div><div class="chipq" data-q="health">❤️</div><div class="chipq" data-q="plan">📅</div></div>
+<div class="chat"><div class="chat-msgs" id="aiMsgs"></div><div class="chat-input"><input id="aiIn" placeholder="${t('ask')}"><button id="aiSend">➤</button></div></div>`;
+function addBubble(txt,who){const m=document.getElementById('aiMsgs');if(!m)return;const d=document.createElement('div');d.className='bubble '+who;d.textContent=txt;m.appendChild(d);m.scrollTop=m.scrollHeight}
+function addTyping(){const m=document.getElementById('aiMsgs');if(m){const d=document.createElement('div');d.className='typing';d.id='aiTyping';d.textContent='···';m.appendChild(d)}}
+function removeTyping(){const x=document.getElementById('aiTyping');if(x)x.remove()}
+function openAI(){openSheet(chatBox());addBubble('👋 '+t('ask'),'ai');
+  document.querySelectorAll('.chipq').forEach(c=>c.onclick=()=>aiChat(c.dataset.q));
+  const go=()=>{const v=document.getElementById('aiIn').value.trim();if(!v)return;document.getElementById('aiIn').value='';aiChat(v)};
+  document.getElementById('aiSend').onclick=go;
+  document.getElementById('aiIn').onkeydown=e=>{if(e.key==='Enter')go()};
+}
+
+/* ============ views ============ */
+const VIEWS=document.getElementById('views');
+let cur='money';
+function show(v){cur=v;render()}
+function navHighlight(){const order=['money','payments','markets','schedule','health','news','rewards','list'];const bs=document.querySelectorAll('#bnav button');bs.forEach((b,i)=>b.classList.toggle('active',order[i]===cur))}
+function renderNav(){const it=[['money','💰',t('money')],['payments','🧾',t('payments')],['markets','📈',t('markets')],['schedule','📅',t('schedule')],['health','❤️',t('health')],['news','📰',t('news')],['rewards','🏆',t('rewards')],['list','🛒',t('list')]];$('#bnav').innerHTML=it.map(x=>`<button data-v="${x[0]}"><span class="e">${x[1]}</span><small>${x[2]}</small></button>`).join('');document.querySelectorAll('#bnav button').forEach(b=>b.onclick=()=>show(b.dataset.v));navHighlight()}
+function renderQuick(){const a=[['bill','🧾',t('bills')],['charge','📶',t('charge')],['toll','🛣️',t('tollW')],['fine','👮',t('fineW')]];$('#quickBar').innerHTML=a.map(x=>`<div class="qa fade-in" data-a="${x[0]}"><div class="e">${x[1]}</div><small>${x[2]}</small></div>`).join('');document.querySelectorAll('#quickBar .qa').forEach(q=>q.onclick=()=>openPay(q.dataset.a))}
+
+function renderMoney(){
+  const m=S.money;const month=new Date().getMonth();
+  const expMonth=S.txn.filter(x=>x.exp&&x.mt===month).reduce((a,x)=>a+x.amt,0);
+  const incMonth=S.txn.filter(x=>x.inc&&x.mt===month).reduce((a,x)=>a+x.amt,0);
+  const kpis=`<div class="kpis fade-in">
+    <div class="kpi"><small>💵 ${t('balance')}</small><b style="color:var(--accent)">${fmt(m.balance)}</b></div>
+    <div class="kpi"><small>🥇 ${t('gold')}</small><b style="color:var(--gold)">${fmt(m.gold)}</b></div>
+    <div class="kpi"><small>📈 ${t('savings')}</small><b style="color:var(--blue)">${fmt(m.savings)}</b></div>
+    <div class="kpi"><small>💳 ${t('debt')}</small><b style="color:var(--red)">${fmt(m.debt)}</b></div>
+    <div class="kpi"><small>⬆ ${t('inc')}</small><b style="color:var(--accent)">${fmt(incMonth)}</b></div>
+    <div class="kpi"><small>⬇ ${t('exp')}</small><b style="color:var(--red)">${fmt(expMonth)}</b></div></div>`;
+  let budgetHTML='';
+  if(S.budget>0){const pct=Math.min(100,Math.round(expMonth/S.budget*100));const left=Math.max(0,S.budget-expMonth);budgetHTML=`<div class="budget-box fade-in"><b style="font-size:15px">📊 ${t('budget')}</b><div class="budget-prog"><i style="width:${pct}%;background:${pct>90?'var(--red)':'var(--grad)'}"></i></div><small style="color:var(--muted)">${fmt(expMonth)} ${t('budgetUsed')} ${fmt(S.budget)} · ${t('budgetLeft')}: <b style="color:var(--accent)">${fmt(left)}</b></small></div>`}
+  let txn=S.txn.slice().reverse().slice(0,8).map(x=>{const c=x.exp?'var(--red)':x.trans?'var(--blue)':'var(--accent)';const s=x.exp?'−':(x.trans?'⇄':'+');return `<div class="row fade-in"><div class="ic">${x.ic||'💸'}</div><div class="t"><b>${esc(x.label||'')}</b><small>${esc(x.desc||'')}</small></div><div class="val" style="color:${c}">${s}${fmt(x.amt)}</div></div>`}).join('')||`<div class="empty">${t('noMoney')}</div>`;
+  let chart='';if(S.txn.length){const days=[];for(let d=6;d>=0;d--){const dt=new Date();dt.setDate(dt.getDate()-d);const sum=S.txn.filter(x=>x.exp&&new Date(x.ts).toDateString()===dt.toDateString()).reduce((a,x)=>a+x.amt,0);days.push(sum)}const mx=Math.max(...days,1);chart=`<div class="budget-box fade-in"><b>${t('chart')} (7 ${t('days')!=='days'?t('today'):'days'})</b><div class="chartbar">${days.map(v=>`<div class="cb" style="height:${Math.max(4,v/mx*100)}%"><b>${v?Math.round(v/1000)+'k':''}</b></div>`).join('')}</div></div>`}
+  VIEWS.innerHTML=kpis+budgetHTML+chart+`<div class="stitle"><span>${t('inc')} / ${t('exp')}</span><span class="more" id="addTransBtn">+ ${t('add')}</span></div>${txn}`;
+  $('#addTransBtn').onclick=()=>openTrans();
+}
+function renderPayments(){let hist=S.payments.slice().reverse().slice(0,10).map(p=>`<div class="row fade-in"><div class="ic">${p.ic||'🧾'}</div><div class="t"><b>${esc(p.label)}</b><small>${esc(p.desc||'')} · ${p.time||''}</small></div><div class="val" style="color:var(--accent)">− ${fmt(p.amt)}</div></div>`).join('')||`<div class="empty">${t('emptyHistory')}</div>`;const a=[['bill','🧾',t('bills')],['charge','📶',t('charge')],['toll','🛣️',t('tollW')],['fine','👮',t('fineW')]];VIEWS.innerHTML=`<div class="quick fade-in" id="q2">${a.map(x=>`<div class="qa" data-a="${x[0]}"><div class="e">${x[1]}</div><small>${x[2]}</small></div>`).join('')}</div><div class="stitle"><span>${t('payments')}</span></div>${hist}`;$('#q2').querySelectorAll('.qa').forEach(q=>q.onclick=()=>openPay(q.dataset.a))}
+function renderMarkets(){const fb=`<div class="tk"><div class="s"><span>🥇 Gold</span></div><b>...</b></div>`;VIEWS.innerHTML=`<div class="stitle"><span>${t('markets')} · ${t('refresh')}</span></div><div class="ticker fade-in">${fxCards||goldCard||fb}${goldCard&&!fxCards?'':goldCard&&fxCards?'':' '}${goldCard}${cryptoCard}</div>
+<div class="stitle"><span>🥇 ${t('gold')} / 💱 FX</span></div>
+<div class="kpis">${(globalIRR&&goldCard)?`<div class="kpi"><small>🥇 ${t('gold')} (gram/IRR)</small><b style="color:var(--gold)">${(goldCard.match(/<b[^>]*>([^<]+)/)||['',''])[1].replace('<span','')||''}</b></div>`:`<div class="kpi"><small>🥇 ${t('gold')}</small><b style="color:var(--gold)">…</b></div>`}
+<div class="kpi"><small>💵 USD</small><b>${globalIRR?Math.round(globalIRR/1000).toLocaleString('en-US')+'k':'…'}</b></div>
+<div class="kpi"><small>₿ BTC</small><b>$…</b></div>
+<div class="kpi"><small>Ξ ETH</small><b>$…</b></div></div>`;fetchFX();fetchGold();fetchCrypto();}
+function renderSchedule(){
+  const j=new Date();let tasks=S.tasks.map((x,i)=>`<div class="task ${x.done?'done':''}"><input type="checkbox" ${x.done?'checked':''} data-i="${i}"><div class="t"><b>${esc(x.desc)}</b><small>${esc(x.time||'')}</small></div><button class="del" data-i="${i}">✕</button></div>`).join('')||`<div class="empty">${t('noTasks')}</div>`;
+  let rems=S.reminders.map((x,i)=>`<div class="task ${x.done?'done':''}"><input type="checkbox" ${x.done?'checked':''} data-r="${i}"><div class="t"><b>⏰ ${esc(x.desc)}</b><small>${x.time||''}</small></div><button class="del" data-r="${i}">✕</button></div>`).join('')||`<div class="empty">${t('noRem')}</div>`;
+  VIEWS.innerHTML=`<div class="stitle"><span>${t('today')} 📅</span><span class="more" id="addTaskBtn">+ ${t('add')}</span></div>${tasks}<div class="stitle"><span>⏰ ${t('addReminder')}</span><span class="more" id="addRemBtn">+</span></div>${rems}`;
+  $('#addTaskBtn').onclick=()=>openTask();$('#addRemBtn').onclick=()=>openRem();
+  document.querySelectorAll('.task input').forEach(c=>{if(c.dataset.i!==undefined)c.onchange=function(){const i=+this.dataset.i;S.tasks[i].done=this.checked;if(this.checked)addPts(5);save();render()};if(c.dataset.r!==undefined)c.onchange=function(){const i=+this.dataset.r;S.reminders[i].done=this.checked;save();render()}});
+  document.querySelectorAll('.task .del').forEach(b=>{if(b.dataset.i!==undefined)b.onclick=()=>{S.tasks.splice(+b.dataset.i,1);save();render()};if(b.dataset.r!==undefined)b.onclick=()=>{S.reminders.splice(+b.dataset.r,1);save();render()}});
+}
+function renderHealth(){const h=S.habits,g=h.goal||6000;const sp=Math.min(100,Math.round(h.steps/g*100)),sl=Math.min(100,Math.round((h.sleep||0)/8*100)),wt=Math.min(100,Math.round((h.water||0)/2000*100));VIEWS.innerHTML=`<div class="health-cards">
+<div class="h-card"><div class="top"><div><small style="color:var(--muted)">🏃 ${t('steps')}</small><b>${fmt(h.steps)}</b></div><div class="circle" style="--p:${sp};--c:var(--accent)"><span>${sp}%</span></div></div><small style="color:var(--muted)">${t('goal')}: ${fmt(g)}</small></div>
+<div class="h-card"><div class="top"><div><small style="color:var(--muted)">💧 ${t('water')}</small><b>${h.water||0}</b></div><div class="circle" style="--p:${wt};--c:var(--blue)"><span>${wt}%</span></div></div><small style="color:var(--muted)">${t('goal')}: 2000</small></div>
+<div class="h-card"><div class="top"><div><small style="color:var(--muted)">😴 ${t('sleep')}</small><b>${h.sleep||0}h</b></div><div class="circle" style="--p:${sl};--c:var(--gold)"><span>${sl}%</span></div></div><small style="color:var(--muted)">${t('goal')}: 8h</small></div>
+<div class="h-card"><small style="color:var(--muted)">❤️ ${t('health')}</small><b style="margin:6px 0">${t('save')} 🔥</b></div></div>
+<div class="stitle"><span>${t('addHabit')}</span></div>
+<div class="quick"><div class="qa" data-a="steps"><div class="e">🏃</div><small>+500</small></div><div class="qa" data-a="water"><div class="e">💧</div><small>+250</small></div><div class="qa" data-a="sleep"><div class="e">😴</div><small>+1h</small></div><div class="qa" data-a="all"><div class="e">✨</div><small>Log</small></div></div>`;
+document.querySelectorAll('#views .qa[data-a]').forEach(q=>q.onclick=()=>logHealth(q.dataset.a));}
+function logHealth(k){if(k==='steps')S.habits.steps+=500;else if(k==='water')S.habits.water+=250;else if(k==='sleep')S.habits.sleep+=1;else if(k==='all'){S.habits.steps+=500;S.habits.water+=250;S.habits.sleep+=1}addPts(2);save();render();toast(t('saved')+' ⭐+2')}
+function renderNews(){const it=[['🌍',t('news'),'Global markets surge as peace talks progress','2h ago'],['💰','Finance','Central banks signal rate decision this week','5h ago'],['⚽','Sports','Championship finals reach dramatic conclusion','8h ago'],['⚡','Tech','New AI tools announced at major conference','12h ago'],['🏛','Economy','Energy prices stabilize across global markets','1d ago']];VIEWS.innerHTML=`<div class="stitle"><span>${t('news')} 📰</span></div>`+it.map(n=>`<div class="news fade-in"><div class="nimg">${n[0]}</div><div class="nbody"><span class="cat">${n[1]}</span><b>${n[2]}</b><small>${n[3]}</small></div></div>`).join('')}
+function renderRewards(){
+  const chal=['save','gold','plan','health','steps'][new Date().getDate()%5];
+  let ch=``;
+  if(S.lastChallenge!==new Date().toDateString()){S.lastChallenge=new Date().toDateString();S.challengeDone=false;save()}
+  const claimable=!S.challengeDone;
+  ch=`<div class="share-card fade-in"><div class="slogo">JIB.</div><div class="spts">${fmt(S.pts)}</div><div class="slv">${level()}</div></div>
+  <div class="stitle"><span>🏆 ${t('challenge')}</span></div>
+  <div class="budget-box">${claimable?`<div class="row" style="border:none;padding:0"><div class="ic">✨</div><div class="t"><b>${t('challenge')}</b><small>${t('challengeDone')}</small></div><button class="btn" style="width:auto;padding:10px 18px;margin:0" id="claimBtn">${t('claim')} +20</button></div>`:`<div style="text-align:center;color:var(--accent)">${t('challengeClaim')}</div>`}</div>
+  <div class="stitle"><span>${t('rewards')} 🏆</span><span class="more" id="shareBtn">${t('share')} ↗</span></div>
+  <div class="row"><div class="ic">🥇</div><div class="t"><b>Gold level</b><small>500 pts</small></div><div class="val">${S.pts>=500?'✓':'—'}</div></div>
+  <div class="row"><div class="ic">💳</div><div class="t"><b>Cashback offer</b><small>1% on bills (Pro)</small></div><div class="val" style="color:var(--primary)">Pro</div></div>`;
+  VIEWS.innerHTML=ch;
+  const cb=document.getElementById('claimBtn');if(cb)cb.onclick=()=>{if(!S.challengeDone){S.challengeDone=true;addPts(20);save();render();toast('⭐ +20')}};
+  document.getElementById('shareBtn').onclick=shareCard;
+}
+function shareCard(){const txt=`I have ${S.pts} points on JIB! 🏆 Level ${level()} — one super-app for life. Try it: jib.app`;if(navigator.share){navigator.share({title:'JIB',text:txt}).catch(()=>{})}else if(navigator.clipboard){navigator.clipboard.writeText(txt).then(()=>toast(t('share')))}else{toast(t('share'))}}
+function renderList(){let items=S.list.map((x,i)=>`<div class="task ${x.done?'done':''}"><input type="checkbox" ${x.done?'checked':''} data-l="${i}"><div class="t"><b>${esc(x.desc)}</b></div><button class="del" data-l="${i}">✕</button></div>`).join('')||`<div class="empty">${t('noList')}</div>`;VIEWS.innerHTML=`<div class="stitle"><span>🛒 ${t('list')}</span><span class="more" id="addItemBtn">+ ${t('add')}</span></div>${items}`;$('#addItemBtn').onclick=()=>openItem();document.querySelectorAll('.task input[data-l]').forEach(c=>c.onchange=function(){const i=+this.dataset.l;S.list[i].done=this.checked;if(this.checked)addPts(2);save();render()});document.querySelectorAll('.task .del[data-l]').forEach(b=>b.onclick=()=>{S.list.splice(+b.dataset.l,1);save();render()})}
+function render(){renderNav();renderQuick();$('#points').textContent=fmt(S.pts);$('#lblPoints').textContent=t('points');$('#lblQuick').textContent=t('quick');$('#greetName').textContent=(cur==='schedule'?'':'')+greet()+' 👋';$('#lblLv').textContent='🏅 '+level();$('#lblStreak').textContent=t('streak').replace('{n}',S.streak);$('#lblChallenge').textContent='✨ '+t('challenge');if(cur==='money')renderMoney();else if(cur==='payments')renderPayments();else if(cur==='markets')renderMarkets();else if(cur==='schedule')renderSchedule();else if(cur==='health')renderHealth();else if(cur==='news')renderNews();else if(cur==='rewards')renderRewards();else renderList();checkReminders()}
+function greet(){const h=new Date().getHours();return h<12?t('greetM'):(h<18?t('greetA'):t('greetE'))}
+
+/* ============ sheets ============ */
+function openSheet(html){$('#sheet').innerHTML=`<div class="grab"></div>`+html;$('#modal').classList.add('show')}
+function closeModal(){$('#modal').classList.remove('show')}
+$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
+function openTrans(){const now=new Date();openSheet(`<h3>${t('addTrans')}</h3><div class="field"><label>${t('type')}</label><select id="trType"><option value="inc">${t('inc')}</option><option value="exp">${t('exp')}</option><option value="trans">${t('transfer')}</option></select></div><div class="field"><label>${t('amount')}</label><input type="number" id="trAmt"></div><div class="field"><label>${t('label')}</label><input id="trLabel"></div><div class="field"><label>${t('desc')}</label><input id="trDesc"></div><button class="btn" id="trSave">${t('save')}</button><button class="btn btn-ghost" onclick="closeModal()">${t('cancel')}</button>`);$('#trSave').onclick=()=>{const amt=+$('#trAmt').value||0;if(!amt)return;const typ=$('#trType').value;const tr={amt,type:typ,inc:typ==='inc',exp:typ==='exp',trans:typ==='trans',label:$('#trLabel').value||(typ==='inc'?t('inc'):typ==='exp'?t('exp'):t('transfer')),desc:$('#trDesc').value,ts:Date.now(),mt:new Date().getMonth()};if(typ==='exp')S.money.balance-=amt;else if(typ==='inc')S.money.balance+=amt;S.txn.push(tr);addPts(5);save();closeModal();render();toast(t('saved')+' ⭐+5')}}
+function openPay(type){const map={bill:['🧾',t('bills')],charge:['📶',t('charge')],toll:['🛣️',t('tollW')],fine:['👮',t('fineW')]};const [ic,label]=map[type];openSheet(`<h3>${ic} ${label}</h3>${type==='bill'?`<div class="field"><label>${t('category')}</label><select id="cat"><option>⚡</option><option>💧</option><option>🔥</option><option>📞</option><option>🌐</option></select></div>`:''}<div class="field"><label>${t('amount')}</label><input type="number" id="pAmt"></div><button class="btn" id="pSave">${t('pay')} ${label}</button><button class="btn btn-ghost" onclick="closeModal()">${t('cancel')}</button>`);$('#pSave').onclick=()=>{const amt=+$('#pAmt').value||0;if(amt){S.payments.push({ic,label,amt,time:new Date().toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit'})});S.txn.push({ic,amt,exp:true,label,desc:label,ts:Date.now(),mt:new Date().getMonth()});addPts(8);save();closeModal();render();toast(t('pay')+' ✓ ⭐+8')}}}
+function openTask(){openSheet(`<h3>${t('addTask')}</h3><div class="field"><label>${t('desc')}</label><input id="tkDesc"></div><div class="field"><label>${t('time')}</label><input id="tkTime" placeholder="09:00"></div><button class="btn" id="tkSave">${t('save')}</button><button class="btn btn-ghost" onclick="closeModal()">${t('cancel')}</button>`);$('#tkSave').onclick=()=>{const d=$('#tkDesc').value;if(!d)return;S.tasks.push({desc:d,time:$('#tkTime').value,done:false});addPts(3);save();closeModal();render();toast(t('saved')+' ⭐+3')}}
+function openRem(){openSheet(`<h3>${t('addReminder')}</h3><div class="field"><label>${t('desc')}</label><input id="rmDesc"></div><div class="field"><label>${t('time')}</label><input type="datetime-local" id="rmTime"></div><button class="btn" id="rmSave">${t('save')}</button><button class="btn btn-ghost" onclick="closeModal()">${t('cancel')}</button>`);$('#rmSave').onclick=()=>{const d=$('#rmDesc').value;const tt=$('#rmTime').value;if(!d||!tt)return;const ts=new Date(tt).getTime();S.reminders.push({desc:d,time:new Date(ts).toLocaleString(),ts,done:false});addPts(3);save();closeModal();render();fireNotif(t('addReminder')+': '+d,'JIB');toast(t('saved')+' ⭐+3')}}
+function openItem(){openSheet(`<h3>${t('addItem')}</h3><div class="field"><label>${t('desc')}</label><input id="itDesc"></div><button class="btn" id="itSave">${t('add')}</button><button class="btn btn-ghost" onclick="closeModal()">${t('cancel')}</button>`);$('#itSave').onclick=()=>{const d=$('#itDesc').value;if(!d)return;S.list.push({desc:d,done:false});save();closeModal();render();toast(t('saved'))}}
+
+/* ============ settings ============ */
+function openSettings(){
+  openSheet(`<h3>⚙️ ${t('settings')}</h3>
+  <div class="stitle" style="margin-top:0">${t('budget')}</div>
+  <div class="field"><label>${t('amount')}</label><input type="number" id="budAmt" value="${S.budget||''}"></div>
+  <button class="btn btn-ghost" id="budSave">${t('save')} ${t('budget')}</button>
+  <div class="stitle">${t('notifications')}</div>
+  <button class="btn btn-ghost" id="notifBtn">${t('permissions')}</button>
+  <div class="stitle" id="installTitle" style="${beforeInstallPrompt?'':'display:none'}">${t('install')}</div>
+  <button class="btn btn-ghost" id="installBtn" style="${beforeInstallPrompt?'':'display:none'}">📲 ${t('install')}</button>
+  <div class="stitle">${t('backup')}</div>
+  <div class="inline"><button class="btn btn-ghost" id="expBtn">📤 ${t('export')}</button></div>
+  <div style="height:6px"></div>
+  <button class="btn btn-ghost" id="impBtn">📥 ${t('import')}</button>
+  <input type="file" id="impFile" accept="application/json" style="display:none">
+  <div class="stitle">${t('jalali')}</div>
+  <button class="btn btn-ghost" id="jalBtn">${t('jalali')}</button>`);
+  $('#budSave').onclick=()=>{S.budget=+$('#budAmt').value||0;save();toast(t('saved'));render()};
+  $('#notifBtn').onclick=askNotif;
+  $('#installBtn').onclick=()=>{if(beforeInstallPrompt){beforeInstallPrompt.prompt();beforeInstallPrompt=null}$('#installTitle').style.display='none';$('#installBtn').style.display='none'};
+  $('#expBtn').onclick=()=>{const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='jib-backup.json';a.click();toast(t('backupDone'))};
+  $('#impBtn').onclick=()=>$('#impFile').click();
+  $('#impFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);for(const k in S)S[k]=d[k]||S[k];save();render();closeModal();toast(t('restored'))}catch(err){toast(t('saved'))}};r.readAsText(f)};
+  $('#jalBtn').onclick=()=>{const j=toJalali(new Date().getFullYear(),new Date().getMonth()+1,new Date().getDate());toast(MONTHS_FA[j.m-1]+' '+j.d+' '+j.j)};
+}
+
+/* ============ init ============ */
+function daily(){const d=new Date().toDateString();if(S.lastDay!==d){S.lastDay=d;S.streak++;addPts(10);toast('⭐ +10')}}
+let countDown=null;
+$('#langSel').onchange=e=>{L=e.target.value;document.documentElement.dir=(RTL.indexOf(L)>=0)?'rtl':'ltr';document.documentElement.lang=L;save();render()};
+$('#settingsBtn').onclick=openSettings;
+$('#bellBtn').onclick=askNotif;
+$('#aiFab').onclick=openAI;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+function loadApp(){daily();setGreet();render();fetchFX();fetchGold();fetchCrypto();setInterval(()=>{fetchFX();fetchGold();fetchCrypto()},300000);setInterval(checkReminders,30000)}
+function setGreet(){const gd=new Date();const j=toJalali(gd.getFullYear(),gd.getMonth()+1,gd.getDate());let dateStr=gd.toLocaleDateString((RTL.indexOf(L)>=0)?'fa-IR':'en-US',{weekday:'long',day:'numeric',month:'long'});if((L==='fa'||L==='ckb'||L==='ar'))dateStr=MONTHS_FA[j.m-1]+' '+j.d+'، '+j.j;$('#greetDate').textContent=dateStr}
+if('serviceWorker' in navigator&&location.protocol.indexOf('http')===0){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})})}
+let beforeInstallPrompt=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();beforeInstallPrompt=e;toast(t('install'))});
+loadApp();
+</script>
+</body>
+</html>
