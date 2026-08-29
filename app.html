@@ -85,6 +85,26 @@ body::after{width:460px;height:460px;background:radial-gradient(circle,#00d4a0,t
 .kpi small{color:var(--muted);font-size:12px;display:flex;align-items:center;gap:5px}
 .kpi b{font-size:21px;display:block;margin-top:6px;font-family:'Sora',sans-serif;position:relative}
 .kpi .chg{font-size:12px;font-weight:700;display:inline-block;margin-top:4px}
+.week{display:flex;gap:6px;margin-top:18px;position:relative;z-index:1}
+.wdot{flex:1;text-align:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:7px 2px;color:#fff}
+.wdot small{display:block;font-size:10px;opacity:.75;text-transform:uppercase}
+.wdot b{font-size:15px;font-family:'Sora',sans-serif;display:block}
+.wdot.now{background:rgba(255,255,255,.28);border-color:#fff}
+.wdot.now span{display:inline-block;width:5px;height:5px;border-radius:50%;background:#fff;margin-top:3px}
+.backbar{display:flex;align-items:center;gap:6px;padding:8px 12px;margin-bottom:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;cursor:pointer;width:fit-content;color:var(--primary);font-weight:600}
+.backbar span{font-size:18px;line-height:1}
+.backbar small{font-size:13px}
+.lvlbar{position:relative;margin-top:18px;height:10px;border-radius:8px;background:rgba(255,255,255,.2);overflow:visible;z-index:1}
+.lvlbar i{display:block;height:100%;border-radius:8px;background:#fff}
+.lvlbar span{position:absolute;right:0;top:-16px;font-size:10px;font-weight:700;color:#fff;opacity:.9}
+.rewards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.r-card{background:linear-gradient(170deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:16px;padding:16px;text-align:center;position:relative;overflow:hidden;transition:.25s}
+.r-card::after{content:"";position:absolute;right:-24px;top:-24px;width:70px;height:70px;border-radius:50%;background:var(--rpc);opacity:.18}
+.r-card:hover{transform:translateY(-3px);border-color:var(--primary);box-shadow:var(--glow)}
+.r-card .e{font-size:26px}
+.r-card b{display:block;margin-top:6px;font-family:'Sora',sans-serif}
+.r-card small{color:var(--muted);font-size:11px;display:block}
+.r-card .rv{display:inline-block;margin-top:8px;font-weight:800;color:var(--accent)}
 .hero-card{position:relative;overflow:hidden;border-radius:26px;padding:24px 22px;margin-bottom:16px;background:linear-gradient(135deg,#4a3bd8,#7a5cff 55%,#00c9a0);box-shadow:0 22px 52px rgba(90,70,255,.38);animation:popIn .55s ease both}
 .hero-card::before{content:"";position:absolute;right:-60px;top:-70px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.12);animation:spin 26s linear infinite}
 .hero-card::after{content:"";position:absolute;left:-30px;bottom:-70px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.08)}
@@ -132,6 +152,8 @@ body::after{width:460px;height:460px;background:radial-gradient(circle,#00d4a0,t
 .h-card:hover{border-color:var(--primary)}
 .h-card .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px}
 .h-card b{font-size:24px;font-family:'Sora',sans-serif}
+.bar{height:7px;border-radius:8px;background:var(--line);overflow:hidden;margin:10px 0 8px}
+.bar i{display:block;height:100%;border-radius:8px;background:var(--accent)}
 .circle{--p:60;--c:var(--accent);width:64px;height:64px;border-radius:50%;background:conic-gradient(var(--c) calc(var(--p)*1%),#1c2740 0);display:grid;place-items:center;position:relative;flex-shrink:0;transition:.4s}
 .circle::before{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--card)}
 .circle span{position:relative;font-size:13px;font-weight:700}
@@ -192,6 +214,7 @@ body::after{width:460px;height:460px;background:radial-gradient(circle,#00d4a0,t
 .chartbar .cb{flex:1;background:var(--grad);border-radius:6px 6px 2px 2px;opacity:.9;min-height:4px;position:relative;transition:.3s;box-shadow:0 -6px 18px rgba(108,92,255,.25)}
 .chartbar .cb:hover{opacity:1;filter:brightness(1.15)}
 .chartbar .cb b{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);font-size:9px;color:var(--muted);white-space:nowrap}
+.svgchart{width:100%;height:150px;display:block;margin-top:12px;overflow:visible}
 
 /* ===== shopping ===== */
 .budget-box{background:linear-gradient(170deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:18px;padding:17px;margin-bottom:10px}
@@ -281,7 +304,7 @@ en:{
   addTrans:"Add transaction",addTask:"Add task",addHabit:"Add habit",addItem:"Add item",addReminder:"Add reminder",
   amount:"Amount",type:"Type",desc:"Description",time:"Time",date:"Date",label:"Label",category:"Category",
   toll:"Toll",fine:"Fine",pay:"Pay",save:"Save",add:"Add",cancel:"Cancel",send:"Send",ask:"Ask me anything...",
-  saved:"Saved ✓",noMoney:"No transactions yet. Add your first one!",noTasks:"No tasks today.",
+  saved:"Saved ✓",noMoney:"No transactions yet. Add your first one!",noTasks:"No tasks today.",doneCarry:"done",reminders:"Reminders",healthScore:"Daily Health Score",logAll:"Log all",backTo:"All",
   setGoal:"Set goal",steps:"Steps",goal:"Goal",water:"Water",sleep:"Sleep",
   noNews:"News will appear here.",refresh:"↻ updated",today:"Today",
   bills:"Bills",charge:"Top-up",tollW:"Tolls",fineW:"Fines",emptyHistory:"No payments yet.",
@@ -302,7 +325,7 @@ fa:{
   addTrans:"افزودن تراکنش",addTask:"افزودن کار",addHabit:"افزودن عادت",addItem:"افزودن کالا",addReminder:"افزودن یادآور",
   amount:"مبلغ (تومان)",type:"نوع",desc:"توضیح",time:"زمان",date:"تاریخ",label:"برچسب",category:"دسته",
   toll:"عوارض",fine:"جریمه",pay:"پرداخت",save:"ذخیره",add:"افزودن",cancel:"انصراف",send:"ارسال",ask:"هر سوالی بپرس...",
-  saved:"ذخیره شد ✓",noMoney:"هنوز تراکنشی نیست. اولین را اضافه کن!",noTasks:"کاری برای امروز نیست.",
+  saved:"ذخیره شد ✓",noMoney:"هنوز تراکنشی نیست. اولین را اضافه کن!",noTasks:"کاری برای امروز نیست.",doneCarry:"انجام",reminders:"یادآوری‌ها",healthScore:"امتیاز سلامت روزانه",logAll:"ثبت همه",backTo:"همه",
   setGoal:"تنظیم هدف",steps:"قدم",goal:"هدف",water:"آب",sleep:"خواب",
   noNews:"خبرها اینجا نمایش داده می‌شوند.",refresh:"↻ به‌روزرسانی شد",today:"امروز",
   bills:"قبض",charge:"شارژ",tollW:"عوارض",fineW:"جریمه",emptyHistory:"هنوز پرداختی نیست.",
@@ -322,7 +345,7 @@ ar:{
   addTrans:"إضافة معاملة",addTask:"إضافة مهمة",addHabit:"إضافة عادة",addItem:"إضافة عنصر",addReminder:"إضافة تذكير",
   amount:"المبلغ",type:"النوع",desc:"الوصف",time:"الوقت",date:"التاريخ",label:"التسمية",category:"الفئة",
   toll:"طريق",fine:"غرامة",pay:"ادفع",save:"حفظ",add:"إضافة",cancel:"إلغاء",send:"إرسال",ask:"اسألني أي شيء...",
-  saved:"تم الحفظ ✓",noMoney:"لا توجد معاملات بعد!",noTasks:"لا مهام اليوم.",
+  saved:"تم الحفظ ✓",noMoney:"لا توجد معاملات بعد!",noTasks:"لا مهام اليوم.",doneCarry:"تم",reminders:"التذكيرات",healthScore:"درجة الصحة اليومية",logAll:"تسجيل الكل",backTo:"الكل",
   setGoal:"اضبط الهدف",steps:"خطوات",goal:"الهدف",water:"ماء",sleep:"نوم",
   noNews:"ستظهر الأخبار هنا.",refresh:"↻ تم التحديث",today:"اليوم",
   bills:"فاتورة",charge:"شحن",tollW:"طرق",fineW:"غرامة",emptyHistory:"لا مدفوعات بعد.",
@@ -342,7 +365,7 @@ ckb:{
   addTrans:"زیادکردنی مامەڵە",addTask:"زیادکردنی کار",addHabit:"زیادکردنی خوو",addItem:"زیادکردنی کەرەستە",addReminder:"زیادکردنی بیرخستنەوە",
   amount:"بڕ (تۆمار)",type:"جۆر",desc:"وەسف",time:"کات",date:"بەروار",label:"ناونیشان",category:"بەش",
   toll:"باجی ڕێگا",fine:"سزا",pay:"پارەدان",save:"پاشەکەوت",add:"زیادکردن",cancel:"هەڵوەشاندنەوە",send:"ناردن",ask:"هەر پرسیارێک بکە...",
-  saved:"پاشەکەوت کرا ✓",noMoney:"هێشتا مامەڵە نییە. یەکەم زیاد بکە!",noTasks:"ئەمڕۆ کارێک نییە.",
+  saved:"پاشەکەوت کرا ✓",noMoney:"هێشتا مامەڵە نییە. یەکەم زیاد بکە!",noTasks:"ئەمڕۆ کارێک نییە.",doneCarry:"کراوە",reminders:"بیرخستنەوەکان",healthScore:"خاڵی تەندروستی ڕۆژانە",logAll:"تۆمارکردنی هەموو",backTo:"هەموو",
   setGoal:"دانانی ئامانج",steps:"هەنگاو",goal:"ئامانج",water:"ئاو",sleep:"خەو",
   noNews:"هەواڵەکان لێرە دەردەکەون.",refresh:"↻ نوێکرایەوە",today:"ئەمڕۆ",
   bills:"قبوڵ",charge:"پڕکردنەوە",tollW:"باجی ڕێگا",fineW:"سزاکان",emptyHistory:"هێشتا پارەدان نییە.",
@@ -362,7 +385,7 @@ kmr:{
   addTrans:"Zêdekirina bikaranînê",addTask:"Zêdekirina karekî",addHabit:"Zêdekirina adetekê",addItem:"Zêdekirina tiştekî",addReminder:"Zêdekirina bîrxistinê",
   amount:"Bend (Tomen)",type:"Cure",desc:"Danasîn",time:"Dem",date:"Dîrok",label:"Nav",category:"Beş",
   toll:"Baca rê",fine:"Ceza",pay:"Bide",save:"Tomar bike",add:"Zêde bike",cancel:"Betal bike",send:"Bişîne",ask:"Tiştekî bipirse...",
-  saved:"Hat tomar kirin ✓",noMoney:"Hê bikaranîn tune. Ya pêşîn zêde bike!",noTasks:"Îro kar tune.",
+  saved:"Hat tomar kirin ✓",noMoney:"Hê bikaranîn tune. Ya pêşîn zêde bike!",noTasks:"Îro kar tune.",doneCarry:"qedandî",reminders:"Bîrxistin",healthScore:"Pûana tenduristiyê ya rojane",logAll:"Hemû tomar bike",backTo:"Hemû",
   setGoal:"Armanc danîn",steps:"Gav",goal:"Armanc",water:"Av",sleep:"Xew",
   noNews:"Nûçe li vir derdikevin.",refresh:"↻ hate nûkirin",today:"Îro",
   bills:"Fatûre",charge:"Dagirtin",tollW:"Baca rê",fineW:"Ceza",emptyHistory:"Hê derdan tune.",
@@ -382,7 +405,7 @@ ru:{
   addTrans:"Добавить операцию",addTask:"Добавить задачу",addHabit:"Добавить привычку",addItem:"Добавить товар",addReminder:"Добавить напоминание",
   amount:"Сумма",type:"Тип",desc:"Описание",time:"Время",date:"Дата",label:"Метка",category:"Категория",
   toll:"Плата за дорогу",fine:"Штраф",pay:"Оплатить",save:"Сохранить",add:"Добавить",cancel:"Отмена",send:"Отправить",ask:"Спроси меня что-нибудь...",
-  saved:"Сохранено ✓",noMoney:"Операций пока нет.",noTasks:"На сегодня задач нет.",
+  saved:"Сохранено ✓",noMoney:"Операций пока нет.",noTasks:"На сегодня задач нет.",doneCarry:"готово",reminders:"Напоминания",healthScore:"Дневной индекс здоровья",logAll:"Всё записать",backTo:"Все",
   setGoal:"Задать цель",steps:"Шаги",goal:"Цель",water:"Вода",sleep:"Сон",
   noNews:"Новости появятся здесь.",refresh:"↻ обновлено",today:"Сегодня",
   bills:"Счета",charge:"Пополнение",tollW:"Дороги",fineW:"Штрафы",emptyHistory:"Платежей пока нет.",
@@ -402,7 +425,7 @@ es:{
   addTrans:"Añadir transacción",addTask:"Añadir tarea",addHabit:"Añadir hábito",addItem:"Añadir artículo",addReminder:"Añadir recordatorio",
   amount:"Monto",type:"Tipo",desc:"Descripción",time:"Hora",date:"Fecha",label:"Etiqueta",category:"Categoría",
   toll:"Peaje",fine:"Multa",pay:"Pagar",save:"Guardar",add:"Añadir",cancel:"Cancelar",send:"Enviar",ask:"Pregúntame lo que sea...",
-  saved:"Guardado ✓",noMoney:"Aún no hay transacciones.",noTasks:"No hay tareas hoy.",
+  saved:"Guardado ✓",noMoney:"Aún no hay transacciones.",noTasks:"No hay tareas hoy.",doneCarry:"hecho",reminders:"Recordatorios",healthScore:"Puntuación de salud diaria",logAll:"Registrar todo",backTo:"Todos",
   setGoal:"Fijar objetivo",steps:"Pasos",goal:"Objetivo",water:"Agua",sleep:"Sueño",
   noNews:"Las noticias aparecerán aquí.",refresh:"↻ actualizado",today:"Hoy",
   bills:"Facturas",charge:"Recarga",tollW:"Peajes",fineW:"Multas",emptyHistory:"Aún no hay pagos.",
@@ -422,7 +445,7 @@ fr:{
   addTrans:"Ajouter une transaction",addTask:"Ajouter une tâche",addHabit:"Ajouter une habitude",addItem:"Ajouter un article",addReminder:"Ajouter un rappel",
   amount:"Montant",type:"Type",desc:"Description",time:"Heure",date:"Date",label:"Libellé",category:"Catégorie",
   toll:"Péage",fine:"Amende",pay:"Payer",save:"Enregistrer",add:"Ajouter",cancel:"Annuler",send:"Envoyer",ask:"Demandez-moi ce que vous voulez...",
-  saved:"Enregistré ✓",noMoney:"Aucune transaction.",noTasks:"Aucune tâche aujourd'hui.",
+  saved:"Enregistré ✓",noMoney:"Aucune transaction.",noTasks:"Aucune tâche aujourd'hui.",doneCarry:"fait",reminders:"Rappels",healthScore:"Score de santé quotidien",logAll:"Tout enregistrer",backTo:"Tout",
   setGoal:"Définir un objectif",steps:"Pas",goal:"Objectif",water:"Eau",sleep:"Sommeil",
   noNews:"Les actualités apparaîtront ici.",refresh:"↻ mis à jour",today:"Aujourd'hui",
   bills:"Factures",charge:"Recharge",tollW:"Péages",fineW:"Amendes",emptyHistory:"Aucun paiement.",
@@ -442,7 +465,7 @@ de:{
   addTrans:"Transaktion hinzufügen",addTask:"Aufgabe hinzufügen",addHabit:"Gewohnheit hinzufügen",addItem:"Artikel hinzufügen",addReminder:"Erinnerung hinzufügen",
   amount:"Betrag",type:"Typ",desc:"Beschreibung",time:"Zeit",date:"Datum",label:"Bezeichnung",category:"Kategorie",
   toll:"Maut",fine:"Strafe",pay:"Bezahlen",save:"Speichern",add:"Hinzufügen",cancel:"Abbrechen",send:"Senden",ask:"Frag mich etwas...",
-  saved:"Gespeichert ✓",noMoney:"Noch keine Transaktionen.",noTasks:"Heute keine Aufgaben.",
+  saved:"Gespeichert ✓",noMoney:"Noch keine Transaktionen.",noTasks:"Heute keine Aufgaben.",doneCarry:"erledigt",reminders:"Erinnerungen",healthScore:"Täglicher Gesundheitswert",logAll:"Alles protokollieren",backTo:"Alle",
   setGoal:"Ziel setzen",steps:"Schritte",goal:"Ziel",water:"Wasser",sleep:"Schlaf",
   noNews:"Nachrichten erscheinen hier.",refresh:"↻ aktualisiert",today:"Heute",
   bills:"Rechnungen",charge:"Aufladen",tollW:"Maut",fineW:"Strafen",emptyHistory:"Noch keine Zahlungen.",
@@ -462,7 +485,7 @@ zh:{
   addTrans:"添加交易",addTask:"添加任务",addHabit:"添加习惯",addItem:"添加物品",addReminder:"添加提醒",
   amount:"金额",type:"类型",desc:"说明",time:"时间",date:"日期",label:"标签",category:"分类",
   toll:"过路费",fine:"罚款",pay:"支付",save:"保存",add:"添加",cancel:"取消",send:"发送",ask:"随便问我...",
-  saved:"已保存 ✓",noMoney:"暂无交易。",noTasks:"今天没有任务。",
+  saved:"已保存 ✓",noMoney:"暂无交易。",noTasks:"今天没有任务。",doneCarry:"完成",reminders:"提醒",healthScore:"每日健康评分",logAll:"全部记录",backTo:"全部",
   setGoal:"设定目标",steps:"步数",goal:"目标",water:"饮水",sleep:"睡眠",
   noNews:"资讯将在此显示。",refresh:"↻ 已更新",today:"今天",
   bills:"账单",charge:"充值",tollW:"过路费",fineW:"罚款",emptyHistory:"暂无支付记录。",
@@ -693,15 +716,53 @@ function openAI(){openSheet(chatBox());addBubble('👋 '+t('ask'),'ai');
 
 /* ============ views ============ */
 const VIEWS=document.getElementById('views');
-let cur='money';
+let cur='home';
 function show(v){cur=v;render()}
-function navHighlight(){const bs=document.querySelectorAll('#bnav button');bs.forEach(b=>{let act=false;if(b.dataset.v==='more'){act=(['schedule','news','rewards','list'].indexOf(cur)>=0)}else{act=(b.dataset.v==='home'?cur==='money':b.dataset.v===cur)}b.classList.toggle('active',act)})}
-function renderNav(){const it=[['home','🏠',t('home')],['markets','📈',t('markets')],['payments','🧾',t('payments')],['health','❤️',t('health')],['more','☰',t('more')]];$('#bnav').innerHTML=it.map(x=>`<button data-v="${x[0]}"><span class="e">${x[1]}</span><small>${x[2]}</small></button>`).join('');document.querySelectorAll('#bnav button').forEach(b=>b.onclick=()=>{if(b.dataset.v==='more'){showMore()}else{show(b.dataset.v==='home'?'money':b.dataset.v)}});navHighlight()}
+function navHighlight(){const bs=document.querySelectorAll('#bnav button');bs.forEach(b=>{let act=false;if(b.dataset.v==='more'){act=(['schedule','news','rewards','list'].indexOf(cur)>=0)}else{act=(b.dataset.v==='home'?cur==='home'||cur==='money':b.dataset.v===cur)}b.classList.toggle('active',act)})}
+function renderNav(){const it=[['home','🏠',t('home')],['markets','📈',t('markets')],['payments','🧾',t('payments')],['health','❤️',t('health')],['more','☰',t('more')]];$('#bnav').innerHTML=it.map(x=>`<button data-v="${x[0]}"><span class="e">${x[1]}</span><small>${x[2]}</small></button>`).join('');document.querySelectorAll('#bnav button').forEach(b=>b.onclick=()=>{if(b.dataset.v==='more'){showMore()}else{show(b.dataset.v)}});navHighlight()}
 function showMore(){const items=[['schedule','📅',t('schedule')],['news','📰',t('news')],['rewards','🏆',t('rewards')],['list','🛒',t('list')],['ai','🤖',t('ai')],['settings','⚙️',t('settings')]];openSheet(`<h3>☰ ${t('more')}</h3><div class="mgrid">${items.map(i=>`<div class="mcell" data-m="${i[0]}"><div class="e">${i[1]}</div><small>${i[2]}</small></div>`).join('')}</div>`);document.querySelectorAll('#sheet .mcell').forEach(c=>c.onclick=()=>{const m=c.dataset.m;closeModal();if(m==='ai')openAI();else if(m==='settings')openSettings();else show(m)})}
 function renderQuick(){const a=[['bill','🧾',t('bills')],['charge','📶',t('charge')],['toll','🛣️',t('tollW')],['fine','👮',t('fineW')]];$('#quickBar').innerHTML=a.map(x=>`<div class="qa fade-in" data-a="${x[0]}"><div class="e">${x[1]}</div><small>${x[2]}</small></div>`).join('');document.querySelectorAll('#quickBar .qa').forEach(q=>q.onclick=()=>openPay(q.dataset.a))}
 
 function catOf(x){if(x.inc||x.trans)return null;if(x.ic)return x.ic;const l=(x.label||'')+' '+(x.desc||'');if(/food|غذا|ناهار|شام|قهوه|کافه|restaurant|caf/.test(l))return '🍔';if(/bill|قبض|برق|اب|گاز|شارژ|اینترنت|internet|phone|تلفن/.test(l))return '🧾';if(/fuel|سوخت|بنزین|gas|transport|تاکسی|taxi|حمل|metro|رفتوآمد/.test(l))return '⛽';if(/shop|خرید|سوپرمارکت|supermarket|market|فروشگاه/.test(l))return '🛒';if(/health|دارو|بیمارستان|doctor|دکتر|درمان/.test(l))return '💊';if(/rent|اجاره|خانه|خانه/.test(l))return '🏠';return '💸';}
 
+function svgChart(vals,w,h,color,stroke){
+  const max=Math.max(...vals,1),min=Math.min(...vals,0);
+  const pad=6,range=(max-min)||1;
+  const pts=vals.map((v,i)=>[(i/(vals.length-1||1))*(w-pad*2)+pad,h-pad-((v-min)/range)*(h-pad*2)-pad]);
+  const line=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  const area=line+` L ${(w-pad).toFixed(1)} ${(h-pad).toFixed(1)} L ${pad} ${(h-pad).toFixed(1)} Z`;
+  const last=pts[pts.length-1];
+  return `<svg class="svgchart" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><defs><linearGradient id="sgg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${color}" stop-opacity=".45"/><stop offset="1" stop-color="${color}" stop-opacity="0"/></linearGradient></defs><path d="${area}" fill="url(#sgg)"/><path d="${line}" fill="none" stroke="${color}" stroke-width="${stroke||2}" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="3.5" fill="${color}"/></svg>`;
+}
+function renderHome(){
+  const m=S.money;const month=new Date().getMonth();
+  const expMonth=S.txn.filter(x=>x.exp&&x.mt===month).reduce((a,x)=>a+x.amt,0);
+  const incMonth=S.txn.filter(x=>x.inc&&x.mt===month).reduce((a,x)=>a+x.amt,0);
+  const tasks=S.tasks.filter(x=>!x.done).slice(0,3);
+  const steps=S.habits.steps||0;
+  const snap=goldCard||fxCards||cryptoCard||`<div class="tk"><div class="s"><span>🥇 ${t('gold')}</span></div><b>…</b><span class="chg green">${t('goldLive')}</span></div>`;
+  const taskHTML=tasks.length?tasks.map(x=>`<div class="task" onclick="show('schedule')"><div class="ic" style="width:38px;height:38px">${x.done?'✅':'📌'}</div><div class="t"><b>${esc(x.desc)}</b><small>${esc(x.time||'')}</small></div><div class="val" style="color:var(--primary);font-size:12px">${t('today')} ›</div></div>`).join(''):`<div class="empty" onclick="show('schedule')">${t('noTasks')}</div>`;
+  VIEWS.innerHTML=`
+  <div class="hero-card fade-in"><div class="hc-row"><div><div class="hc-lab">💵 ${t('balance')}</div><b class="hc-big">${fmt(m.balance)}</b><span class="hc-sub">IRR · ${t('toman')}</span></div><span class="hc-chip">⭐ ${fmt(S.pts)}</span></div><div class="hc-btns"><button class="hc-btn" id="hAdd">+ ${t('add')}</button><button class="hc-btn" id="hMarkets">📈 ${t('markets')}</button></div></div>
+  <div class="kpis fade-in">
+    <div class="kpi" style="--kpc:rgba(0,212,160,.25)"><small>⬆ ${t('inc')}</small><b style="color:var(--accent)">${fmt(incMonth)}</b></div>
+    <div class="kpi" style="--kpc:rgba(255,92,122,.25)"><small>⬇ ${t('exp')}</small><b style="color:var(--red)">${fmt(expMonth)}</b></div>
+    <div class="kpi" style="--kpc:rgba(255,201,77,.25)"><small>🏃 ${t('steps')}</small><b style="color:var(--gold)">${fmt(steps)}</b></div>
+    <div class="kpi" style="--kpc:rgba(108,92,255,.25)"><small>🏅 ${t('rewards')}</small><b style="color:var(--primary2)">${fmt(S.pts)}</b></div>
+  </div>
+  <div class="stitle"><span>📈 ${t('markets')}</span><span class="more" onclick="show('markets')">${t('today')} ›</span></div>
+  <div class="ticker fade-in" id="homeTicker">${snap}</div>
+  ${goldDeep||''}
+  <div class="stitle"><span>📌 ${t('today')}</span><span class="more" onclick="show('schedule')">${t('schedule')} ›</span></div>
+  ${taskHTML}
+  <div class="stitle"><span>❤️ ${t('health')}</span><span class="more" onclick="show('health')">${t('health')} ›</span></div>
+  <div class="health-cards">
+    <div class="h-card" onclick="show('health')"><div class="top"><div><small style="color:var(--muted)">🏃 ${t('steps')}</small><b>${fmt(steps)}</b></div><div class="circle" style="--p:${Math.min(100,Math.round(steps/(S.habits.goal||6000)*100))};--c:var(--accent)"><span>${Math.min(100,Math.round(steps/(S.habits.goal||6000)*100))}%</span></div></div></div>
+    <div class="h-card" onclick="openAI()"><div class="top"><div><small style="color:var(--muted)">🤖 ${t('aiTitle')}</small><b style="font-size:20px">💬</b></div></div><small style="color:var(--muted)">${t('ask')}</small></div>
+  </div>`;
+  const ha=document.getElementById('hAdd');if(ha)ha.onclick=()=>openTrans();
+  const hm=document.getElementById('hMarkets');if(hm)hm.onclick=()=>{cur='markets';render()};
+}
 function renderMoney(){
   const m=S.money;const month=new Date().getMonth();
   const expMonth=S.txn.filter(x=>x.exp&&x.mt===month).reduce((a,x)=>a+x.amt,0);
@@ -716,7 +777,7 @@ function renderMoney(){
   let budgetHTML='';
   if(S.budget>0){const pct=Math.min(100,Math.round(expMonth/S.budget*100));const left=Math.max(0,S.budget-expMonth);budgetHTML=`<div class="budget-box fade-in"><b style="font-size:15px">📊 ${t('budget')}</b><div class="budget-prog"><i style="width:${pct}%;background:${pct>90?'var(--red)':'var(--grad)'}"></i></div><small style="color:var(--muted)">${fmt(expMonth)} ${t('budgetUsed')} ${fmt(S.budget)} · ${t('budgetLeft')}: <b style="color:var(--accent)">${fmt(left)}</b></small></div>`}
   let txn=S.txn.slice().reverse().slice(0,8).map(x=>{const c=x.exp?'var(--red)':x.trans?'var(--blue)':'var(--accent)';const s=x.exp?'−':(x.trans?'⇄':'+');return `<div class="row fade-in"><div class="ic">${x.ic||'💸'}</div><div class="t"><b>${esc(x.label||'')}</b><small>${esc(x.desc||'')}</small></div><div class="val" style="color:${c}">${s}${fmt(x.amt)}</div></div>`}).join('')||`<div class="empty">${t('noMoney')}</div>`;
-  let chart='';if(S.txn.length){const days=[];for(let d=6;d>=0;d--){const dt=new Date();dt.setDate(dt.getDate()-d);const sum=S.txn.filter(x=>x.exp&&new Date(x.ts).toDateString()===dt.toDateString()).reduce((a,x)=>a+x.amt,0);days.push(sum)}const mx=Math.max(...days,1);chart=`<div class="budget-box fade-in"><b>${t('chart')} (7 ${t('lastDays')})</b><div class="chartbar">${days.map(v=>`<div class="cb" style="height:${Math.max(4,v/mx*100)}%"><b>${v?Math.round(v/1000)+'k':''}</b></div>`).join('')}</div></div>`}
+  let chart='';if(S.txn.length){const days=[];for(let d=6;d>=0;d--){const dt=new Date();dt.setDate(dt.getDate()-d);const sum=S.txn.filter(x=>x.exp&&new Date(x.ts).toDateString()===dt.toDateString()).reduce((a,x)=>a+x.amt,0);days.push(sum)}chart=`<div class="budget-box fade-in"><b>${t('chart')} (7 ${t('lastDays')})</b><div class="chart-wrap">${svgChart(days,300,150,'#6c5cff')}</div></div>`}
   let stats='';
   if(S.txn.length){const now=new Date(),dom=now.getDate();const dayCount=Math.max(1,dom);const net=incMonth-expMonth;const dailyAvg=Math.round(expMonth/dayCount);const cats={};S.txn.forEach(x=>{const c=catOf(x);if(!c)return;if(!cats[c])cats[c]=0;cats[c]+=x.amt});const top=Object.keys(cats).sort((a,b)=>cats[b]-cats[a]).slice(0,5).map(c=>{const pct=cats[c]/ (expMonth||1)*100;return `<div class="row" style="border:none;padding:8px 0"><div class="ic">${c}</div><div class="t"><b>${fmt(cats[c])}</b></div><div class="val" style="color:var(--muted);font-size:12px">${Math.round(pct)}%</div></div>`}).join('');
   stats=`<div class="budget-box fade-in"><b>📊 ${t('monthStats')}</b>
@@ -744,18 +805,29 @@ ${rateNote?`<div style="font-size:11px;color:var(--muted2);margin-top:8px">${t('
 function renderSchedule(){
   const j=new Date();let tasks=S.tasks.map((x,i)=>`<div class="task ${x.done?'done':''}"><input type="checkbox" ${x.done?'checked':''} data-i="${i}"><div class="t"><b>${esc(x.desc)}</b><small>${esc(x.time||'')}</small></div><button class="del" data-i="${i}">✕</button></div>`).join('')||`<div class="empty">${t('noTasks')}</div>`;
   let rems=S.reminders.map((x,i)=>`<div class="task ${x.done?'done':''}"><input type="checkbox" ${x.done?'checked':''} data-r="${i}"><div class="t"><b>⏰ ${esc(x.desc)}</b><small>${x.time||''}</small></div><button class="del" data-r="${i}">✕</button></div>`).join('')||`<div class="empty">${t('noRem')}</div>`;
-  VIEWS.innerHTML=`<div class="stitle"><span>${t('today')} 📅</span><span class="more" id="addTaskBtn">+ ${t('add')}</span></div>${tasks}<div class="stitle"><span>⏰ ${t('addReminder')}</span><span class="more" id="addRemBtn">+</span></div>${rems}`;
-  $('#addTaskBtn').onclick=()=>openTask();$('#addRemBtn').onclick=()=>openRem();
+  const dArr=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];const tdone=S.tasks.filter(x=>x.done).length,tdcnt=S.tasks.length;
+  const wk=Array.from({length:7},(_,k)=>{const d=new Date();d.setDate(j.getDate()-6+k);return `<div class="wdot ${k===6?'now':''}"><small>${dArr[d.getDay()]}</small><b>${d.getDate()}</b>${k===6?'<span></span>':''}</div>`}).join('');
+  VIEWS.innerHTML=`<div class="hero-card" style="--hb:linear-gradient(135deg,#7c5cff,#ff9a5c)">
+    <div class="hc-row"><div><small class="hc-lab" style="color:#fff;opacity:.9">${t('today')} 📅</small><span class="hc-big" style="font-size:22px;color:#fff">${greet()}</span><div class="hc-sub" style="color:#fff;opacity:.85">${tdcnt?tdone+'/'+tdcnt+' '+t('doneCarry'):j.toLocaleDateString()}</div></div><button class="hc-chip" id="addTaskBtn" style="color:#fff">+ ${t('add')}</button></div>
+    <div class="week">${wk}</div>
+  </div>
+  <div class="kpis fade-in"><div class="kpi" style="--kpc:rgba(0,212,160,.25)"><small>✅ ${t('doneCarry')}</small><b style="color:var(--accent)">${tdone}</b></div><div class="kpi" style="--kpc:rgba(108,92,255,.25)"><small>📌 ${t('today')}</small><b style="color:var(--primary2)">${tdcnt}</b></div><div class="kpi" style="--kpc:rgba(255,154,92,.25)"><small>⏰ ${t('reminders')}</small><b style="color:var(--gold)">${S.reminders.length}</b></div></div>
+  <div class="stitle"><span>${t('addTask')}</span><span class="more" id="addTaskBtn2">+</span></div>${tasks}
+  <div class="stitle"><span>⏰ ${t('addReminder')}</span><span class="more" id="addRemBtn">+</span></div>${rems}`;
+  $('#addTaskBtn').onclick=()=>openTask();if(document.getElementById('addTaskBtn2'))document.getElementById('addTaskBtn2').onclick=()=>openTask();$('#addRemBtn').onclick=()=>openRem();
   document.querySelectorAll('.task input').forEach(c=>{if(c.dataset.i!==undefined)c.onchange=function(){const i=+this.dataset.i;S.tasks[i].done=this.checked;if(this.checked)addPts(5);save();render()};if(c.dataset.r!==undefined)c.onchange=function(){const i=+this.dataset.r;S.reminders[i].done=this.checked;save();render()}});
   document.querySelectorAll('.task .del').forEach(b=>{if(b.dataset.i!==undefined)b.onclick=()=>{S.tasks.splice(+b.dataset.i,1);save();render()};if(b.dataset.r!==undefined)b.onclick=()=>{S.reminders.splice(+b.dataset.r,1);save();render()}});
 }
-function renderHealth(){const h=S.habits,g=h.goal||6000;const sp=Math.min(100,Math.round(h.steps/g*100)),sl=Math.min(100,Math.round((h.sleep||0)/8*100)),wt=Math.min(100,Math.round((h.water||0)/2000*100));VIEWS.innerHTML=`<div class="health-cards">
-<div class="h-card"><div class="top"><div><small style="color:var(--muted)">🏃 ${t('steps')}</small><b>${fmt(h.steps)}</b></div><div class="circle" style="--p:${sp};--c:var(--accent)"><span>${sp}%</span></div></div><small style="color:var(--muted)">${t('goal')}: ${fmt(g)}</small></div>
-<div class="h-card"><div class="top"><div><small style="color:var(--muted)">💧 ${t('water')}</small><b>${h.water||0}</b></div><div class="circle" style="--p:${wt};--c:var(--blue)"><span>${wt}%</span></div></div><small style="color:var(--muted)">${t('goal')}: 2000</small></div>
-<div class="h-card"><div class="top"><div><small style="color:var(--muted)">😴 ${t('sleep')}</small><b>${h.sleep||0}h</b></div><div class="circle" style="--p:${sl};--c:var(--gold)"><span>${sl}%</span></div></div><small style="color:var(--muted)">${t('goal')}: 8h</small></div>
-<div class="h-card"><small style="color:var(--muted)">❤️ ${t('health')}</small><b style="margin:6px 0">${t('save')} 🔥</b></div></div>
+function renderHealth(){const h=S.habits,g=h.goal||6000;const sp=Math.min(100,Math.round(h.steps/g*100)),sl=Math.min(100,Math.round((h.sleep||0)/8*100)),wt=Math.min(100,Math.round((h.water||0)/2000*100));const score=Math.round((sp+sl+wt)/3);VIEWS.innerHTML=`<div class="hero-card fade-in" style="--hb:linear-gradient(135deg,#00c9a0,#6c5cff)">
+<div class="hc-row"><div><div class="hc-lab" style="color:#fff;opacity:.92">❤️ ${t('health')}</div><b class="hc-big" style="color:#fff">${score}%</b><span class="hc-sub" style="color:#fff;opacity:.85">${t('healthScore')||'Daily Health Score'}</span></div><span class="hc-chip" style="color:#fff">🔥 ${t('save')}</span></div>
+</div>
+<div class="health-cards">
+<div class="h-card"><div class="top"><div><small style="color:var(--muted)">🏃 ${t('steps')}</small><b>${fmt(h.steps)}</b></div><div class="circle" style="--p:${sp};--c:var(--accent)"><span>${sp}%</span></div></div><div class="bar"><i style="width:${sp}%;background:var(--accent)"></i></div><small style="color:var(--muted)">${t('goal')}: ${fmt(g)}</small></div>
+<div class="h-card"><div class="top"><div><small style="color:var(--muted)">💧 ${t('water')}</small><b>${h.water||0}ml</b></div><div class="circle" style="--p:${wt};--c:var(--blue)"><span>${wt}%</span></div></div><div class="bar"><i style="width:${wt}%;background:var(--blue)"></i></div><small style="color:var(--muted)">${t('goal')}: 2000ml</small></div>
+<div class="h-card"><div class="top"><div><small style="color:var(--muted)">😴 ${t('sleep')}</small><b>${h.sleep||0}h</b></div><div class="circle" style="--p:${sl};--c:var(--gold)"><span>${sl}%</span></div></div><div class="bar"><i style="width:${sl}%;background:var(--gold)"></i></div><small style="color:var(--muted)">${t('goal')}: 8h</small></div>
+</div>
 <div class="stitle"><span>${t('addHabit')}</span></div>
-<div class="quick"><div class="qa" data-a="steps"><div class="e">🏃</div><small>+500</small></div><div class="qa" data-a="water"><div class="e">💧</div><small>+250</small></div><div class="qa" data-a="sleep"><div class="e">😴</div><small>+1h</small></div><div class="qa" data-a="all"><div class="e">✨</div><small>Log</small></div></div>`;
+<div class="quick"><div class="qa" data-a="steps"><div class="e">🏃</div><small>+500</small></div><div class="qa" data-a="water"><div class="e">💧</div><small>+250ml</small></div><div class="qa" data-a="sleep"><div class="e">😴</div><small>+1h</small></div><div class="qa" data-a="all"><div class="e">✨</div><small>${t('logAll')||'Log all'}</small></div></div>`;
 document.querySelectorAll('#views .qa[data-a]').forEach(q=>q.onclick=()=>logHealth(q.dataset.a));}
 function logHealth(k){if(k==='steps')S.habits.steps+=500;else if(k==='water')S.habits.water+=250;else if(k==='sleep')S.habits.sleep+=1;else if(k==='all'){S.habits.steps+=500;S.habits.water+=250;S.habits.sleep+=1}addPts(2);save();render();toast(t('saved')+' ⭐+2')}
 function renderNews(){const it=[['🌍',t('news'),'Global markets surge as peace talks progress','2h ago'],['💰','Finance','Central banks signal rate decision this week','5h ago'],['⚽','Sports','Championship finals reach dramatic conclusion','8h ago'],['⚡','Tech','New AI tools announced at major conference','12h ago'],['🏛','Economy','Energy prices stabilize across global markets','1d ago']];VIEWS.innerHTML=`<div class="stitle"><span>${t('news')} 📰</span></div>`+it.map(n=>`<div class="news fade-in"><div class="nimg">${n[0]}</div><div class="nbody"><span class="cat">${n[1]}</span><b>${n[2]}</b><small>${n[3]}</small></div></div>`).join('')}
@@ -764,19 +836,28 @@ function renderRewards(){
   let ch=``;
   if(S.lastChallenge!==new Date().toDateString()){S.lastChallenge=new Date().toDateString();S.challengeDone=false;save()}
   const claimable=!S.challengeDone;
-  ch=`<div class="share-card fade-in"><div class="slogo">JIB.</div><div class="spts">${fmt(S.pts)}</div><div class="slv">${level()}</div></div>
+  const lvl=level();const thr=S.pts>=500?500:(S.pts>=200?200:0);const nxt=S.pts>=500?null:(S.pts>=200?500:200);const pct=nxt?Math.min(100,Math.round((S.pts-thr)/(nxt-thr)*100)):100;
+  const lvlIcon=lvl==='Gold'?'🥇':(lvl==='Silver'?'🥈':'🥉');
+  ch=`<div class="hero-card fade-in" style="--hb:linear-gradient(135deg,#ffc94d,#ff9a5c)">
+  <div class="hc-row"><div><div class="hc-lab" style="color:#fff;opacity:.92">${lvlIcon} ${lvl}</div><b class="hc-big" style="color:#fff">${fmt(S.pts)}</b><span class="hc-sub" style="color:#fff;opacity:.85">pts · ${t('rewards')}</span></div><span class="hc-chip" style="color:#fff" id="shareBtn">↗ ${t('share')}</span></div>
+  <div class="lvlbar"><i style="width:${pct}%"></i><span>${nxt?pct+'% → '+nxt:'MAX'}</span></div>
+  </div>
   <div class="stitle"><span>🏆 ${t('challenge')}</span></div>
   <div class="budget-box">${claimable?`<div class="row" style="border:none;padding:0"><div class="ic">✨</div><div class="t"><b>${t('challenge')}</b><small>${t('challengeDone')}</small></div><button class="btn" style="width:auto;padding:10px 18px;margin:0" id="claimBtn">${t('claim')} +20</button></div>`:`<div style="text-align:center;color:var(--accent)">${t('challengeClaim')}</div>`}</div>
-  <div class="stitle"><span>${t('rewards')} 🏆</span><span class="more" id="shareBtn">${t('share')} ↗</span></div>
-  <div class="row"><div class="ic">🥇</div><div class="t"><b>Gold level</b><small>500 pts</small></div><div class="val">${S.pts>=500?'✓':'—'}</div></div>
-  <div class="row"><div class="ic">💳</div><div class="t"><b>Cashback offer</b><small>1% on bills (Pro)</small></div><div class="val" style="color:var(--primary)">Pro</div></div>`;
+  <div class="stitle"><span>${t('rewards')} 🥇</span></div>
+  <div class="rewards">
+  <div class="r-card" style="--rpc:#ffd76a"><div class="e">🥇</div><b>Gold</b><small>500 pts</small><span class="rv">${S.pts>=500?'✓':'—'}</span></div>
+  <div class="r-card" style="--rpc:#c9c9df"><div class="e">🥈</div><b>Silver</b><small>200 pts</small><span class="rv">${S.pts>=200?'✓':'—'}</span></div>
+  <div class="r-card" style="--rpc:#d4936a"><div class="e">🥉</div><b>Bronze</b><small>0 pts</small><span class="rv">✓</span></div>
+  <div class="r-card" style="--rpc:#00d4a0"><div class="e">💳</div><b>Cashback</b><small>1% on bills (Pro)</small><span class="rv" style="color:var(--primary)">Pro</span></div>
+  </div>`;
   VIEWS.innerHTML=ch;
   const cb=document.getElementById('claimBtn');if(cb)cb.onclick=()=>{if(!S.challengeDone){S.challengeDone=true;addPts(20);save();render();toast('⭐ +20')}};
   document.getElementById('shareBtn').onclick=shareCard;
 }
 function shareCard(){const txt=`I have ${S.pts} points on JIB! 🏆 Level ${level()} — one super-app for life. Try it: jib.app`;if(navigator.share){navigator.share({title:'JIB',text:txt}).catch(()=>{})}else if(navigator.clipboard){navigator.clipboard.writeText(txt).then(()=>toast(t('share')))}else{toast(t('share'))}}
 function renderList(){let items=S.list.map((x,i)=>`<div class="task ${x.done?'done':''}"><input type="checkbox" ${x.done?'checked':''} data-l="${i}"><div class="t"><b>${esc(x.desc)}</b></div><button class="del" data-l="${i}">✕</button></div>`).join('')||`<div class="empty">${t('noList')}</div>`;VIEWS.innerHTML=`<div class="stitle"><span>🛒 ${t('list')}</span><span class="more" id="addItemBtn">+ ${t('add')}</span></div>${items}`;$('#addItemBtn').onclick=()=>openItem();document.querySelectorAll('.task input[data-l]').forEach(c=>c.onchange=function(){const i=+this.dataset.l;S.list[i].done=this.checked;if(this.checked)addPts(2);save();render()});document.querySelectorAll('.task .del[data-l]').forEach(b=>b.onclick=()=>{S.list.splice(+b.dataset.l,1);save();render()})}
-function render(){renderNav();renderQuick();$('#points').textContent=fmt(S.pts);$('#lblPoints').textContent=t('points');$('#lblQuick').textContent=t('quick');$('#greetName').textContent=(cur==='schedule'?'':'')+greet()+' 👋';$('#lblLv').textContent='🏅 '+level();$('#lblStreak').textContent=t('streak').replace('{n}',S.streak);$('#lblChallenge').textContent='✨ '+t('challenge');if(cur==='money')renderMoney();else if(cur==='payments')renderPayments();else if(cur==='markets')renderMarkets();else if(cur==='schedule')renderSchedule();else if(cur==='health')renderHealth();else if(cur==='news')renderNews();else if(cur==='rewards')renderRewards();else renderList();checkReminders()}
+function render(){renderNav();renderQuick();$('#points').textContent=fmt(S.pts);$('#lblPoints').textContent=t('points');$('#lblQuick').textContent=t('quick');$('#greetName').textContent=(cur==='schedule'?'':'')+greet()+' 👋';$('#lblLv').textContent='🏅 '+level();$('#lblStreak').textContent=t('streak').replace('{n}',S.streak);$('#lblChallenge').textContent='✨ '+t('challenge');if(cur==='home')renderHome();else if(cur==='money')renderMoney();else if(cur==='payments')renderPayments();else if(cur==='markets')renderMarkets();else if(cur==='schedule')renderSchedule();else if(cur==='health')renderHealth();else if(cur==='news')renderNews();else if(cur==='rewards')renderRewards();else renderList();if(['schedule','news','rewards','list'].indexOf(cur)>=0)VIEWS.insertAdjacentHTML('afterbegin',`<div class="backbar" onclick="showMore()"><span>‹</span><small>${t('backTo')||'All'}</small></div>`);checkReminders()}
 function greet(){const h=new Date().getHours();return h<12?t('greetM'):(h<18?t('greetA'):t('greetE'))}
 
 /* ============ sheets ============ */
