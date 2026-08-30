@@ -302,6 +302,41 @@ body::after{width:460px;height:460px;background:radial-gradient(circle,#00d4a0,t
 .fade-in{animation:riseIn .4s ease both}
 @keyframes riseInApp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .mod,.qa,.r-card,.h-card,.task,.row,.news{margin-bottom:0}
+
+/* ================= GLASSMORPHISM LUXE (app) ================= */
+body{
+  background:
+    radial-gradient(1000px 700px at 10% 0%,rgba(124,92,255,.30),transparent 55%),
+    radial-gradient(900px 600px at 100% 20%,rgba(0,212,160,.26),transparent 55%),
+    radial-gradient(700px 600px at 50% 115%,rgba(255,90,180,.18),transparent 55%),
+    linear-gradient(160deg,#0a0b1a,#121034 45%,#0b1c2c 78%,#081019);
+  background-attachment:fixed;
+}
+.app{position:relative}
+#appView{padding-bottom:0}
+.points-card,.hero-card,.budget-box,.mod,.quick,.qa,.h-card,.r-card,.task,.row,.news,.share-card,
+.mgrid .mcell,.health-cards .h-card,.ticker,.tk,.backbar,.chat,.sheet{
+  background:linear-gradient(165deg,var(--glass),var(--glass-2));
+  -webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);
+  border:1px solid var(--g-border);
+  box-shadow:0 14px 46px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.1);
+}
+.points-card{background:linear-gradient(165deg,rgba(255,255,255,.14),rgba(108,92,255,.12));border:1px solid var(--g-border);-webkit-backdrop-filter:blur(24px) saturate(160%)}
+.hero-card{border:1px solid rgba(255,255,255,.28)}
+.top .av{background:linear-gradient(135deg,#8b5bff,#00d4a0);box-shadow:0 6px 22px rgba(124,92,255,.5)}
+.icon-btn{background:rgba(255,255,255,.07);border:1px solid var(--g-border);backdrop-filter:blur(8px)}
+.bnav{background:rgba(16,18,40,.55);-webkit-backdrop-filter:blur(26px) saturate(160%);backdrop-filter:blur(26px) saturate(160%);border-top:1px solid rgba(255,255,255,.14);box-shadow:0 -16px 50px rgba(0,0,0,.5)}
+.bnav button.active{background:linear-gradient(135deg,rgba(124,92,255,.5),rgba(0,212,160,.35));box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
+.kpi{background:linear-gradient(165deg,var(--glass),var(--glass-2)) !important;border:1px solid var(--g-border)}
+.fab{border:2px solid rgba(255,255,255,.5)}
+.modal .sheet{background:rgba(18,20,42,.92);-webkit-backdrop-filter:blur(30px) saturate(160%)}
+.toast{background:rgba(16,40,50,.9);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid rgba(0,212,160,.5)}
+.app-footer{color:#aab3d4}
+:root{
+  --glass:rgba(255,255,255,.085);
+  --glass-2:rgba(255,255,255,.04);
+  --g-border:rgba(255,255,255,.16);
+}
 </style>
 </head>
 <body>

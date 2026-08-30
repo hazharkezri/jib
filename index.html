@@ -308,6 +308,98 @@ body{background:var(--bg)}
 @media(max-width:760px){.features{grid-template-columns:1fr}}
 .reveal{transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
 
+/* ================= GLASSMORPHISM LUXE ================= */
+:root{
+  --glass:rgba(255,255,255,.09);
+  --glass-2:rgba(255,255,255,.055);
+  --glass-line:rgba(255,255,255,.16);
+  --g-border:rgba(255,255,255,.22);
+}
+html,body{height:auto}
+body{
+  background:
+    radial-gradient(1100px 700px at 12% -8%,rgba(124,92,255,.34),transparent 55%),
+    radial-gradient(900px 650px at 100% 8%,rgba(0,212,160,.30),transparent 55%),
+    radial-gradient(800px 600px at 50% 120%,rgba(255,90,180,.22),transparent 55%),
+    linear-gradient(135deg,#0a0b1a,#131033 45%,#0b1a2b 75%,#081018);
+  background-attachment:fixed;
+}
+.glow{opacity:.55}
+main,footer{position:relative;z-index:1}
+
+/* NAV — floating glass pill */
+#nav{position:sticky;top:14px;z-index:60;max-width:1180px;margin:0 auto;left:0;right:0;padding:0 8px}
+#nav .nav-in{
+  margin:0 auto;padding:12px 20px;border-radius:24px;
+  background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));
+  -webkit-backdrop-filter:blur(22px) saturate(150%);backdrop-filter:blur(22px) saturate(150%);
+  border:1px solid var(--g-border);
+  box-shadow:0 10px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.12);
+}
+#nav.scrolled .nav-in{background:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.06));box-shadow:0 18px 60px rgba(0,0,0,.5)}
+#nav .logo{color:#fff;text-shadow:0 2px 18px rgba(124,92,255,.5)}
+
+/* HEADINGS */
+.sec-head h2{color:#fff;-webkit-text-fill-color:#fff;background:linear-gradient(120deg,#ffffff,#dcd6ff 55%,#a9f0dd)}
+.eyebrow{background:rgba(255,255,255,.08);border-color:var(--g-border);color:#dcd6ff}
+
+/* GLASS CARD SYSTEM */
+.feat,.plan,.stat,.faq-item,.market,.lang-drop,.mnav,
+.cta-band,.store,.visual{
+  background:linear-gradient(160deg,var(--glass),var(--glass-2)) !important;
+  -webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);
+  border:1px solid var(--g-border) !important;
+  box-shadow:0 14px 44px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.12);
+}
+.feat::before,.plan::before{background:linear-gradient(140deg,rgba(255,255,255,.5),rgba(255,255,255,.06))}
+.feat:hover,.plan:hover,.faq-item:hover{border-color:rgba(255,255,255,.42) !important;box-shadow:0 24px 70px rgba(0,0,0,.45)}
+.feat .ic{background:linear-gradient(135deg,rgba(124,92,255,.35),rgba(0,212,160,.28));border:1px solid var(--g-border);border-radius:18px;width:58px;height:58px;display:grid;place-items:center;font-size:26px;box-shadow:inset 0 1px 0 rgba(255,255,255,.2)}
+
+/* HERO */
+.hero h1{color:#fff;text-shadow:0 6px 40px rgba(124,92,255,.4)}
+.hero .sub{color:#d5d8f0}
+.chip{background:rgba(255,255,255,.07);border:1px solid var(--g-border);backdrop-filter:blur(8px)}
+.chip-row{gap:10px}
+.chip-row .chip{flex-wrap:wrap}
+
+/* PHONE shimmer card */
+.phone{background:linear-gradient(165deg,rgba(255,255,255,.14),rgba(255,255,255,.04));border:1px solid var(--g-border);-webkit-backdrop-filter:blur(30px) saturate(160%);backdrop-filter:blur(30px) saturate(160%);box-shadow:0 30px 80px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.18)}
+.floatcard{background:rgba(255,255,255,.10);border:1px solid var(--g-border);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.phone-ring{border-color:rgba(255,255,255,.14)}
+
+/* BUTTONS */
+.btn-primary{background:linear-gradient(135deg,#fff,#e4dcff);color:#1a1033;box-shadow:0 10px 40px rgba(255,255,255,.25)}
+.btn-primary:hover{box-shadow:0 16px 50px rgba(255,255,255,.35)}
+.btn-ghost{background:rgba(255,255,255,.08);border:1px solid var(--g-border);color:#fff;backdrop-filter:blur(10px)}
+.btn-grad-border{background:rgba(255,255,255,.08);color:#fff;backdrop-filter:blur(10px)}
+.btn-grad-border::before{background:linear-gradient(135deg,#fff,rgba(255,255,255,.2))}
+
+/* MARKET / LIVE */
+.market-bar{background:rgba(255,255,255,.06);border:1px solid var(--g-border);backdrop-filter:blur(16px)}
+.market{background:rgba(255,255,255,.05)}
+.chg.green{color:#8ff0d0}
+.chg.red{color:#ff9db1}
+.g{color:#c4f5e2}
+.logos-in{opacity:.9}
+.logo-l{color:#fff}
+.v-row .v{background:rgba(0,212,160,.14);color:#b7f5e2;border:1px solid rgba(0,212,160,.4)}
+.visual{border-radius:24px;overflow:hidden}
+
+/* FOOTER glass */
+.foot-grid a{color:#cdd3ee}
+.footer{background:transparent}
+.social a{background:rgba(255,255,255,.06);border:1px solid var(--g-border);backdrop-filter:blur(8px)}
+.foot-bottom{color:#aab3d4;border-top:1px solid rgba(255,255,255,.1)}
+.logo-badge{background:linear-gradient(135deg,#8b5bff,#00d4a0);box-shadow:0 8px 26px rgba(124,92,255,.6)}
+
+/* LANG DROPDOWN glass */
+.lang-drop{background:rgba(18,20,40,.85);-webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%)}
+.lang-btn:hover{background:rgba(255,255,255,.08)}
+.ld-head{color:#dcd6ff}
+
+@media(max-width:760px){#nav{top:8px}}
+
+
 </style>
 </head>
 <body>
