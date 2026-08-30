@@ -251,6 +251,17 @@ body::after{width:460px;height:460px;background:radial-gradient(circle,#00d4a0,t
 .share-card .slogo{font-family:'Sora';font-size:32px;font-weight:800;color:var(--accent);position:relative;z-index:1}
 .share-card .spts{font-size:48px;font-family:'Sora';font-weight:800;color:var(--gold);margin:6px 0;position:relative;z-index:1}
 .share-card .slv{font-size:14px;color:var(--muted);position:relative;z-index:1}
+.app-footer{padding:22px 16px 96px;text-align:center;font-size:12px;color:var(--muted);direction:rtl}
+.modgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:2px 0 16px}
+.mod{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 10px;text-align:center;cursor:pointer;transition:.2s}
+.mod:active{transform:scale(.96)}
+.mod .e{font-size:24px}
+.mod b{display:block;font-size:12px;font-weight:700;color:var(--text);margin-top:6px}
+.catrow{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--line)}
+.catrow span{font-size:16px}
+.catrow b{font-size:13px;white-space:nowrap;color:var(--text)}
+.catbar{flex:1;height:8px;background:rgba(127,127,157,.14);border-radius:6px;overflow:hidden}
+.catbar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#7c5cff,#00c9a0)}
 </style>
 </head>
 <body>
@@ -284,6 +295,7 @@ body::after{width:460px;height:460px;background:radial-gradient(circle,#00d4a0,t
   <div class="quick" id="quickBar"></div>
 
   <div id="views"></div>
+  <footer class="app-footer"><span>تمام حقوق برای سایت گلوبال تریدر هاب محفوظ می باشد</span></footer>
 </div>
 
 <button class="fab" id="aiFab">💬</button>
@@ -296,6 +308,7 @@ body::after{width:460px;height:460px;background:radial-gradient(circle,#00d4a0,t
 /* ============ i18n ============ */
 const I18N={
 en:{
+  dashTitle:"Dashboard",reports:"Reports",transactions:"Transactions",net:"Net",overview:"Overview",
   greetM:"Good morning",greetA:"Good afternoon",greetE:"Good evening",
   points:"Your points",lv:"Level",streak:"🔥 {n}-day streak",
   quick:"Quick actions",
@@ -317,6 +330,7 @@ en:{
   lang:"Language",settings:"Settings",notifications:"Notifications",permissions:"Allow notifications",install:"Install JIB app 🔽",rateNote:"Toman prices are estimated from the live free-market Tether rate when reachable; otherwise gold/FX use international USD rates. Iranian coins may have a market premium over their gold content."
 },
 fa:{
+  dashTitle:"داشبورد",reports:"گزارش‌ها",transactions:"تراکنش‌ها",net:"خالص",overview:"نمای کلی",
   greetM:"صبح بخیر",greetA:"ظهر بخیر",greetE:"عصر بخیر",
   points:"امتیاز شما",lv:"سطح",streak:"🔥 {n} روز پیاپی",
   quick:"عملیات سریع",
@@ -338,6 +352,7 @@ fa:{
   lang:"زبان",settings:"تنظیمات",notifications:"اعلان‌ها",permissions:"اجازه اعلان",install:"نصب اپ جیب 🔽",rateNote:"قیمت‌های تومانی از نرخ زنده تتر بازار آزاد (وقتی در دسترس باشد) تخمین زده می‌شود؛ در غیر این صورت طلا و ارز با نرخ بین‌المللی دلار است. سکه‌های ایرانی ممکن است حباب/پیش‌مایه‌ی بیش از وزن طلا داشته باشند."
 },
 ar:{
+  dashTitle:"لوحة التحكم",reports:"التقارير",transactions:"المعاملات",net:"الصافي",overview:"نظرة عامة",
   greetM:"صباح الخير",greetA:"مساء الخير",greetE:"مساء الخير",
   points:"نقاطك",lv:"المستوى",streak:"🔥 {n} أيام متتالية",
   quick:"إجراءات سريعة",money:"المال",payments:"المدفوعات",markets:"الأسواق",schedule:"الجدول",health:"الصحة",news:"الأخبار",rewards:"المكافآت",list:"القائمة",ai:"الذكاء",home:"الرئيسية",more:"المزيد",
@@ -358,6 +373,7 @@ ar:{
   lang:"اللغة",settings:"الإعدادات",notifications:"التنبيهات",permissions:"السماح بالتنبيهات",install:"ثبّت تطبيق جيب 🔽",rateNote:"تُقدَّر الأسعار بالتومان من سعر تتر الحرّ الفوري (عند توفره)؛ وإلا يُعرض الذهب والعملات بالدولار الدولي. قد تحمل العملات الإيرانية علاوة سوقية فوق وزن الذهب."
 },
 ckb:{
+  dashTitle:"داشبۆرد",reports:"ڕاپۆرتەکان",transactions:"مامەڵەکان",net:"خاوێن",overview:"بینینی گشتی",
   greetM:"بەیانی باش",greetA:"نیوەڕۆی باش",greetE:"ئێوارەی باش",
   points:"خاڵەکانت",lv:"ئاست",streak:"🔥 {n} ڕۆژی لەسەریەک",
   quick:"کردەوە خێراکان",money:"پارە",payments:"پارەدانەکان",markets:"بازارەکان",schedule:"بەرنامە",health:"تەندروستی",news:"هەواڵ",rewards:"خەڵات",list:"کڕین",ai:"هوشمەند",home:"ماڵەوە",more:"زیاتر",
@@ -378,6 +394,7 @@ ckb:{
   lang:"زمان",settings:"ڕێکخستنەکان",notifications:"ئاگادارییەکان",permissions:"ڕێگەدان بە ئاگاداری",install:"دامەزراندنی ئەپی جیب 🔽",rateNote:"نرخی تۆمار لە نرخی ڕاستەوخۆی تێتهەری بازاری ئازاد خەمڵێنراوە (کاتێک بەردەست بێت)؛ ئەگینا زێڕ و دراو بە نرخی دۆلاری نێونەتەوەیی. سکەکان ڕەنگە حەبابی لە نرخی زێڕەکەیان زیاتر هەبێت."
 },
 kmr:{
+  dashTitle:"Dashboard",reports:"Rapor",transactions:"Danûstandin",net:"Net",overview:"Nêrîna giştî",
   greetM:"Beyanîbaş",greetA:"Nîvroybaş",greetE:"Êvarbaş",
   points:"Xalên te",lv:"Ast",streak:"🔥 {n} rojên li pey hev",
   quick:"Kiryarên bilez",money:"Pere",payments:"Derdan",markets:"Bazar",schedule:"Bername",health:"Tenduristî",news:"Nûçe",rewards:"Xelat",list:"Lîste",ai:"Zîrek",home:"Mal",more:"Zêdetir",
@@ -398,6 +415,7 @@ kmr:{
   lang:"Ziman",settings:"Mîhengan",notifications:"Agahdarî",permissions:"Destûra agahdariyê",install:"JIB saz bike 🔽",rateNote:"Nirxên bi Tomen ji nirxa zindî ya Tether a bazara azad tê jê nirxandin (gava bighin); wekî din zêr û drav bi nirxê dolarê navneteweyî ne. Pereyên Îranê dibe ku pêşbaziya bazara ji nirxa zêr zêdetir hebe."
 },
 ru:{
+  dashTitle:"Панель",reports:"Отчёты",transactions:"Транзакции",net:"Итого",overview:"Обзор",
   greetM:"Доброе утро",greetA:"Добрый день",greetE:"Добрый вечер",
   points:"Ваши баллы",lv:"Уровень",streak:"🔥 {n} дней подряд",
   quick:"Быстрые действия",money:"Деньги",payments:"Платежи",markets:"Рынки",schedule:"Расписание",health:"Здоровье",news:"Новости",rewards:"Награды",list:"Список",ai:"ИИ",home:"Главная",more:"Ещё",
@@ -418,6 +436,7 @@ ru:{
   lang:"Язык",settings:"Настройки",notifications:"Уведомления",permissions:"Разрешить уведомления",install:"Установить приложение JIB 🔽",rateNote:"Цены в туманах оцениваются по живому курсу Tether свободного рынка (если доступен); иначе золото и валюта — по международному доллару. Иранские монеты могут иметь рыночную надбавку сверх золотого содержания."
 },
 es:{
+  dashTitle:"Panel",reports:"Informes",transactions:"Transacciones",net:"Neto",overview:"Resumen",
   greetM:"Buenos días",greetA:"Buenas tardes",greetE:"Buenas noches",
   points:"Tus puntos",lv:"Nivel",streak:"🔥 {n} días seguidos",
   quick:"Acciones rápidas",money:"Dinero",payments:"Pagos",markets:"Mercados",schedule:"Horario",health:"Salud",news:"Noticias",rewards:"Recompensas",list:"Lista",ai:"IA",home:"Inicio",more:"Más",
@@ -438,6 +457,7 @@ es:{
   lang:"Idioma",settings:"Ajustes",notifications:"Notificaciones",permissions:"Permitir notificaciones",install:"Instalar la aplicación JIB 🔽",rateNote:"Los precios en tumán se estiman desde la tasa de Tether del mercado libre (si está disponible); de lo contrario, el oro y la moneda usan tipos internacionales en USD. Las monedas iraníes pueden tener prima de mercado sobre su contenido de oro."
 },
 fr:{
+  dashTitle:"Tableau de bord",reports:"Rapports",transactions:"Transactions",net:"Net",overview:"Aperçu",
   greetM:"Bonjour",greetA:"Bon après-midi",greetE:"Bonsoir",
   points:"Vos points",lv:"Niveau",streak:"🔥 {n} jours d'affilée",
   quick:"Actions rapides",money:"Argent",payments:"Paiements",markets:"Marchés",schedule:"Agenda",health:"Santé",news:"Actualités",rewards:"Récompenses",list:"Liste",ai:"IA",home:"Accueil",more:"Plus",
@@ -458,6 +478,7 @@ fr:{
   lang:"Langue",settings:"Paramètres",notifications:"Notifications",permissions:"Autoriser les notifications",install:"Installer l'app JIB 🔽",rateNote:"Les prix en toman sont estimés d'après le taux Tether du marché libre (si disponible) ; sinon or et devises s'affichent en taux USD internationaux. Les pièces iraniennes peuvent avoir une prime de marché sur leur contenu d'or."
 },
 de:{
+  dashTitle:"Übersicht",reports:"Berichte",transactions:"Transaktionen",net:"Netto",overview:"Überblick",
   greetM:"Guten Morgen",greetA:"Guten Tag",greetE:"Guten Abend",
   points:"Deine Punkte",lv:"Level",streak:"🔥 {n} Tage in Folge",
   quick:"Schnellaktionen",money:"Geld",payments:"Zahlungen",markets:"Märkte",schedule:"Zeitplan",health:"Gesundheit",news:"Nachrichten",rewards:"Belohnungen",list:"Liste",ai:"KI",home:"Start",more:"Mehr",
@@ -478,6 +499,7 @@ de:{
   lang:"Sprache",settings:"Einstellungen",notifications:"Benachrichtigungen",permissions:"Benachrichtigungen erlauben",install:"JIB-App installieren 🔽",rateNote:"Toman-Preise werden aus dem Tether-Kurs des freien Marktes geschätzt (wenn verfügbar); sonst zeigen Gold und Währung internationale USD-Kurse. Iranische Münzen können eine Marktprämie über ihrem Goldwert haben."
 },
 zh:{
+  dashTitle:"仪表盘",reports:"报告",transactions:"交易",net:"净额",overview:"概览",
   greetM:"早上好",greetA:"下午好",greetE:"晚上好",
   points:"你的积分",lv:"等级",streak:"🔥 连续 {n} 天",
   quick:"快捷操作",money:"钱包",payments:"支付",markets:"行情",schedule:"日程",health:"健康",news:"资讯",rewards:"奖励",list:"清单",ai:"智能",home:"首页",more:"更多",
@@ -528,10 +550,10 @@ function toJalali(gy,gm,gd){
   let jy=gy<=1600?0:979;gy-=gy<=1600?621:1600;
   const gy2=(jy>0)?(gy+621):gy;let day=(gy2%4===0&&(gy2%100!==0||gy2%400===0))?366:365;
   day=(gy2-1)*365+Math.floor((gy2-1)/4)-Math.floor((gy2-1)/100)+Math.floor((gy2-1)/400)+(gdm[gm-1]+gd);
-  gy=0;const le=jy<0||jy>0;
-  let jdn=day+79;jy=33*(jdn/979);const jy2=Math.floor(jy);let leap=(jy2-((jy2/33)*33))*4/33;
+  gy=0;
+  let jdn=day+79;jy=33*(jdn/979);let jy2=Math.floor(jy);let leap=(jy2-((jy2/33)*33))*4/33;
   if(leap>=0&&leap<0.5)jy2++;jy=jy2;
-  let dayj=jdn-979*jy/33;jy++;const jm=(dayj>=365)?0:(dayj-365);
+  let dayj=jdn-979*jy/33;jy++;let jm=(dayj>=365)?0:(dayj-365);
   leap=((jy-1)%4===0)?(dayj<186?1:(dayj<366?0:1)):((dayj<186)?1:(dayj<366?0:1));
   let jd=dayj;if(leap)jd++;jm=Math.floor(jd/31);const jm2=(jd%31)+1;jm++;
   return {j:jy,m:jm,d:jm2};
@@ -718,9 +740,9 @@ function openAI(){openSheet(chatBox());addBubble('👋 '+t('ask'),'ai');
 const VIEWS=document.getElementById('views');
 let cur='home';
 function show(v){cur=v;render()}
-function navHighlight(){const bs=document.querySelectorAll('#bnav button');bs.forEach(b=>{let act=false;if(b.dataset.v==='more'){act=(['schedule','news','rewards','list'].indexOf(cur)>=0)}else{act=(b.dataset.v==='home'?cur==='home'||cur==='money':b.dataset.v===cur)}b.classList.toggle('active',act)})}
+function navHighlight(){const bs=document.querySelectorAll('#bnav button');bs.forEach(b=>{let act=false;if(b.dataset.v==='more'){act=(['schedule','news','rewards','list','reports'].indexOf(cur)>=0)}else{act=(b.dataset.v==='home'?cur==='home'||cur==='money':b.dataset.v===cur)}b.classList.toggle('active',act)})}
 function renderNav(){const it=[['home','🏠',t('home')],['markets','📈',t('markets')],['payments','🧾',t('payments')],['health','❤️',t('health')],['more','☰',t('more')]];$('#bnav').innerHTML=it.map(x=>`<button data-v="${x[0]}"><span class="e">${x[1]}</span><small>${x[2]}</small></button>`).join('');document.querySelectorAll('#bnav button').forEach(b=>b.onclick=()=>{if(b.dataset.v==='more'){showMore()}else{show(b.dataset.v)}});navHighlight()}
-function showMore(){const items=[['schedule','📅',t('schedule')],['news','📰',t('news')],['rewards','🏆',t('rewards')],['list','🛒',t('list')],['ai','🤖',t('ai')],['settings','⚙️',t('settings')]];openSheet(`<h3>☰ ${t('more')}</h3><div class="mgrid">${items.map(i=>`<div class="mcell" data-m="${i[0]}"><div class="e">${i[1]}</div><small>${i[2]}</small></div>`).join('')}</div>`);document.querySelectorAll('#sheet .mcell').forEach(c=>c.onclick=()=>{const m=c.dataset.m;closeModal();if(m==='ai')openAI();else if(m==='settings')openSettings();else show(m)})}
+function showMore(){const items=[['schedule','📅',t('schedule')],['news','📰',t('news')],['rewards','🏆',t('rewards')],['list','🛒',t('list')],['reports','📊',t('reports')],['ai','🤖',t('ai')],['settings','⚙️',t('settings')]];openSheet(`<h3>☰ ${t('more')}</h3><div class="mgrid">${items.map(i=>`<div class="mcell" data-m="${i[0]}"><div class="e">${i[1]}</div><small>${i[2]}</small></div>`).join('')}</div>`);document.querySelectorAll('#sheet .mcell').forEach(c=>c.onclick=()=>{const m=c.dataset.m;closeModal();navTo(m)})}
 function renderQuick(){const a=[['bill','🧾',t('bills')],['charge','📶',t('charge')],['toll','🛣️',t('tollW')],['fine','👮',t('fineW')]];$('#quickBar').innerHTML=a.map(x=>`<div class="qa fade-in" data-a="${x[0]}"><div class="e">${x[1]}</div><small>${x[2]}</small></div>`).join('');document.querySelectorAll('#quickBar .qa').forEach(q=>q.onclick=()=>openPay(q.dataset.a))}
 
 function catOf(x){if(x.inc||x.trans)return null;if(x.ic)return x.ic;const l=(x.label||'')+' '+(x.desc||'');if(/food|غذا|ناهار|شام|قهوه|کافه|restaurant|caf/.test(l))return '🍔';if(/bill|قبض|برق|اب|گاز|شارژ|اینترنت|internet|phone|تلفن/.test(l))return '🧾';if(/fuel|سوخت|بنزین|gas|transport|تاکسی|taxi|حمل|metro|رفتوآمد/.test(l))return '⛽';if(/shop|خرید|سوپرمارکت|supermarket|market|فروشگاه/.test(l))return '🛒';if(/health|دارو|بیمارستان|doctor|دکتر|درمان/.test(l))return '💊';if(/rent|اجاره|خانه|خانه/.test(l))return '🏠';return '💸';}
@@ -738,31 +760,54 @@ function renderHome(){
   const m=S.money;const month=new Date().getMonth();
   const expMonth=S.txn.filter(x=>x.exp&&x.mt===month).reduce((a,x)=>a+x.amt,0);
   const incMonth=S.txn.filter(x=>x.inc&&x.mt===month).reduce((a,x)=>a+x.amt,0);
+  const netMonth=incMonth-expMonth;
   const tasks=S.tasks.filter(x=>!x.done).slice(0,3);
+  const reminders=S.reminders.slice(0,2);
   const steps=S.habits.steps||0;
+  const hp=Math.min(100,Math.round(steps/(S.habits.goal||6000)*100));
+  const hpScore=Math.round((hp+Math.min(100,Math.round((S.habits.sleep||0)/8*100))+Math.min(100,Math.round((S.habits.water||0)/2000*100)))/3);
   const snap=goldCard||fxCards||cryptoCard||`<div class="tk"><div class="s"><span>🥇 ${t('gold')}</span></div><b>…</b><span class="chg green">${t('goldLive')}</span></div>`;
-  const taskHTML=tasks.length?tasks.map(x=>`<div class="task" onclick="show('schedule')"><div class="ic" style="width:38px;height:38px">${x.done?'✅':'📌'}</div><div class="t"><b>${esc(x.desc)}</b><small>${esc(x.time||'')}</small></div><div class="val" style="color:var(--primary);font-size:12px">${t('today')} ›</div></div>`).join(''):`<div class="empty" onclick="show('schedule')">${t('noTasks')}</div>`;
+  const lvl=level();const lvlIcon=lvl==='Gold'?'🥇':(lvl==='Silver'?'🥈':'🥉');
+  const mods=[
+    ['money','💰',t('money')],['markets','📈',t('markets')],['payments','🧾',t('payments')],
+    ['health','❤️',t('health')],['schedule','📅',t('schedule')],['rewards','🏆',t('rewards')]
+  ];
+  const taskHTML=tasks.length?tasks.map(x=>`<div class="task" onclick="show('schedule')"><div class="ic" style="width:38px;height:38px">📌</div><div class="t"><b>${esc(x.desc)}</b><small>${esc(x.time||'')}</small></div><div class="val" style="color:var(--primary);font-size:12px">${t('today')} ›</div></div>`).join(''):`<div class="empty" onclick="show('schedule')">${t('noTasks')}</div>`;
+  const remHTML=reminders.length?reminders.map(x=>`<div class="task" onclick="show('schedule')"><div class="ic" style="width:38px;height:38px">⏰</div><div class="t"><b>${esc(x.desc)}</b><small>${esc(x.time||'')}</small></div><div class="val" style="color:var(--gold);font-size:12px">${t('reminders')} ›</div></div>`).join(''):'';
+  const txnHTML=S.txn.slice().reverse().slice(0,4).map(x=>{const c=x.exp?'var(--red)':x.trans?'var(--blue)':'var(--accent)';const s=x.exp?'−':(x.trans?'⇄':'+');return `<div class="row fade-in"><div class="ic">${x.ic||'💸'}</div><div class="t"><b>${esc(x.label||'')}</b></div><div class="val" style="color:${c}">${s}${fmt(x.amt)}</div></div>`}).join('');
   VIEWS.innerHTML=`
-  <div class="hero-card fade-in"><div class="hc-row"><div><div class="hc-lab">💵 ${t('balance')}</div><b class="hc-big">${fmt(m.balance)}</b><span class="hc-sub">IRR · ${t('toman')}</span></div><span class="hc-chip">⭐ ${fmt(S.pts)}</span></div><div class="hc-btns"><button class="hc-btn" id="hAdd">+ ${t('add')}</button><button class="hc-btn" id="hMarkets">📈 ${t('markets')}</button></div></div>
+  <div class="hero-card fade-in" style="--hb:linear-gradient(135deg,#7c5cff,#3aa0ff)">
+    <div class="hc-row"><div><div class="hc-lab" style="color:#fff;opacity:.9">${t('dashTitle')} ✦</div><b class="hc-big" style="color:#fff">${fmt(m.balance)}</b><span class="hc-sub" style="color:#fff;opacity:.85">IRR · ${t('toman')}</span></div><span class="hc-chip" style="color:#fff;background:rgba(255,255,255,.18)">⭐ ${fmt(S.pts)}</span></div>
+    <div class="hc-btns"><button class="hc-btn" id="hAdd" style="background:#fff;color:var(--primary)">+ ${t('add')}</button><button class="hc-btn" id="hMarkets" style="background:rgba(255,255,255,.15);color:#fff">📈 ${t('markets')}</button></div>
+  </div>
   <div class="kpis fade-in">
     <div class="kpi" style="--kpc:rgba(0,212,160,.25)"><small>⬆ ${t('inc')}</small><b style="color:var(--accent)">${fmt(incMonth)}</b></div>
     <div class="kpi" style="--kpc:rgba(255,92,122,.25)"><small>⬇ ${t('exp')}</small><b style="color:var(--red)">${fmt(expMonth)}</b></div>
-    <div class="kpi" style="--kpc:rgba(255,201,77,.25)"><small>🏃 ${t('steps')}</small><b style="color:var(--gold)">${fmt(steps)}</b></div>
-    <div class="kpi" style="--kpc:rgba(108,92,255,.25)"><small>🏅 ${t('rewards')}</small><b style="color:var(--primary2)">${fmt(S.pts)}</b></div>
+    <div class="kpi" style="--kpc:rgba(108,92,255,.25)"><small>💠 ${t('net')}</small><b style="color:${netMonth>=0?'var(--primary2)':'var(--red)'}">${fmt(netMonth)}</b></div>
+    <div class="kpi" style="--kpc:rgba(255,201,77,.25)"><small>🏅 ${t('rewards')}</small><b style="color:var(--gold)">${fmt(S.pts)}</b></div>
+  </div>
+  <div class="stitle"><span>🧩 ${t('overview')}</span></div>
+  <div class="modgrid fade-in">
+    ${mods.map(x=>`<div class="mod" data-m="${x[0]}"><div class="e">${x[1]}</div><b>${x[2]}</b></div>`).join('')}
   </div>
   <div class="stitle"><span>📈 ${t('markets')}</span><span class="more" onclick="show('markets')">${t('today')} ›</span></div>
   <div class="ticker fade-in" id="homeTicker">${snap}</div>
   ${goldDeep||''}
-  <div class="stitle"><span>📌 ${t('today')}</span><span class="more" onclick="show('schedule')">${t('schedule')} ›</span></div>
-  ${taskHTML}
   <div class="stitle"><span>❤️ ${t('health')}</span><span class="more" onclick="show('health')">${t('health')} ›</span></div>
   <div class="health-cards">
-    <div class="h-card" onclick="show('health')"><div class="top"><div><small style="color:var(--muted)">🏃 ${t('steps')}</small><b>${fmt(steps)}</b></div><div class="circle" style="--p:${Math.min(100,Math.round(steps/(S.habits.goal||6000)*100))};--c:var(--accent)"><span>${Math.min(100,Math.round(steps/(S.habits.goal||6000)*100))}%</span></div></div></div>
-    <div class="h-card" onclick="openAI()"><div class="top"><div><small style="color:var(--muted)">🤖 ${t('aiTitle')}</small><b style="font-size:20px">💬</b></div></div><small style="color:var(--muted)">${t('ask')}</small></div>
-  </div>`;
+    <div class="h-card" onclick="show('health')"><div class="top"><div><small style="color:var(--muted)">🏃 ${t('steps')}</small><b>${fmt(steps)}</b></div><div class="circle" style="--p:${hp};--c:var(--accent)"><span>${hp}%</span></div></div><div class="bar"><i style="width:${hp}%;background:var(--accent)"></i></div><small style="color:var(--muted)">${t('goal')}: ${fmt(S.habits.goal||6000)}</small></div>
+    <div class="h-card" onclick="show('health')"><div class="top"><div><small style="color:var(--muted)">💧 ${t('water')}</small><b>${S.habits.water||0}ml</b></div><div class="circle" style="--p:${Math.min(100,Math.round((S.habits.water||0)/2000*100))};--c:var(--blue)"><span>${Math.min(100,Math.round((S.habits.water||0)/2000*100))}%</span></div></div><div class="bar"><i style="width:${Math.min(100,Math.round((S.habits.water||0)/2000*100))}%;background:var(--blue)"></i></div></div>
+  </div>
+  <div class="stitle"><span>📌 ${t('today')}</span><span class="more" onclick="show('schedule')">${t('schedule')} ›</span></div>
+  ${taskHTML}${remHTML}
+  <div class="stitle"><span>${t('transactions')}</span><span class="more" onclick="show('money')">${t('money')} ›</span></div>
+  ${txnHTML||`<div class="empty">${t('noMoney')}</div>`}`;
+  document.querySelectorAll('#views .mod').forEach(mod=>mod.onclick=()=>{const v=mod.dataset.m;if(v==='schedule'||v==='rewards'){showMoreTo(v)}else{cur=v;render()}});
   const ha=document.getElementById('hAdd');if(ha)ha.onclick=()=>openTrans();
   const hm=document.getElementById('hMarkets');if(hm)hm.onclick=()=>{cur='markets';render()};
 }
+function showMoreTo(v){const items=[['rewards','🏆',t('rewards')],['schedule','📅',t('schedule')],['news','📰',t('news')],['list','🛒',t('list')],['reports','📊',t('reports')],['ai','🤖',t('ai')],['settings','⚙️',t('settings')]];openSheet(`<h3>☰ ${t('more')}</h3><div class="mgrid">${items.map(i=>`<div class="mcell ${i[0]===v?'active':''}" data-m="${i[0]}"><div class="e">${i[1]}</div><small>${i[2]}</small></div>`).join('')}</div>`);document.querySelectorAll('#sheet .mcell').forEach(c=>c.onclick=()=>{const m=c.dataset.m;closeModal();navTo(m)})}
+function navTo(m){if(m==='ai')openAI();else if(m==='settings')openSettings();else if(m==='news'||m==='rewards'||m==='list'||m==='reports'||m==='schedule'){cur=m;render()}else{cur=m;render()}}
 function renderMoney(){
   const m=S.money;const month=new Date().getMonth();
   const expMonth=S.txn.filter(x=>x.exp&&x.mt===month).reduce((a,x)=>a+x.amt,0);
@@ -857,7 +902,44 @@ function renderRewards(){
 }
 function shareCard(){const txt=`I have ${S.pts} points on JIB! 🏆 Level ${level()} — one super-app for life. Try it: jib.app`;if(navigator.share){navigator.share({title:'JIB',text:txt}).catch(()=>{})}else if(navigator.clipboard){navigator.clipboard.writeText(txt).then(()=>toast(t('share')))}else{toast(t('share'))}}
 function renderList(){let items=S.list.map((x,i)=>`<div class="task ${x.done?'done':''}"><input type="checkbox" ${x.done?'checked':''} data-l="${i}"><div class="t"><b>${esc(x.desc)}</b></div><button class="del" data-l="${i}">✕</button></div>`).join('')||`<div class="empty">${t('noList')}</div>`;VIEWS.innerHTML=`<div class="stitle"><span>🛒 ${t('list')}</span><span class="more" id="addItemBtn">+ ${t('add')}</span></div>${items}`;$('#addItemBtn').onclick=()=>openItem();document.querySelectorAll('.task input[data-l]').forEach(c=>c.onchange=function(){const i=+this.dataset.l;S.list[i].done=this.checked;if(this.checked)addPts(2);save();render()});document.querySelectorAll('.task .del[data-l]').forEach(b=>b.onclick=()=>{S.list.splice(+b.dataset.l,1);save();render()})}
-function render(){renderNav();renderQuick();$('#points').textContent=fmt(S.pts);$('#lblPoints').textContent=t('points');$('#lblQuick').textContent=t('quick');$('#greetName').textContent=(cur==='schedule'?'':'')+greet()+' 👋';$('#lblLv').textContent='🏅 '+level();$('#lblStreak').textContent=t('streak').replace('{n}',S.streak);$('#lblChallenge').textContent='✨ '+t('challenge');if(cur==='home')renderHome();else if(cur==='money')renderMoney();else if(cur==='payments')renderPayments();else if(cur==='markets')renderMarkets();else if(cur==='schedule')renderSchedule();else if(cur==='health')renderHealth();else if(cur==='news')renderNews();else if(cur==='rewards')renderRewards();else renderList();if(['schedule','news','rewards','list'].indexOf(cur)>=0)VIEWS.insertAdjacentHTML('afterbegin',`<div class="backbar" onclick="showMore()"><span>‹</span><small>${t('backTo')||'All'}</small></div>`);checkReminders()}
+function renderReports(){
+  const month=new Date().getMonth();
+  const expMonth=S.txn.filter(x=>x.exp&&x.mt===month).reduce((a,x)=>a+x.amt,0);
+  const incMonth=S.txn.filter(x=>x.inc&&x.mt===month).reduce((a,x)=>a+x.amt,0);
+  const net=incMonth-expMonth;
+  const now=new Date(),dom=now.getDate();
+  const dailyAvg=Math.round(expMonth/Math.max(1,dom));
+  const cats={};S.txn.forEach(x=>{const c=catOf(x);if(!c)return;if(!cats[c])cats[c]=0;cats[c]+=x.amt});
+  const tops=Object.keys(cats).sort((a,b)=>cats[b]-cats[a]).slice(0,6);
+  const tot=cats[tops[0]]||1;
+  const bars=tops.map(c=>`<div class="catrow"><span>${c}</span><div class="catbar"><i style="width:${Math.max(6,Math.round(cats[c]/ (expMonth||1)*100))}%"></i></div><b>${fmt(cats[c])}</b></div>`).join('');
+  const champ=tops.length?tops.reduce((a,b)=>cats[b]>cats[a]?b:a):null;
+  let chart='';if(S.txn.length){const days=[];for(let d=6;d>=0;d--){const dt=new Date();dt.setDate(dt.getDate()-d);days.push(S.txn.filter(x=>x.exp&&new Date(x.ts).toDateString()===dt.toDateString()).reduce((a,x)=>a+x.amt,0))}chart=`<div class="budget-box fade-in"><b>${t('chart')} (7 ${t('lastDays')})</b><div class="chart-wrap">${svgChart(days,300,150,'#7c5cff')}</div></div>`}
+  const hp=Math.min(100,Math.round((S.habits.steps||0)/(S.habits.goal||6000)*100));
+  const hpScore=Math.round((hp+Math.min(100,Math.round((S.habits.sleep||0)/8*100))+Math.min(100,Math.round((S.habits.water||0)/2000*100)))/3);
+  const tdone=S.tasks.filter(x=>x.done).length;
+  const totalT=S.tasks.length;
+  VIEWS.innerHTML=`
+  <div class="hero-card fade-in" style="--hb:linear-gradient(135deg,#00c9a0,#7c5cff)">
+    <div class="hc-row"><div><div class="hc-lab" style="color:#fff;opacity:.92">📊 ${t('reports')}</div><b class="hc-big" style="color:#fff">${fmt(net)}</b><span class="hc-sub" style="color:#fff;opacity:.85">${t('netMonth')} · ${t('reports')}</span></div><span class="hc-chip" style="color:#fff">${champ?champ+' '+t('topCat'):'—'}</span></div>
+  </div>
+  <div class="kpis fade-in">
+    <div class="kpi" style="--kpc:rgba(0,212,160,.25)"><small>📅 ${t('monthStats')}</small><b>${fmt(incMonth)} / ${fmt(expMonth)}</b></div>
+    <div class="kpi" style="--kpc:rgba(255,92,122,.25)"><small>${t('dailyAvg')}</small><b style="color:var(--red)">${fmt(dailyAvg)}</b></div>
+    <div class="kpi" style="--kpc:rgba(108,92,255,.25)"><small>${t('netMonth')}</small><b style="color:${net>=0?'var(--primary2)':'var(--red)'}">${fmt(net)}</b></div>
+    <div class="kpi" style="--kpc:rgba(255,201,77,.25)"><small>❤️ ${t('healthScore')||'Health'}</small><b style="color:var(--gold)">${hpScore}%</b></div>
+  </div>
+  ${chart}
+  <div class="stitle"><span>📊 ${t('topCat')}</span></div>
+  ${bars||`<div class="empty">${t('noMoney')}</div>`}
+  <div class="stitle"><span>✅ ${t('today')}</span></div>
+  <div class="kpis fade-in">
+    <div class="kpi" style="--kpc:rgba(0,212,160,.25)"><small>${t('doneCarry')}</small><b style="color:var(--accent)">${tdone}</b></div>
+    <div class="kpi" style="--kpc:rgba(108,92,255,.25)"><small>📌 ${t('today')}</small><b style="color:var(--primary2)">${totalT}</b></div>
+    <div class="kpi" style="--kpc:rgba(255,92,122,.25)"><small>🏃 ${t('steps')}</small><b style="color:var(--accent)">${fmt(S.habits.steps||0)}</b></div>
+  </div>`;
+}
+function render(){renderNav();renderQuick();$('#points').textContent=fmt(S.pts);$('#lblPoints').textContent=t('points');$('#lblQuick').textContent=t('quick');$('#greetName').textContent=(cur==='schedule'?'':'')+greet()+' 👋';$('#lblLv').textContent='🏅 '+level();$('#lblStreak').textContent=t('streak').replace('{n}',S.streak);$('#lblChallenge').textContent='✨ '+t('challenge');if(cur==='home')renderHome();else if(cur==='money')renderMoney();else if(cur==='payments')renderPayments();else if(cur==='markets')renderMarkets();else if(cur==='schedule')renderSchedule();else if(cur==='health')renderHealth();else if(cur==='news')renderNews();else if(cur==='rewards')renderRewards();else if(cur==='reports')renderReports();else renderList();if(['schedule','news','rewards','list','reports'].indexOf(cur)>=0)VIEWS.insertAdjacentHTML('afterbegin',`<div class="backbar" onclick="showMore()"><span>‹</span><small>${t('backTo')||'All'}</small></div>`);checkReminders()}
 function greet(){const h=new Date().getHours();return h<12?t('greetM'):(h<18?t('greetA'):t('greetE'))}
 
 /* ============ sheets ============ */
