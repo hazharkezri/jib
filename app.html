@@ -262,6 +262,25 @@ body::after{width:460px;height:460px;background:radial-gradient(circle,#00d4a0,t
 .catrow b{font-size:13px;white-space:nowrap;color:var(--text)}
 .catbar{flex:1;height:8px;background:rgba(127,127,157,.14);border-radius:6px;overflow:hidden}
 .catbar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#7c5cff,#00c9a0)}
+.drawer-overlay{position:fixed;inset:0;background:rgba(5,8,18,.55);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:.3s;z-index:70}
+.drawer-overlay.show{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;bottom:0;right:0;width:min(320px,86vw);background:linear-gradient(180deg,#0b1120,#0e1526);border-left:1px solid var(--line);z-index:71;transform:translateX(105%);transition:transform .32s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:-24px 0 60px rgba(0,0,0,.5)}
+.drawer.open{transform:translateX(0)}
+[dir=rtl] .drawer{right:auto;left:0;border-left:none;border-right:1px solid var(--line);transform:translateX(-105%)}
+[dir=rtl] .drawer.open{transform:translateX(0)}
+.drawer-head{display:flex;align-items:center;gap:12px;padding:20px 18px;border-bottom:1px solid var(--line)}
+.drawer-av{position:relative}.drawer-av .pp{width:46px;height:46px;font-size:22px}
+.drawer-user{flex:1;min-width:0}
+.drawer-user b{display:block;font-size:16px}.drawer-user small{color:var(--muted);font-size:12px}
+.drawer-close{background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;padding:6px}
+.drawer-body{flex:1;overflow-y:auto;padding:10px 12px 30px}
+.dgroup{margin:14px 0 6px;padding:0 10px;font-size:11px;font-weight:800;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+.ditem{display:flex;align-items:center;gap:13px;padding:13px 12px;border-radius:14px;cursor:pointer;color:var(--text);transition:.18s}
+.ditem:hover,.ditem.active{background:linear-gradient(135deg,rgba(108,92,255,.16),rgba(0,212,160,.1));color:#fff}
+.ditem .e{font-size:20px;width:30px;text-align:center}
+.ditem b{flex:1;font-size:14.5px;font-weight:650}
+.ditem small{color:var(--muted2);font-size:12px}
+.ditem.active{box-shadow:inset 0 0 0 1px rgba(108,92,255,.35)}
 </style>
 </head>
 <body>
@@ -303,6 +322,15 @@ body::after{width:460px;height:460px;background:radial-gradient(circle,#00d4a0,t
 <div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
 <div class="modal" id="langModal" ><div class="sheet"><div class="grab"></div><h3 id="lblLang">Language</h3><div class="lang-grid" id="langGrid"></div></div></div>
 <div class="toast" id="toast"></div>
+<div class="drawer-overlay" id="drawerOv"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-head">
+    <div class="drawer-av"><span class="pp">${typeof t==='function'?'ج':'ج'}</span><span class="pts-badge">⭐ <b id="dvPts">0</b></span></div>
+    <div class="drawer-user"><b id="dvGreet">JIB</b><small id="dvLvl">·</small></div>
+    <button class="drawer-close" id="drawerClose" aria-label="Close">✕</button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+</aside>
 
 <script>
 /* ============ i18n ============ */
@@ -806,8 +834,17 @@ function renderHome(){
   const ha=document.getElementById('hAdd');if(ha)ha.onclick=()=>openTrans();
   const hm=document.getElementById('hMarkets');if(hm)hm.onclick=()=>{cur='markets';render()};
 }
-function showMoreTo(v){const items=[['rewards','🏆',t('rewards')],['schedule','📅',t('schedule')],['news','📰',t('news')],['list','🛒',t('list')],['reports','📊',t('reports')],['ai','🤖',t('ai')],['settings','⚙️',t('settings')]];openSheet(`<h3>☰ ${t('more')}</h3><div class="mgrid">${items.map(i=>`<div class="mcell ${i[0]===v?'active':''}" data-m="${i[0]}"><div class="e">${i[1]}</div><small>${i[2]}</small></div>`).join('')}</div>`);document.querySelectorAll('#sheet .mcell').forEach(c=>c.onclick=()=>{const m=c.dataset.m;closeModal();navTo(m)})}
-function navTo(m){if(m==='ai')openAI();else if(m==='settings')openSettings();else if(m==='news'||m==='rewards'||m==='list'||m==='reports'||m==='schedule'){cur=m;render()}else{cur=m;render()}}
+function showMore(){openDrawer()}
+function showMoreTo(v){openDrawer()}
+function navTo(m){if(m==='ai')openAI();else if(m==='settings')openSettings();else{cur=m;render()}closeDrawer()}
+function renderDrawer(){document.getElementById('dvPts').textContent=fmt(S.pts);document.getElementById('dvGreet').textContent=greet();document.getElementById('dvLvl').textContent=getLvl();
+  const groups=[['✦',t('overview'),[['home','🏠',t('home')],['money','💰',t('money')],['reports','📊',t('reports')]]],['📈',t('markets'),[['markets','📈',t('markets')]]],['🧾',t('payments'),[['payments','🧾',t('payments')]]],['❤️','Health',[['health','❤️',t('health')]]],['🗓️',t('more'),[['schedule','📅',t('schedule')],['rewards','🏆',t('rewards')],['list','🛒',t('list')],['news','📰',t('news')]]],['⚙️','System',[['settings','⚙️',t('settings')],['ai','🤖',t('ai')]]]];
+  document.getElementById('drawerBody').innerHTML=groups.map(g=>`<div class="dgroup">${g[0]} ${g[1]}</div>${g[2].map(i=>`<div class="ditem ${cur===i[0]?'active':''}" data-m="${i[0]}"><span class="e">${i[1]}</span><b>${i[2]}</b></div>`).join('')}`).join('');
+  document.querySelectorAll('#drawer .ditem').forEach(d=>d.onclick=()=>navTo(d.dataset.m));
+}
+function openDrawer(){renderDrawer();document.getElementById('drawer').classList.add('open');document.getElementById('drawerOv').classList.add('show')}
+function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('drawerOv').classList.remove('show')}
+function getLvl(){const p=S.pts;return (p>=500?'🥇 Gold':p>=200?'🥈 Silver':'🥉 Bronze')+' · '+p+' '+(t('points')||'pts')}
 function renderMoney(){
   const m=S.money;const month=new Date().getMonth();
   const expMonth=S.txn.filter(x=>x.exp&&x.mt===month).reduce((a,x)=>a+x.amt,0);
@@ -988,6 +1025,9 @@ $('#langBtn').onclick=()=>{buildLangGrid();document.getElementById('langModal').
 $('#langModal').addEventListener('click',e=>{if(e.target.id==='langModal')document.getElementById('langModal').classList.remove('show')});
 $('#settingsBtn').onclick=openSettings;
 $('#bellBtn').onclick=askNotif;
+window.drawerInit=(document.getElementById('drawerClose').onclick=closeDrawer);
+document.getElementById('drawerOv').onclick=closeDrawer;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
 $('#aiFab').onclick=openAI;
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 function loadApp(){daily();setGreet();render();fetchFX();fetchGold();fetchCrypto();fetchToman();setInterval(()=>{fetchFX();fetchGold();fetchCrypto();fetchToman()},300000);setInterval(checkReminders,30000)}

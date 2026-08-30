@@ -52,6 +52,12 @@ main,footer{position:relative;z-index:1}
 
 nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s;background:rgba(5,7,13,.6);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid transparent}
 nav.scrolled{border-bottom:1px solid var(--line);background:rgba(5,7,13,.88)}
+nav{-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);transition:box-shadow .3s ease}
+nav.scrolled{box-shadow:0 12px 40px rgba(0,0,0,.45)}
+nav.scrolled .nav-in{padding-top:10px;padding-bottom:10px}
+nav.scrolled .logo-badge{width:32px;height:32px;font-size:16px;animation-play-state:running}
+nav.scrolled .logo{font-size:19px}
+.nav-in{transition:padding .3s ease}
 .nav-in{max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .logo{display:flex;align-items:center;gap:10px;font-family:'Sora',sans-serif;font-weight:800;font-size:22px;letter-spacing:.5px}
 .logo-badge{width:36px;height:36px;border-radius:10px;background:var(--grad);display:grid;place-items:center;font-size:18px;box-shadow:0 4px 14px rgba(108,92,255,.45);animation:floatY 4s ease-in-out infinite}
