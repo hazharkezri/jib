@@ -433,6 +433,23 @@ main,footer{position:relative;z-index:1}
 .lead-ok{display:none;margin-top:12px;color:var(--accent);font-weight:700}
 .lead-ok.show{display:inline-block;animation:riseIn .4s ease}
 @media(max-width:520px){.lead-in{flex-direction:column}.lead-in .btn{width:100%}}
+
+/* testimonials */
+.tst-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
+.tst{padding:26px;border-radius:22px;background:linear-gradient(165deg,var(--glass),var(--glass-2));-webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);border:1px solid var(--g-border);box-shadow:0 14px 46px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.1);display:flex;flex-direction:column;gap:14px;transition:.25s}
+.tst:hover{transform:translateY(-5px);border-color:rgba(124,92,255,.5)}
+.tst-stars{color:var(--gold);letter-spacing:2px;font-size:15px}
+.tst p{color:var(--muted);font-size:15px;line-height:1.65;margin:0;flex:1}
+.tst-user{display:flex;align-items:center;gap:12px}
+.tst-av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;box-shadow:0 6px 16px rgba(0,0,0,.3)}
+.tst-user b{display:block;color:#fff;font-size:14.5px}
+.tst-user small{color:var(--muted2);font-size:12px}
+@media(max-width:860px){.tst-grid{grid-template-columns:1fr}}
+
+/* trust badges */
+.trust-badges{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:30px;position:relative}
+.tb{display:flex;align-items:center;gap:10px;padding:11px 18px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid var(--g-border);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:var(--muted);font-size:14px;font-weight:650}
+.tb .tbe{font-size:18px}
 @media(max-width:1099px){
   .lsb{position:fixed;top:0;left:0;bottom:0;width:min(300px,84vw);z-index:90;
     background:linear-gradient(180deg,rgba(14,12,34,.97),rgba(10,9,26,.98));
@@ -703,6 +720,16 @@ main,footer{position:relative;z-index:1}
   </div>
 </section>
 
+<section class="sec-pad" id="testi">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-tag">Testimonials</span>
+      <h2 id="testiH1">Loved by 100k+ users</h2>
+    </div>
+    <div class="tst-grid" id="tstGrid"></div>
+  </div>
+</section>
+
 <section class="sec-pad" style="padding-top:0">
   <div class="container cta-band">
     <h2 id="ctaH1">Your life has a <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">home</span> now.</h2>
@@ -718,6 +745,12 @@ main,footer{position:relative;z-index:1}
       <a class="store"><span class="e">🍎</span><span><small data-l8n="dl">Download on the</small><b data-l8n="as">App Store</b></span></a>
       <a class="store"><span class="e">▶</span><span><small data-l8n="gi">Get it on</small><b data-l8n="gp">Google Play</b></span></a>
       <a href="app.html" class="store"><span class="e">🌐</span><span><small data-l8n="oi">Open in</small><b data-l8n="wa">Web App</b></span></a>
+    </div>
+    <div class="trust-badges">
+      <span class="tb"><span class="tbe">🔒</span> <span class="tbt">End-to-end encryption</span></span>
+      <span class="tb"><span class="tbe">🛡️</span> <span class="tbt">100% private</span></span>
+      <span class="tb"><span class="tbe">🌍</span> <span class="tbt">10 languages</span></span>
+      <span class="tb"><span class="tbe">🎁</span> <span class="tbt">Free forever</span></span>
     </div>
   </div>
 </section>
@@ -762,7 +795,8 @@ document.querySelectorAll('.faq-q').forEach(q=>{
 const LANGS={'en':['🇬🇧','English'],'fa':['🇮🇷','فارسی'],'ar':['🇸🇦','العربية'],'ckb':['🇮🇶','کوردی (سۆرانی)'],'kmr':['🇹🇷','Kurmancî'],'ru':['🇷🇺','Русский'],'es':['🇪🇸','Español'],'fr':['🇫🇷','Français'],'de':['🇩🇪','Deutsch'],'zh':['🇨🇳','中文']};
 const RTL=['fa','ar','ckb'];
 const CL={
-en:{navF:'Features',navS:'Super-App',navM:'Markets',navP:'Pricing',navQ:'FAQ',navOpen:'Open App',ln:'Language',
+en:{
+  testiH1:'Loved by 100k+ users',t1:'Everything — money, health, calendar — finally in one place. I check it every morning.',n1:'Sara A.',j1:'Trader · Dubai',t2:'The live gold and crypto rates update instantly. JIB replaced three separate apps for me.',n2:'Reza K.',j2:'Founder · Tehran',t3:'Beautiful, fast, and private. The dashboard is exactly what I wanted — clean and professional.',n3:'Mona T.',j3:'Designer · Istanbul',tb1:'End-to-end encryption',tb2:'100% private',tb3:'10 languages',tb4:'Free forever',navF:'Features',navS:'Super-App',navM:'Markets',navP:'Pricing',navQ:'FAQ',navOpen:'Open App',ln:'Language',
 chip1:'✦ One account, everything',chip2:'🌍 190+ countries',chip3:'🗣 10 languages',
 h1:'Your entire life in <span class="g">one pocket</span>',
 sub:'JIB combines money, payments, live markets, schedule, health, news and rewards into a single beautiful daily dashboard. Simple enough for everyone, powerful enough for everything.',
@@ -802,7 +836,8 @@ dl:'Download on the',as:'App Store',gi:'Get it on',gp:'Google Play',oi:'Open in'
 footDesc:'One super-app for your entire life. Built by people who believe daily life should be simple.',
 fProduct:'Product',fCompany:'Company',fLegal:'Legal',fP1:'Features',fP2:'Payments',fP3:'Markets',fP4:'Pricing',fC1:'About',fC2:'Careers',fC3:'Press',fC4:'Contact',fL1:'Privacy',fL2:'Terms',fL3:'Security',fL4:'Cookies',
 cr:'© 2026 JIB. All rights reserved.'},
-fa:{navF:'قابلیت‌ها',navS:'سوپر اپ',navM:'بازارها',navP:'قیمت‌ها',navQ:'سوالات',navOpen:'باز کردن اپ',ln:'زبان',
+fa:{
+  testiH1:'مورد علاقه ۱۰۰ هزار+ کاربر',t1:'همهچیز — پول، سلامت، برنامه — بالاخره در یک جا. هر روز صبح چکش میکنم.',n1:'سارا ا.',j1:'معاملهگر · دبی',t2:'قیمت زنده طلا و کریپتو فوری بهروز میشود. جیب جای سه اپ را برایم گرفت.',n2:'رضا ک.',j2:'بنیانگذار · تهران',t3:'زیبا، سریع و خصوصی. داشبورد دقیقاً همان چیزی است که میخواستم — تمیز و حرفهای.',n3:'مونا ت.',j3:'طراح · استانبول',tb1:'رمزنگاری سرتاسری',tb2:'۱۰۰٪ خصوصی',tb3:'۱۰ زبان',tb4:'برای همیشه رایگان',navF:'قابلیت‌ها',navS:'سوپر اپ',navM:'بازارها',navP:'قیمت‌ها',navQ:'سوالات',navOpen:'باز کردن اپ',ln:'زبان',
 chip1:'✦ یک حساب، همه‌چیز',chip2:'🌍 بیش از ۱۹۰ کشور',chip3:'🗣 ۱۰ زبان',
 h1:'کل زندگیتان در <span class="g">یک جیب</span>',
 sub:'جیب پول، پرداخت‌ها، بازارهای زنده، برنامه، سلامت، اخبار و پاداش‌ها را در یک داشبورد روزانه و زیبا ترکیب می‌کند. به‌اندازه‌ی کافی ساده برای همه، به‌اندازه‌ی کافی قدرتمند برای هرچیز.',
@@ -842,7 +877,8 @@ dl:'دانلود از',as:'اپ استور',gi:'دریافت از',gp:'گوگل 
 footDesc:'یک سوپر اپ برای کل زندگیتان. ساخته‌شده توسط کسانی که باور دارند زندگی روزمره باید ساده باشد.',
 fProduct:'محصول',fCompany:'شرکت',fLegal:'حقوقی',fP1:'قابلیت‌ها',fP2:'پرداخت',fP3:'بازارها',fP4:'قیمت‌ها',fC1:'درباره',fC2:'فرصت‌های شغلی',fC3:'رسانه',fC4:'تماس',fL1:'حریم خصوصی',fL2:'شرایط',fL3:'امنیت',fL4:'کوکی‌ها',
   cr:'تمام حقوق برای سایت جیب محفوظ می باشد'},
-ar:{navF:'المزايا',navS:'التطبيق',navM:'الأسواق',navP:'الأسعار',navQ:'الأسئلة',navOpen:'فتح التطبيق',ln:'اللغة',
+ar:{
+  testiH1:'أحبه أكثر من 100 ألف مستخدم',t1:'كل شيء - المال، الصحة، التقويم - أخيرًا في مكان واحد. أتحقق منه كل صباح.',n1:'سارة أ.',j1:'متعامل · دبي',t2:'أسعار الذهب والعملات الرقمية تتحدث فورًا. جيب حلّ محل ثلاثة تطبيقات.',n2:'رضا ك.',j2:'مؤسس · طهران',t3:'جميل وسريع وخاص. لوحة التحكم تمامًا كما أردت - نظيفة واحترافية.',n3:'منى ت.',j3:'مصممة · إسطنبول',tb1:'تشفير كامل',tb2:'خصوصية 100%',tb3:'10 لغات',tb4:'مجاني للأبد',navF:'المزايا',navS:'التطبيق',navM:'الأسواق',navP:'الأسعار',navQ:'الأسئلة',navOpen:'فتح التطبيق',ln:'اللغة',
 chip1:'✦ حساب واحد، كل شيء',chip2:'🌍 أكثر من 190 دولة',chip3:'🗣 10 لغات',
 h1:'حياتك كلها في <span class="g">جيب واحد</span>',
 sub:'يجمع جيب المال، والمدفوعات، والأسواق الحية، والجدول، والصحة، والأخبار والمكافآت في لوحة يومية واحدة جميلة. بسيط بما يكفي للجميع، وقوي بما يكفي لكل شيء.',
@@ -882,7 +918,8 @@ dl:'حمل من',as:'آب ستور',gi:'احصل عليه من',gp:'غوغل ب�
 footDesc:'تطبيق واحد لحياتك كلها. صُنع بواسطة أشخاص يؤمنون أن الحياة اليومية يجب أن تكون بسيطة.',
 fProduct:'المنتج',fCompany:'الشركة',fLegal:'قانوني',fP1:'المزايا',fP2:'المدفوعات',fP3:'الأسواق',fP4:'الأسعار',fC1:'عنّا',fC2:'الوظائف',fC3:'الصحافة',fC4:'اتصل',fL1:'الخصوصية',fL2:'الشروط',fL3:'الأمان',fL4:'الكوكيز',
   cr:'جميع الحقوق محفوظة لموقع جيب'},
-ckb:{navF:'قابلیتەکان',navS:'سوپر ئەپ',navM:'بازارەکان',navP:'نرخەکان',navQ:'پرسیارەکان',navOpen:'کردنەوەی ئەپ',ln:'زمان',
+ckb:{
+  testiH1:'خۆشەویستی ۱۰۰ هەزار+ بەکارهێنەر',t1:'هەموو شتێک — پارە، تەندروستی، ڕۆژژمێر — لە یەک شوێندا. هەموو بەیانییەک سەیری دەکەم.',n1:'سارا ئ.',j1:'بازرگان · دوبەی',t2:'نرخی زیندووی زێڕ و کریپتۆ دەستبەجێ دەبێتەوە. جیب شوێنی سێ ئەپم گرتەوە.',n2:'ڕەزا ک.',j2:'دامەزرێنەر · تاران',t3:'جوان، خێرا و تایبەت. داشبۆردەکە بەتەواوی ئەوەی ویستم بوو — خاوێن و پرۆفیشناڵ.',n3:'مۆنا ت.',j3:'دیزاینەر · ئیستەنبوڵ',tb1:'نهێنیکردنی کۆیی',tb2:'تایبەتی ۱۰۰٪',tb3:'۱۰ زمان',tb4:'بەخۆڕایی بۆ هەمیشە',navF:'قابلیتەکان',navS:'سوپر ئەپ',navM:'بازارەکان',navP:'نرخەکان',navQ:'پرسیارەکان',navOpen:'کردنەوەی ئەپ',ln:'زمان',
 chip1:'✦ یەک هەژمار، هەموو شتێک',chip2:'🌍 زیاتر لە ١٩٠ وڵات',chip3:'🗣 ١٠ زمان',
 h1:'هەموو ژیانت لە <span class="g">یەک گیرفان</span>',
 sub:'جیب پارە، پارەدانەکان، بازارە زیندووەکان، بەرنامە، تەندروستی، هەواڵ و خەڵاتەکان لە یەک داشبۆردی ڕۆژانەی جواندا کۆدەکاتەوە. بەسە سادە بۆ هەمووان، بەسە بەهێز بۆ هەموو شتێک.',
@@ -922,7 +959,8 @@ dl:'دابەزاندن لە',as:'ئاپ ستۆر',gi:'وەرگرتن لە',gp:'�
 footDesc:'یەک سوپر ئەپ بۆ هەموو ژیانت. دروستکراو لەلایەن ئەو کەسانەی بڕوایان هەیە ژیانی ڕۆژانە دەبێت سادە بێت.',
 fProduct:'بەرهەم',fCompany:'کۆمپانیا',fLegal:'یاسایی',fP1:'قابلیەتەکان',fP2:'پارەدان',fP3:'بازارەکان',fP4:'نرخەکان',fC1:'دەربارە',fC2:'کار',fC3:'ڕاگەیاندن',fC4:'پەیوەندی',fL1:'تایبەتمەندی',fL2:'مەرجەکان',fL3:'ئاسایش',fL4:'کووکیەکان',
 cr:'هەموو مافەکان بۆ سایت جیب پارێزراون'},
-kmr:{navF:'Taybetmendî',navS:'Super-App',navM:'Bazar',navP:'Biha',navQ:'Pirs',navOpen:'Vekirina Appê',ln:'Ziman',
+kmr:{
+  testiH1:'Ji hêla 100k+ bikarhêneran ve tê hezkirin',t1:'Her tişt — pere, tenduristî, salname — di dawiyê de li cihekî. Her sibeh kontrol dikim.',n1:'Sara A.',j1:'Bazirgan · Dubai',t2:'Birayên zêr û krîptoyê yên zindî zû nû dibin. JIB li şûna sê sepanan bû.',n2:'Reza K.',j2:'Bingehdar · Tehran',t3:'Bedew, zû û taybet. Sernav bi tevahî ya ku min dixwest — paqij û profesyonel.',n3:'Mona T.',j3:'Sêwiraner · Stenbol',tb1:'Şîfrekirina dawî',tb2:'100% kesayet',tb3:'10 ziman',tb4:'Belaş hertim',navF:'Taybetmendî',navS:'Super-App',navM:'Bazar',navP:'Biha',navQ:'Pirs',navOpen:'Vekirina Appê',ln:'Ziman',
 chip1:'✦ Yek hesab, her tişt',chip2:'🌍 Zêdetirî 190 welat',chip3:'🗣 10 ziman',
 h1:'Teva jiyana te di <span class="g">yek berîkê</span> de',
 sub:'JIB pere, berdêl, bazarên zindî, bername, tenduristî, nûçe û xelatên di yek dashboarda rojane ya xweşik de kom dike. Ji bo her kesî têra xwe sade, ji bo her tiştî têra xwe bi hêz.',
@@ -962,7 +1000,8 @@ dl:'Daxistin ji',as:'App Store',gi:'Bistîne ji',gp:'Google Play',oi:'Vekirina d
 footDesc:'Yek super-app ji bo teva jiyana te. Ji hêla kesên ku bawer dikin jiyana rojane divê sade be hate çêkirin.',
 fProduct:'Berhem',fCompany:'Şirket',fLegal:'Qanûnî',fP1:'Taybetmendî',fP2:'Berdêl',fP3:'Bazar',fP4:'Biha',fC1:'Derbar',fC2:'Kar',fC3:'Çapemenî',fC4:'Têkilî',fL1:'Nepenî',fL2:'Merc',fL3:'Ewlehî',fL4:'Kûkî',
 cr:'Hemû maf ji bo malpera JIB parastî ne'},
-ru:{navF:'Возможности',navS:'Супер-приложение',navM:'Рынки',navP:'Цены',navQ:'Вопросы',navOpen:'Открыть',ln:'Язык',
+ru:{
+  testiH1:'Нравится 100 000+ пользователям',t1:'Всё — деньги, здоровье, календарь — наконец в одном месте. Проверяю каждое утро.',n1:'Сара А.',j1:'Трейдер · Дубай',t2:'Живые курсы золота и крипты обновляются мгновенно. JIB заменил три приложения.',n2:'Реза К.',j2:'Основатель · Тегеран',t3:'Красиво, быстро и приватно. Дашборд именно то, что я хотел — чистый и профессиональный.',n3:'Мона Т.',j3:'Дизайнер · Стамбул',tb1:'Сквозное шифрование',tb2:'100% приватно',tb3:'10 языков',tb4:'Бесплатно навсегда',navF:'Возможности',navS:'Супер-приложение',navM:'Рынки',navP:'Цены',navQ:'Вопросы',navOpen:'Открыть',ln:'Язык',
 chip1:'✦ Один аккаунт — всё',chip2:'🌍 190+ стран',chip3:'🗣 10 языков',
 h1:'Вся ваша жизнь в <span class="g">одном кармане</span>',
 sub:'JIB объединяет деньги, платежи, живые рынки, расписание, здоровье, новости и награды в единую красивую ежедневную панель. Достаточно просто для всех и достаточно мощно для всего.',
@@ -1002,7 +1041,8 @@ dl:'Скачать из',as:'App Store',gi:'Получить в',gp:'Google Play
 footDesc:'Одно супер-приложение для всей вашей жизни. Создано людьми, верящими, что повседневная жизнь должна быть простой.',
 fProduct:'Продукт',fCompany:'Компания',fLegal:'Правовое',fP1:'Возможности',fP2:'Платежи',fP3:'Рынки',fP4:'Цены',fC1:'О нас',fC2:'Карьера',fC3:'Пресс-центр',fC4:'Контакты',fL1:'Конфиденциальность',fL2:'Условия',fL3:'Безопасность',fL4:'Куки',
 cr:'Все права защищены для сайта JIB'},
-es:{navF:'Funciones',navS:'Super-App',navM:'Mercados',navP:'Precios',navQ:'Preguntas',navOpen:'Abrir',ln:'Idioma',
+es:{
+  testiH1:'Amado por 100.000+ usuarios',t1:'Todo — dinero, salud, calendario — por fin en un solo lugar. Lo reviso cada mañana.',n1:'Sara A.',j1:'Comerciante · Dubái',t2:'Los precios en vivo de oro y cripto se actualizan al instante. JIB reemplazó tres apps.',n2:'Reza K.',j2:'Fundador · Teherán',t3:'Hermoso, rápido y privado. El panel es exactamente lo que quería — limpio y profesional.',n3:'Mona T.',j3:'Diseñadora · Estambul',tb1:'Cifrado de extremo a extremo',tb2:'100% privado',tb3:'10 idiomas',tb4:'Gratis para siempre',navF:'Funciones',navS:'Super-App',navM:'Mercados',navP:'Precios',navQ:'Preguntas',navOpen:'Abrir',ln:'Idioma',
 chip1:'✦ Una cuenta, todo',chip2:'🌍 190+ países',chip3:'🗣 10 idiomas',
 h1:'Toda tu vida en <span class="g">un bolsillo</span>',
 sub:'JIB combina dinero, pagos, mercados en vivo, agenda, salud, noticias y recompensas en un único tablero diario y hermoso. Simple para todos, potente para todo.',
@@ -1042,7 +1082,8 @@ dl:'Descargar en',as:'App Store',gi:'Obtener en',gp:'Google Play',oi:'Abrir en',
 footDesc:'Una super-app para toda tu vida. Hecha por personas que creen que la vida diaria debe ser simple.',
 fProduct:'Producto',fCompany:'Empresa',fLegal:'Legal',fP1:'Funciones',fP2:'Pagos',fP3:'Mercados',fP4:'Precios',fC1:'Acerca',fC2:'Empleo',fC3:'Prensa',fC4:'Contacto',fL1:'Privacidad',fL2:'Términos',fL3:'Seguridad',fL4:'Cookies',
 cr:'Todos los derechos reservados para el sitio JIB'},
-fr:{navF:'Fonctionnalités',navS:'Super-App',navM:'Marchés',navP:'Prix',navQ:'FAQ',navOpen:'Ouvrir',ln:'Langue',
+fr:{
+  testiH1:'Adoré par 100 000+ utilisateurs',t1:'Tout — argent, santé, calendrier — enfin au même endroit. Je le consulte chaque matin.',n1:'Sara A.',j1:'Traders · Dubaï',t2:'Les cours en direct de l\'or et des cryptos se mettent à jour instantanément. JIB a remplacé trois apps.',n2:'Reza K.',j2:'Fondateur · Téhéran',t3:'Magnifique, rapide et privé. Le tableau est exactement ce que je voulais — propre et professionnel.',n3:'Mona T.',j3:'Designer · Istanbul',tb1:'Chiffrement de bout en bout',tb2:'100% privé',tb3:'10 langues',tb4:'Gratuit pour toujours',navF:'Fonctionnalités',navS:'Super-App',navM:'Marchés',navP:'Prix',navQ:'FAQ',navOpen:'Ouvrir',ln:'Langue',
 chip1:'✦ Un compte, tout',chip2:'🌍 190+ pays',chip3:'🗣 10 langues',
 h1:'Toute votre vie dans <span class="g">une poche</span>',
 sub:'JIB combine argent, paiements, marchés en direct, agenda, santé, actualités et récompenses dans un tableau de bord quotidien unique et magnifique. Simple pour tous, puissant pour tout.',
@@ -1082,7 +1123,8 @@ dl:'Télécharger sur',as:'App Store',gi:'Obtenir sur',gp:'Google Play',oi:'Ouvr
 footDesc:'Une super-app pour toute votre vie. Créée par des gens qui croient que la vie quotidienne doit être simple.',
 fProduct:'Produit',fCompany:'Entreprise',fLegal:'Légal',fP1:'Fonctionnalités',fP2:'Paiements',fP3:'Marchés',fP4:'Prix',fC1:'À propos',fC2:'Carrières',fC3:'Presse',fC4:'Contact',fL1:'Confidentialité',fL2:'Conditions',fL3:'Sécurité',fL4:'Cookies',
 cr:'Tous droits réservés pour le site JIB'},
-de:{navF:'Funktionen',navS:'Super-App',navM:'Märkte',navP:'Preise',navQ:'FAQ',navOpen:'Öffnen',ln:'Sprache',
+de:{
+  testiH1:'Von 100.000+ Nutzern geliebt',t1:'Alles — Geld, Gesundheit, Kalender — endlich an einem Ort. Ich prüfe es jeden Morgen.',n1:'Sara A.',j1:'Trader · Dubai',t2:'Live-Kurse für Gold und Krypto aktualisieren sich sofort. JIB ersetzte drei Apps.',n2:'Reza K.',j2:'Gründer · Teheran',t3:'Schön, schnell und privat. Das Dashboard ist genau das, was ich wollte — sauber und professionell.',n3:'Mona T.',j3:'Designerin · Istanbul',tb1:'Ende-zu-Ende-Verschlüsselung',tb2:'100% privat',tb3:'10 Sprachen',tb4:'Für immer kostenlos',navF:'Funktionen',navS:'Super-App',navM:'Märkte',navP:'Preise',navQ:'FAQ',navOpen:'Öffnen',ln:'Sprache',
 chip1:'✦ Ein Konto, alles',chip2:'🌍 190+ Länder',chip3:'🗣 10 Sprachen',
 h1:'Ihr ganzes Leben in <span class="g">einer Tasche</span>',
 sub:'JIB vereint Geld, Zahlungen, Live-Märkte, Terminplan, Gesundheit, Nachrichten und Belohnungen in einem schönen täglichen Dashboard. Einfach genug für alle, leistungsstark genug für alles.',
@@ -1122,7 +1164,8 @@ dl:'Laden von',as:'App Store',gi:'Holen in',gp:'Google Play',oi:'Öffnen in',wa:
 footDesc:'Eine Super-App für Ihr ganzes Leben. Von Menschen gebaut, die glauben, dass das Alltagsleben einfach sein sollte.',
 fProduct:'Produkt',fCompany:'Unternehmen',fLegal:'Rechtliches',fP1:'Funktionen',fP2:'Zahlungen',fP3:'Märkte',fP4:'Preise',fC1:'Über uns',fC2:'Karriere',fC3:'Presse',fC4:'Kontakt',fL1:'Datenschutz',fL2:'Bedingungen',fL3:'Sicherheit',fL4:'Cookies',
 cr:'Alle Rechte für die Website JIB vorbehalten'},
-zh:{navF:'功能',navS:'超级应用',navM:'行情',navP:'价格',navQ:'常见问题',navOpen:'打开应用',ln:'语言',
+zh:{
+  testiH1:'深受10万+用户喜爱',t1:'一切——金钱、健康、日历——终于在一处。我每天早晨查看。',n1:'萨拉·A',j1:'交易员 · 迪拜',t2:'黄金和加密货币实时价格即时更新。JIB 替代了我三个应用。',n2:'雷扎·K',j2:'创始人 · 德黑兰',t3:'美观、快速且私密。仪表盘正是我想要的——干净专业。',n3:'莫娜·T',j3:'设计师 · 伊斯坦布尔',tb1:'端到端加密',tb2:'100% 私密',tb3:'10 种语言',tb4:'永远免费',navF:'功能',navS:'超级应用',navM:'行情',navP:'价格',navQ:'常见问题',navOpen:'打开应用',ln:'语言',
 chip1:'✦ 一个账户，一切尽在',chip2:'🌍 190+ 个国家',chip3:'🗣 10 种语言',
 h1:'你的整个生活，都在<span class="g">一个口袋</span>里',
 sub:'JIB 将资金、支付、实时行情、日程、健康、新闻和奖励整合到一个美观的日常面板中。对所有人足够简单，对一切足够强大。',
@@ -1170,8 +1213,10 @@ if(!LV||!CL[LV]){const nav=(navigator.language||'en').toLowerCase();LV='en';for(
 function setLV(code){LV=code;try{localStorage.setItem('jibLangL',LV)}catch(e){}applyL();buildGrid()}
 function flagHTML(c){return (c==='ckb'||c==='kmr')?'<span class="kurd"></span>':LANGS[c][0]}
 function buildGrid(){const g=document.getElementById('langGrid');g.innerHTML=Object.keys(LANGS).map(c=>`<div class="lang-btn ${c===LV?'active':''}" data-l="${c}" role="button" tabindex="0"><span class="lf">${flagHTML(c)}</span><span class="lt"><b>${LANGS[c][1]}</b></span></div>`).join('');}
+function renderTesti(){const d=CL[LV]||CL.en,g=document.getElementById('tstGrid');if(!g)return;const t=[[d.t1,d.n1,d.j1],['S','#8b5bff,#00d4a0']];const data=[[d.t1,'S',d.n1,d.j1,'#8b5bff,#00d4a0'],[d.t2,'R',d.n2,d.j2,'#00d4a0,#4da3ff'],[d.t3,'M',d.n3,d.j3,'#ff5fa2,#ff9d4d']];g.innerHTML=data.map(x=>`<div class="tst"><div class="tst-stars">★★★★★</div><p>"${x[0]}"</p><div class="tst-user"><span class="tst-av" style="background:linear-gradient(135deg,${x[4]})">${x[1]}</span><div><b>${x[2]}</b><small>${x[3]}</small></div></div></div>`).join('')}
+function renderTrust(){const d=CL[LV]||CL.en,els=document.querySelectorAll('.tb .tbt');const vals=[d.tb1,d.tb2,d.tb3,d.tb4];for(let k=0;k<els.length;k++)if(vals[k]!=null)els[k].textContent=vals[k]}
 document.addEventListener('click',e=>{const b=e.target.closest('#langGrid .lang-btn');if(b){setLV(b.dataset.l);document.getElementById('langDrop').classList.remove('show');document.getElementById('langBtn').setAttribute('aria-expanded','false')}},true);
-function applyL(){const d=CL[LV]||CL.en;document.documentElement.lang=LV;document.documentElement.dir=(RTL.indexOf(LV)>=0)?'rtl':'ltr';document.querySelectorAll('[data-l8n]').forEach(el=>{const k=el.getAttribute('data-l8n');if(d[k]!=null)el.textContent=d[k]});const h1=document.getElementById('heroH1');if(h1&&d.h1)h1.innerHTML=d.h1;const ch=document.getElementById('ctaH1');if(ch&&d.ctaH)ch.innerHTML=d.ctaH;const fe=document.getElementById('feH1');if(fe&&d.feH)fe.innerHTML=d.feH;const lf=document.getElementById('langFlag');if(lf)lf.innerHTML=flagHTML(LV);const lc=document.getElementById('langCode');if(lc)lc.textContent=LV.toUpperCase();const ld=document.getElementById('ldHead');if(ld)ld.textContent=d.ln}
+function applyL(){const d=CL[LV]||CL.en;document.documentElement.lang=LV;document.documentElement.dir=(RTL.indexOf(LV)>=0)?'rtl':'ltr';document.querySelectorAll('[data-l8n]').forEach(el=>{const k=el.getAttribute('data-l8n');if(d[k]!=null)el.textContent=d[k]});const h1=document.getElementById('heroH1');if(h1&&d.h1)h1.innerHTML=d.h1;const ch=document.getElementById('ctaH1');if(ch&&d.ctaH)ch.innerHTML=d.ctaH;const fe=document.getElementById('feH1');if(fe&&d.feH)fe.innerHTML=d.feH;const lf=document.getElementById('langFlag');if(lf)lf.innerHTML=flagHTML(LV);const lc=document.getElementById('langCode');if(lc)lc.textContent=LV.toUpperCase();const ld=document.getElementById('ldHead');if(ld)ld.textContent=d.ln;renderTesti();renderTrust()}
 document.getElementById('langBtn').addEventListener('click',e=>{e.stopPropagation();e.preventDefault();const drop=document.getElementById('langDrop');buildGrid();drop.classList.toggle('show');document.getElementById('langBtn').setAttribute('aria-expanded',drop.classList.contains('show'));document.getElementById('ldHead').textContent=(CL[LV]||CL.en).ln||'Language'});
 document.addEventListener('click',e=>{const drop=document.getElementById('langDrop');const b=document.getElementById('langBtn');if(drop&&!drop.contains(e.target)&&!b.contains(e.target)){drop.classList.remove('show');b.setAttribute('aria-expanded','false')}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){const d=document.getElementById('langDrop');d.classList.remove('show');document.getElementById('langBtn').setAttribute('aria-expanded','false')}});
