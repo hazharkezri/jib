@@ -399,11 +399,69 @@ main,footer{position:relative;z-index:1}
 
 @media(max-width:760px){#nav{top:8px}}
 
+/* ================= LEFT SIDEBAR LUXE (landing) ================= */
+.lsb{display:none}
+@media(min-width:1100px){
+  body{padding-left:250px}
+  [dir=rtl] body{padding-left:0;padding-right:250px}
+  .lsb{display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;width:250px;z-index:80;
+    background:linear-gradient(180deg,rgba(20,18,42,.75),rgba(12,10,30,.82));
+    -webkit-backdrop-filter:blur(26px) saturate(160%);backdrop-filter:blur(26px) saturate(160%);
+    border-right:1px solid rgba(255,255,255,.12);
+    box-shadow:inset -1px 0 0 rgba(255,255,255,.05),10px 0 44px rgba(0,0,0,.4);
+    padding:20px 14px}
+  [dir=rtl] .lsb{left:auto;right:0;border-right:none;border-left:1px solid rgba(255,255,255,.12)}
+  .lsb-brand{display:flex;align-items:center;gap:10px;padding:6px 8px 22px;color:#fff}
+  .lsb-logo{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#8b5bff,#00d4a0);display:grid;place-items:center;font-weight:800;box-shadow:0 6px 22px rgba(124,92,255,.55)}
+  .lsb-brand b{font-family:'Sora',sans-serif;font-size:20px}
+  .lsb-nav{flex:1;display:flex;flex-direction:column;gap:3px;overflow-y:auto}
+  .lsb-nav a{display:flex;align-items:center;gap:13px;color:var(--muted);font-weight:650;font-size:14.5px;padding:11px 14px;border-radius:13px;transition:.2s;border:1px solid transparent}
+  .lsb-nav a .e{font-size:19px;width:26px;text-align:center}
+  .lsb-nav a:hover{color:#fff;background:rgba(255,255,255,.06)}
+  .lsb-nav a[data-m="app"]{color:#fff;background:linear-gradient(135deg,rgba(124,92,255,.5),rgba(0,212,160,.32));border-color:rgba(255,255,255,.2);margin-top:8px}
+  .lsb-foot{padding:14px 8px 4px;border-top:1px solid rgba(255,255,255,.1);margin-top:8px}
+  .lsb-cta{width:100%;padding:11px;display:block;text-align:center}
+  .lsb-close,.lsb-toggle,.lsb-overlay{display:none}
+}
+
+/* lead form */
+.lead{position:relative;max-width:520px;margin:0 auto 30px}
+.lead-in{display:flex;gap:10px;padding:8px;border-radius:18px;background:rgba(255,255,255,.06);border:1px solid var(--line2);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.lead-in input{flex:1;min-width:0;background:transparent;border:none;outline:none;color:#fff;font-family:inherit;font-size:15px;padding:12px 14px}
+.lead-in input::placeholder{color:var(--muted)}
+.lead-in .btn{padding:12px 22px;white-space:nowrap;border-radius:13px}
+.lead-ok{display:none;margin-top:12px;color:var(--accent);font-weight:700}
+.lead-ok.show{display:inline-block;animation:riseIn .4s ease}
+@media(max-width:520px){.lead-in{flex-direction:column}.lead-in .btn{width:100%}}
+@media(max-width:1099px){
+  .lsb{position:fixed;top:0;left:0;bottom:0;width:min(300px,84vw);z-index:90;
+    background:linear-gradient(180deg,rgba(14,12,34,.97),rgba(10,9,26,.98));
+    -webkit-backdrop-filter:blur(26px);backdrop-filter:blur(26px);
+    border-right:1px solid rgba(255,255,255,.12);padding:20px 14px;display:flex;flex-direction:column;
+    transform:translateX(-105%);transition:transform .32s cubic-bezier(.4,0,.2,1);overflow-y:auto}
+  [dir=rtl] .lsb{left:auto;right:0;transform:translateX(105%);border-right:none;border-left:1px solid rgba(255,255,255,.12)}
+  .lsb.open{transform:translateX(0)}
+  .lsb-close{display:grid;place-items:center;margin-left:auto;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;width:32px;height:32px;border-radius:10px;cursor:pointer}
+  .lsb-overlay{position:fixed;inset:0;background:rgba(5,8,18,.6);backdrop-filter:blur(3px);z-index:85;opacity:0;visibility:hidden;transition:.3s}
+  .lsb-overlay.show{opacity:1;visibility:visible}
+  .lsb-toggle{position:fixed;left:14px;bottom:18px;z-index:70;width:54px;height:54px;border-radius:18px;border:1px solid rgba(255,255,255,.25);
+    background:linear-gradient(135deg,#8b5bff,#00d4a0);color:#fff;font-size:22px;cursor:pointer;box-shadow:0 12px 34px rgba(124,92,255,.5)}
+  [dir=rtl] .lsb-toggle{left:auto;right:14px}
+}
+
+
 
 </style>
 </head>
 <body>
 <div class="glow"></div>
+
+<aside class="lsb" id="lsb">
+  <div class="lsb-brand"><span class="lsb-logo">جیب</span><b>JIB<span style="color:var(--accent)">.</span></b><button class="lsb-close" id="lsbClose">✕</button></div>
+  <nav class="lsb-nav" id="lsbNav"></nav>
+  <div class="lsb-foot"><a href="app.html" class="btn-grad-border lsb-cta">Open App ↗</a></div>
+</aside>
+<div class="lsb-overlay" id="lsbOv"></div>
 
 <nav id="nav">
   <div class="nav-in">
@@ -649,6 +707,13 @@ main,footer{position:relative;z-index:1}
   <div class="container cta-band">
     <h2 id="ctaH1">Your life has a <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">home</span> now.</h2>
     <p data-l8n="ctaP">Join millions who put their entire day in one pocket. Download JIB free today.</p>
+    <form class="lead" id="leadForm" onsubmit="return false">
+      <div class="lead-in">
+        <input type="email" id="leadEmail" placeholder="you@email.com" aria-label="Email" required>
+        <button type="submit" class="btn btn-primary">Get early access</button>
+      </div>
+      <small class="lead-ok" id="leadOk">✓ You're on the list. Welcome to JIB.</small>
+    </form>
     <div class="store-btns">
       <a class="store"><span class="e">🍎</span><span><small data-l8n="dl">Download on the</small><b data-l8n="as">App Store</b></span></a>
       <a class="store"><span class="e">▶</span><span><small data-l8n="gi">Get it on</small><b data-l8n="gp">Google Play</b></span></a>
@@ -1127,6 +1192,51 @@ try{const fx=await(await fetch('https://open.er-api.com/v6/latest/USD')).json();
 setMk('mkUsd',USD_IRR,'usd','#4da3ff',v=>Math.round(v/1000)+'k');
 try{const c=await(await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd',{headers:{'User-Agent':'Mozilla/5.0'}})).json();if(c.bitcoin)setMk('mkBtc',c.bitcoin.usd,'btc','#6c5cff',v=>'$'+Math.round(v).toLocaleString('en-US'));if(c.ethereum)setMk('mkEth',c.ethereum.usd,'eth','#8b7bff',v=>'$'+Math.round(v).toLocaleString('en-US'));if(c.solana)setMk('mkSol',c.solana.usd,'sol','#00d4a0',v=>'$'+v.toFixed(2));}catch(e){}}
 loadMarkets();setInterval(loadMarkets,60000);
+
+/* ===== LSB sidebar luxe ===== */
+(function(){
+  const lsb=document.getElementById('lsb');
+  if(!lsb)return;
+  const items=[
+    ['dashboard','🏠','داشبورد'],['markets','📈','بازار زنده'],['gold','🥇','طلا و ارز'],['fx','💱','فارکس'],['crypto','₿','کریپتو'],['payments','🧾','پرداخت‌ها'],['health','❤️','سلامت'],['schedule','📅','برنامه'],['rewards','🏆','جایزه'],['reports','📊','گزارش'],
+    ['app','🚀','سوپر اپ']
+  ];
+  const nav=document.getElementById('lsbNav');
+  nav.innerHTML=items.map(i=>`<a href="#" data-m="${i[0]}"><span class="e">${i[1]}</span><span>${i[2]}</span></a>`).join('');
+  nav.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click',e=>{
+      e.preventDefault();
+      const m=a.dataset.m;
+      document.getElementById('lsb').classList.remove('open');
+      document.getElementById('lsbOv').classList.remove('show');
+      if(m==='app'){location.href='app.html';return}
+      const id=(m==='markets'||m==='gold'||m==='fx'||m==='crypto')?'markets':(m==='dashboard'?'home':'');
+      if(id){document.getElementById(id)&&document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+    });
+  });
+  const close=document.getElementById('lsbClose'),ov=document.getElementById('lsbOv');
+  close.onclick=()=>{lsb.classList.remove('open');ov.classList.remove('show')};
+  ov.onclick=()=>{lsb.classList.remove('open');ov.classList.remove('show')};
+  // open sidebar on mobile via a floating toggle
+  const tog=document.createElement('button');
+  tog.className='lsb-toggle';tog.innerHTML='☰';tog.setAttribute('aria-label','Menu');
+  tog.onclick=()=>{lsb.classList.add('open');ov.classList.add('show')};
+  document.body.appendChild(tog);
+  document.getElementById('burger')&&document.getElementById('burger').addEventListener('click',()=>{lsb.classList.add('open');ov.classList.add('show')});
+})();
+
+/* lead form */
+(function(){
+  const f=document.getElementById('leadForm');
+  if(!f)return;
+  const ok=document.getElementById('leadOk');
+  f.addEventListener('submit',e=>{
+    e.preventDefault();
+    ok.classList.add('show');
+    f.querySelector('input').disabled=true;
+    f.querySelector('button').textContent='✓ Done';
+  });
+})();
 </script>
 </body>
 </html>

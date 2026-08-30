@@ -337,9 +337,46 @@ body{
   --glass-2:rgba(255,255,255,.04);
   --g-border:rgba(255,255,255,.16);
 }
+
+/* ================= LEFT SIDEBAR LUXE ================= */
+.lsb{display:none}
+@media(min-width:900px){
+  .lsb{display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;width:250px;z-index:65;
+    background:linear-gradient(180deg,rgba(20,18,42,.72),rgba(12,10,30,.78));
+    -webkit-backdrop-filter:blur(26px) saturate(160%);backdrop-filter:blur(26px) saturate(160%);
+    border-right:1px solid var(--g-border);
+    box-shadow:inset -1px 0 0 rgba(255,255,255,.05),10px 0 40px rgba(0,0,0,.35);
+    padding:20px 14px}
+  [dir=rtl] .lsb{left:auto;right:0;border-right:none;border-left:1px solid var(--g-border)}
+  .lsb-brand{display:flex;align-items:center;gap:10px;padding:6px 8px 20px;color:#fff}
+  .lsb-logo{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#8b5bff,#00d4a0);display:grid;place-items:center;font-weight:800;box-shadow:0 6px 22px rgba(124,92,255,.55)}
+  .lsb-brand b{font-family:'Sora',sans-serif;font-size:20px;letter-spacing:.5px}
+  .lsb-nav{flex:1;display:flex;flex-direction:column;gap:4px;overflow-y:auto}
+  .lsb-nav button{display:flex;align-items:center;gap:13px;width:100%;background:none;border:none;color:var(--muted);font-family:inherit;font-weight:650;font-size:14.5px;padding:12px 14px;border-radius:14px;cursor:pointer;text-align:left;transition:.2s;border:1px solid transparent}
+  [dir=rtl] .lsb-nav button{text-align:right}
+  .lsb-nav button .e{font-size:19px;width:26px;text-align:center}
+  .lsb-nav button:hover{color:#fff;background:rgba(255,255,255,.06)}
+  .lsb-nav button.active{color:#fff;background:linear-gradient(135deg,rgba(124,92,255,.45),rgba(0,212,160,.30));border-color:rgba(255,255,255,.18);box-shadow:0 8px 26px rgba(124,92,255,.28)}
+  .lsb-nav button small{display:block;font-size:10.5px;font-weight:600;color:var(--muted2)}
+  .lsb-foot{display:flex;align-items:center;justify-content:space-between;padding:16px 8px 4px;border-top:1px solid rgba(255,255,255,.1);margin-top:8px}
+  .lsb-pts{color:var(--gold);font-weight:700;font-size:14px}
+  .lsb-lang{background:rgba(124,92,255,.2);border:1px solid rgba(255,255,255,.15);padding:5px 12px;border-radius:20px;font-weight:700;font-size:12px;color:#fff}
+  #appView{margin-left:250px;max-width:100%}
+  [dir=rtl] #appView{margin-left:0;margin-right:250px}
+  .bnav{left:calc(250px + 50%);transform:translateX(-50%)}
+  [dir=rtl] .bnav{left:auto;right:calc(250px + 50%);transform:translateX(50%)}
+  .fab{left:calc(250px + 50%);transform:translateX(-50%)}
+  [dir=rtl] .fab{left:auto;right:calc(250px + 50%);transform:translateX(50%)}
+}
 </style>
 </head>
 <body>
+
+<aside class="lsb" id="lsb">
+  <div class="lsb-brand"><span class="lsb-logo">جیب</span><b>JIB<span style="color:var(--accent)">.</span></b></div>
+  <nav class="lsb-nav" id="lsbNav"></nav>
+  <div class="lsb-foot"><span class="lsb-pts">⭐ <b id="lsbPts">0</b></span><span class="lsb-lang" id="lsbLang">EN</span></div>
+</aside>
 
 <div class="app" id="appView">
   <div class="top">
@@ -901,6 +938,14 @@ function renderDrawer(){document.getElementById('dvPts').textContent=fmt(S.pts);
 function openDrawer(){renderDrawer();document.getElementById('drawer').classList.add('open');document.getElementById('drawerOv').classList.add('show')}
 function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('drawerOv').classList.remove('show')}
 function getLvl(){const p=S.pts;return (p>=500?'🥇 Gold':p>=200?'🥈 Silver':'🥉 Bronze')+' · '+p+' '+(t('points')||'pts')}
+function renderLsb(){
+  if(!document.getElementById('lsb'))return;
+  document.getElementById('lsbPts').textContent=fmt(S.pts);
+  document.getElementById('lsbLang').textContent=L.toUpperCase();
+  const items=[['home','🏠',t('home')],['money','💰',t('money')],['markets','📈',t('markets')],['payments','🧾',t('payments')],['health','❤️',t('health')],['schedule','📅',t('schedule')],['rewards','🏆',t('rewards')],['reports','📊',t('reports')],['settings','⚙️',t('settings')]];
+  document.getElementById('lsbNav').innerHTML=items.map(i=>`<button data-m="${i[0]}" class="${cur===i[0]?'active':''}"><span class="e">${i[1]}</span><span>${i[2]}</span></button>`).join('');
+  document.querySelectorAll('#lsbNav button').forEach(b=>b.onclick=()=>navTo(b.dataset.m));
+}
 function renderMoney(){
   const m=S.money;const month=new Date().getMonth();
   const expMonth=S.txn.filter(x=>x.exp&&x.mt===month).reduce((a,x)=>a+x.amt,0);
@@ -1032,7 +1077,7 @@ function renderReports(){
     <div class="kpi" style="--kpc:rgba(255,92,122,.25)"><small>🏃 ${t('steps')}</small><b style="color:var(--accent)">${fmt(S.habits.steps||0)}</b></div>
   </div>`;
 }
-function render(){renderNav();renderQuick();$('#points').textContent=fmt(S.pts);$('#lblPoints').textContent=t('points');$('#lblQuick').textContent=t('quick');$('#greetName').textContent=(cur==='schedule'?'':'')+greet()+' 👋';$('#lblLv').textContent='🏅 '+level();$('#lblStreak').textContent=t('streak').replace('{n}',S.streak);$('#lblChallenge').textContent='✨ '+t('challenge');if(cur==='home')renderHome();else if(cur==='money')renderMoney();else if(cur==='payments')renderPayments();else if(cur==='markets')renderMarkets();else if(cur==='schedule')renderSchedule();else if(cur==='health')renderHealth();else if(cur==='news')renderNews();else if(cur==='rewards')renderRewards();else if(cur==='reports')renderReports();else renderList();if(['schedule','news','rewards','list','reports'].indexOf(cur)>=0)VIEWS.insertAdjacentHTML('afterbegin',`<div class="backbar" onclick="showMore()"><span>‹</span><small>${t('backTo')||'All'}</small></div>`);checkReminders()}
+function render(){renderNav();renderLsb();renderQuick();$('#points').textContent=fmt(S.pts);$('#lblPoints').textContent=t('points');$('#lblQuick').textContent=t('quick');$('#greetName').textContent=(cur==='schedule'?'':'')+greet()+' 👋';$('#lblLv').textContent='🏅 '+level();$('#lblStreak').textContent=t('streak').replace('{n}',S.streak);$('#lblChallenge').textContent='✨ '+t('challenge');if(cur==='home')renderHome();else if(cur==='money')renderMoney();else if(cur==='payments')renderPayments();else if(cur==='markets')renderMarkets();else if(cur==='schedule')renderSchedule();else if(cur==='health')renderHealth();else if(cur==='news')renderNews();else if(cur==='rewards')renderRewards();else if(cur==='reports')renderReports();else renderList();if(['schedule','news','rewards','list','reports'].indexOf(cur)>=0)VIEWS.insertAdjacentHTML('afterbegin',`<div class="backbar" onclick="showMore()"><span>‹</span><small>${t('backTo')||'All'}</small></div>`);checkReminders()}
 function greet(){const h=new Date().getHours();return h<12?t('greetM'):(h<18?t('greetA'):t('greetE'))}
 
 /* ============ sheets ============ */
