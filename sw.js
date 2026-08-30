@@ -1,4 +1,4 @@
-const VERSION = 'jib-v1.1.0';
+const VERSION = 'jib-v1.2.0';
 const CORE = [
   './',
   './index.html',
@@ -27,22 +27,31 @@ self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
 
-  // Network-first for API calls (gold/fx/crypto/AI) so data stays fresh
-  if (req.url.indexOf('er-api.com') >= 0 ||
-      req.url.indexOf('gold-api.com') >= 0 ||
-      req.url.indexOf('coingecko') >= 0 ||
-      req.url.indexOf('pollinations') >= 0) {
+  const url = req.url;
+  const isAPI = url.indexOf('er-api.com') >= 0 ||
+                url.indexOf('gold-api.com') >= 0 ||
+                url.indexOf('coingecko') >= 0 ||
+                url.indexOf('pollinations') >= 0;
+
+  // Always go to network for API + navigation (HTML) so pages stay fresh after deploy
+  const isNav = req.mode === 'navigate' ||
+                req.destination === 'document' ||
+                url.endsWith('/') || url.endsWith('.html');
+
+  if (isAPI || isNav) {
     e.respondWith(
       fetch(req).then(res => {
-        const copy = res.clone();
-        caches.open(VERSION).then(c => c.put(req, copy));
+        if (res && res.status === 200) {
+          const copy = res.clone();
+          caches.open(VERSION).then(c => c.put(req, copy));
+        }
         return res;
       }).catch(() => caches.match(req))
     );
     return;
   }
 
-  // Cache-first for app shell and same-origin assets
+  // Cache-first for static assets (images, manifest, icons)
   e.respondWith(
     caches.match(req).then(cached => {
       const fetchPromise = fetch(req).then(res => {
