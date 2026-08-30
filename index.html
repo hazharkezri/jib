@@ -96,6 +96,18 @@ nav.scrolled{border-bottom:1px solid var(--line);background:rgba(5,7,13,.88)}
 .lang-btn .lt small{font-size:11px;color:var(--muted)}
 .lang-btn.active{border-color:var(--accent);background:linear-gradient(170deg,rgba(0,212,160,.12),var(--card2))}
 .lang-btn.active::after{content:"✓";margin-left:auto;color:var(--accent);font-weight:800}
+.langwrap{position:relative}
+.lang-drop{position:absolute;top:calc(100% + 10px);right:0;min-width:300px;max-width:min(300px,calc(100vw - 20px));background:linear-gradient(180deg,var(--card2),#0a1020);border:1px solid var(--line2);border-radius:18px;padding:14px;opacity:0;visibility:hidden;transform:translateY(-6px) scale(.97);transform-origin:top right;transition:.22s cubic-bezier(.2,.8,.3,1);box-shadow:0 22px 50px rgba(0,0,0,.45);z-index:55}
+[dir=rtl] .lang-drop{right:auto;left:0;transform-origin:top left}
+.lang-drop.show{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.lang-drop .ld-head{font-size:13px;color:var(--muted);font-weight:700;margin:2px 2px 12px;letter-spacing:.4px}
+.lang-drop .lang-grid{grid-template-columns:1fr;gap:6px;max-height:320px;overflow:auto}
+.lang-drop .lang-btn{background:transparent;border:none;border-radius:12px;padding:9px 10px}
+.lang-drop .lang-btn:hover{background:rgba(108,92,255,.14);transform:none;box-shadow:none}
+.lang-drop .lang-btn.active{background:rgba(0,212,160,.1);border:1px solid rgba(0,212,160,.3)}
+.lang-drop .lang-btn .lf{font-size:22px;width:34px;text-align:center;flex-shrink:0}
+.lang-drop .lang-btn .lt b{font-size:14px}
+.lang-drop .lang-btn .lt small{font-size:11px;white-space:nowrap}
 
 .hero{min-height:100vh;display:flex;align-items:center;padding:140px 0 80px;position:relative;overflow:hidden}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
@@ -250,7 +262,6 @@ footer{border-top:1px solid var(--line);padding:60px 0 30px}
 @keyframes up{from{transform:translateY(50px);opacity:0}to{transform:none;opacity:1}}
 .sheet .grab{width:44px;height:5px;border-radius:3px;background:var(--line2);margin:0 auto 18px}
 .sheet h3{font-size:18px;margin-bottom:18px}
-#lblLang{font-size:18px;margin-bottom:18px}
 </style>
 </head>
 <body>
@@ -267,7 +278,13 @@ footer{border-top:1px solid var(--line);padding:60px 0 30px}
       <a href="#faq" data-l8n="navQ">FAQ</a>
     </div>
     <div class="nav-cta">
-      <button class="lang" id="langBtn" title="Language"><span id="langFlag">🌐</span><span id="langCode">EN</span></button>
+      <div class="langwrap">
+        <button class="lang" id="langBtn" title="Language" aria-haspopup="true" aria-expanded="false"><span id="langFlag">🌐</span><span id="langCode">EN</span></button>
+        <div class="lang-drop" id="langDrop">
+          <div class="ld-head" id="ldHead">Language</div>
+          <div class="lang-grid" id="langGrid"></div>
+        </div>
+      </div>
       <a href="app.html" class="btn-grad-border" data-l8n="navOpen">Open App ↗</a>
       <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
@@ -523,7 +540,6 @@ footer{border-top:1px solid var(--line);padding:60px 0 30px}
   </div>
 </footer>
 
-<div class="modal" id="langModal"><div class="sheet"><div class="grab"></div><h3 id="lblLang">Language</h3><div class="lang-grid" id="langGrid"></div></div></div>
 
 <script>
 const nav=document.getElementById('nav');
@@ -949,10 +965,11 @@ let LV=localStorage.getItem('jibLangL');
 if(!LV||!CL[LV]){const nav=(navigator.language||'en').toLowerCase();LV='en';for(const c in LMap)if(LMap[c].some(x=>nav.indexOf(x)>=0)){LV=c;break}localStorage.setItem('jibLangL',LV)}
 function setLV(code){LV=code;localStorage.setItem('jibLangL',LV);applyL();buildGrid()}
 function flagHTML(c){return (c==='ckb'||c==='kmr')?'<span class="kurd"></span>':LANGS[c][0]}
-function buildGrid(){const g=document.getElementById('langGrid');g.innerHTML=Object.keys(LANGS).map(c=>`<div class="lang-btn ${c===LV?'active':''}" data-l="${c}"><span class="lf">${flagHTML(c)}</span><span class="lt"><b>${LANGS[c][1]}</b></span></div>`).join('');g.querySelectorAll('.lang-btn').forEach(b=>b.onclick=()=>{setLV(b.dataset.l);document.getElementById('langModal').classList.remove('show')})}
-function applyL(){const d=CL[LV]||CL.en;document.documentElement.lang=LV;document.documentElement.dir=(RTL.indexOf(LV)>=0)?'rtl':'ltr';document.querySelectorAll('[data-l8n]').forEach(el=>{const k=el.getAttribute('data-l8n');if(d[k]!=null)el.textContent=d[k]});const h1=document.getElementById('heroH1');if(h1&&d.h1)h1.innerHTML=d.h1;const ch=document.getElementById('ctaH1');if(ch&&d.ctaH)ch.innerHTML=d.ctaH;const fe=document.getElementById('feH1');if(fe&&d.feH)fe.innerHTML=d.feH;const lf=document.getElementById('langFlag');if(lf)lf.innerHTML=flagHTML(LV);const lc=document.getElementById('langCode');if(lc)lc.textContent=LV.toUpperCase();const ll=document.getElementById('lblLang');if(ll)ll.textContent=d.ln}
-document.getElementById('langBtn').addEventListener('click',()=>{buildGrid();document.getElementById('langModal').classList.add('show')});
-document.getElementById('langModal').addEventListener('click',e=>{if(e.target.id==='langModal')document.getElementById('langModal').classList.remove('show')});
+function buildGrid(){const g=document.getElementById('langGrid');g.innerHTML=Object.keys(LANGS).map(c=>`<div class="lang-btn ${c===LV?'active':''}" data-l="${c}" role="button" tabindex="0"><span class="lf">${flagHTML(c)}</span><span class="lt"><b>${LANGS[c][1]}</b></span></div>`).join('');g.querySelectorAll('.lang-btn').forEach(b=>b.onclick=()=>{setLV(b.dataset.l);document.getElementById('langDrop').classList.remove('show');document.getElementById('langBtn').setAttribute('aria-expanded','false')})}
+function applyL(){const d=CL[LV]||CL.en;document.documentElement.lang=LV;document.documentElement.dir=(RTL.indexOf(LV)>=0)?'rtl':'ltr';document.querySelectorAll('[data-l8n]').forEach(el=>{const k=el.getAttribute('data-l8n');if(d[k]!=null)el.textContent=d[k]});const h1=document.getElementById('heroH1');if(h1&&d.h1)h1.innerHTML=d.h1;const ch=document.getElementById('ctaH1');if(ch&&d.ctaH)ch.innerHTML=d.ctaH;const fe=document.getElementById('feH1');if(fe&&d.feH)fe.innerHTML=d.feH;const lf=document.getElementById('langFlag');if(lf)lf.innerHTML=flagHTML(LV);const lc=document.getElementById('langCode');if(lc)lc.textContent=LV.toUpperCase();const ld=document.getElementById('ldHead');if(ld)ld.textContent=d.ln}
+document.getElementById('langBtn').addEventListener('click',e=>{e.stopPropagation();e.preventDefault();const drop=document.getElementById('langDrop');buildGrid();drop.classList.toggle('show');document.getElementById('langBtn').setAttribute('aria-expanded',drop.classList.contains('show'));document.getElementById('ldHead').textContent=(CL[LV]||CL.en).ln||'Language'});
+document.addEventListener('click',e=>{const drop=document.getElementById('langDrop');const b=document.getElementById('langBtn');if(drop&&!drop.contains(e.target)&&!b.contains(e.target)){drop.classList.remove('show');b.setAttribute('aria-expanded','false')}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){const d=document.getElementById('langDrop');d.classList.remove('show');document.getElementById('langBtn').setAttribute('aria-expanded','false')}});
 const burger=document.getElementById('burger'),mnav=document.getElementById('mnav');
 burger.addEventListener('click',()=>{burger.classList.toggle('open');mnav.classList.toggle('show')});
 mnav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');mnav.classList.remove('show')}));
