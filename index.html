@@ -268,6 +268,46 @@ footer{border-top:1px solid var(--line);padding:60px 0 30px}
 @keyframes up{from{transform:translateY(50px);opacity:0}to{transform:none;opacity:1}}
 .sheet .grab{width:44px;height:5px;border-radius:3px;background:var(--line2);margin:0 auto 18px}
 .sheet h3{font-size:18px;margin-bottom:18px}
+
+/* ===== living / pro polish ===== */
+@keyframes auroraMove{0%{transform:translate(0,0) scale(1)}33%{transform:translate(60px,-40px) scale(1.15)}66%{transform:translate(-40px,30px) scale(.95)}100%{transform:translate(0,0) scale(1)}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes spinSlow{to{transform:rotate(360deg)}}
+@keyframes sheen{0%{transform:translateX(-130%) skewX(-18deg)}60%,100%{transform:translateX(230%) skewX(-18deg)}}
+@keyframes pulseGlow{0%,100%{box-shadow:0 8px 30px rgba(108,92,255,.4)}50%{box-shadow:0 8px 44px rgba(108,92,255,.75)}}
+
+body{background:var(--bg)}
+.hero{position:relative;overflow:hidden}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;z-index:0;pointer-events:none}
+.hero::before{width:520px;height:520px;top:-140px;right:-80px;background:radial-gradient(circle,rgba(108,92,255,.5),transparent 65%);animation:auroraMove 18s ease-in-out infinite}
+.hero::after{width:460px;height:460px;bottom:-160px;left:-100px;background:radial-gradient(circle,rgba(0,212,160,.4),transparent 65%);animation:auroraMove 22s ease-in-out infinite reverse}
+.hero-grid{position:relative;z-index:1}
+.phone{animation:floaty 6s ease-in-out infinite}
+.phone-ring{animation:floaty 6s ease-in-out infinite reverse}
+.floatcard{animation:floaty 5s ease-in-out infinite}
+.floatcard.f2{animation-delay:1.2s}
+.floatcard.f3{animation-delay:2.1s}
+.logo-badge{animation:floatY 4s ease-in-out infinite}
+
+.btn-primary{position:relative;overflow:hidden}
+.btn-primary::after{content:"";position:absolute;top:0;bottom:0;width:40%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);animation:sheen 3.6s linear infinite}
+.btn-primary.pulse{animation:pulseGlow 3s ease-in-out infinite}
+
+.sec-head h2{background:linear-gradient(120deg,#fff 20%,#b9c2ff 50%,#7de3c8 80%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:20px}
+.eyebrow{background:linear-gradient(90deg,rgba(108,92,255,.18),rgba(0,212,160,.14));padding:6px 14px;border-radius:30px;border:1px solid rgba(108,92,255,.3)}
+
+.feat{transition:transform .35s cubic-bezier(.2,.7,.3,1.2),box-shadow .35s,border-color .35s,background .35s}
+.feat::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(140deg,rgba(108,92,255,.7),rgba(0,212,160,.5));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:.35s}
+.feat::after{content:"";position:absolute;top:-40%;left:-40%;width:80%;height:120%;background:radial-gradient(circle at center,rgba(108,92,255,.22),transparent 60%);transform:scale(0);transition:transform .5s cubic-bezier(.2,.7,.3,1)}
+.feat:hover::before{opacity:1}
+.feat:hover::after{transform:scale(1.6)}
+.feat .ic{transition:transform .3s cubic-bezier(.2,.7,.3,1.4)}
+.feat:hover .ic{transform:scale(1.18) rotate(-6deg)}
+
+.features{grid-auto-rows:1fr}
+@media(max-width:760px){.features{grid-template-columns:1fr}}
+.reveal{transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
+
 </style>
 </head>
 <body>
