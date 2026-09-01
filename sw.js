@@ -1,4 +1,4 @@
-const VERSION = 'jib-v1.2.0';
+const VERSION = 'jib-v1.3.0';
 const CORE = [
   './',
   './index.html',
@@ -30,6 +30,7 @@ self.addEventListener('fetch', e => {
   const url = req.url;
   const isAPI = url.indexOf('er-api.com') >= 0 ||
                 url.indexOf('gold-api.com') >= 0 ||
+                url.indexOf('/api/price') >= 0 ||
                 url.indexOf('coingecko') >= 0 ||
                 url.indexOf('pollinations') >= 0;
 
