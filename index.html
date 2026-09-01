@@ -65,6 +65,8 @@ nav.scrolled .logo{font-size:19px}
 .nav-links a{color:var(--muted);font-size:14.5px;font-weight:500;transition:.2s;padding:9px 14px;border-radius:10px;position:relative}
 .nav-links a::after{content:"";position:absolute;left:14px;right:14px;bottom:4px;height:2px;border-radius:2px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .28s ease}
 .nav-links a:hover{color:#fff;background:rgba(108,92,255,.08)}
+.nav-links a.active{color:#fff}
+.nav-links a.active::after{transform:scaleX(1)}
 .nav-links a:hover::after{transform:scaleX(1)}
 [dir=rtl] .nav-links a::after{transform-origin:right}
 .nav-cta{display:flex;gap:10px;align-items:center}
@@ -488,6 +490,13 @@ main,footer{position:relative;z-index:1}
   [dir=rtl] .lsb-toggle{left:auto;right:14px}
 }
 
+@media (prefers-reduced-motion: reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+
+[id]{scroll-margin-top:96px}
+[dir=rtl] [id]{scroll-margin-top:96px}
 
 
 </style>
@@ -693,7 +702,6 @@ main,footer{position:relative;z-index:1}
       </div>
 
     </div>
-    <p style="color:var(--muted);font-size:12px;margin-top:16px;text-align:center">Live</p>
   </div>
 </section>
 
@@ -848,6 +856,16 @@ document.querySelectorAll('.faq-q').forEach(q=>{
   });
 });
 
+const navScroll=()=>{
+  const secs=['features','superapp','markets','pricing','faq'];
+  let cur='';
+  secs.forEach(id=>{const el=document.getElementById(id);if(el&&window.scrollY>=el.offsetTop-160)cur=id});
+  document.querySelectorAll('#nav .nav-links a').forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
+  });
+};
+window.addEventListener('scroll',navScroll,{passive:true});navScroll();
+
 const LANGS={'en':['🇬🇧','English'],'fa':['🇮🇷','فارسی'],'ar':['🇸🇦','العربية'],'ckb':['🇮🇶','کوردی (سۆرانی)'],'kmr':['🇹🇷','Kurmancî'],'ru':['🇷🇺','Русский'],'es':['🇪🇸','Español'],'fr':['🇫🇷','Français'],'de':['🇩🇪','Deutsch'],'zh':['🇨🇳','中文']};
 const RTL=['fa','ar','ckb'];
 const CL={
@@ -888,7 +906,7 @@ fq2q:'Which countries does JIB support?',fq2a:'JIB works in 190+ countries with 
 fq3q:'Is my financial data safe?',fq3a:'Your data is encrypted end-to-end with bank-grade security. You always control what you share, and you can export or delete everything at any time.',
 fq4q:'Can I use JIB on both phone and computer?',fq4a:'Yes. Your data syncs automatically across all your devices in real time. Start on your phone, continue on your laptop.',
 fq5q:'How do I earn rewards?',fq5a:'Earn points for logging in daily, paying bills, completing tasks and more. Redeem points for cashback, discounts, gifts and partner deals.',
-ctaH:'Your life has a chic home now.',ctaP:'Join millions who put their entire day in one pocket. Download JIB free today.',
+ctaH:'Your life has a home now.',ctaP:'Join millions who put their entire day in one pocket. Download JIB free today.',
 dl:'Download on the',as:'App Store',gi:'Get it on',gp:'Google Play',oi:'Open in',wa:'Web App',
 footDesc:'One super-app for your entire life. Built by people who believe daily life should be simple.',
 fProduct:'Product',fCompany:'Company',fLegal:'Legal',fP1:'Features',fP2:'Payments',fP3:'Markets',fP4:'Pricing',fC1:'About',fC2:'Careers',fC3:'Press',fC4:'Contact',fL1:'Privacy',fL2:'Terms',fL3:'Security',fL4:'Cookies',
@@ -934,7 +952,7 @@ ctaH:'زندگیتان حالا یک <span style="background:var(--grad);-webkit
 dl:'دانلود از',as:'اپ استور',gi:'دریافت از',gp:'گوگل پلی',oi:'باز کردن در',wa:'اپ وب',
 footDesc:'یک سوپر اپ برای کل زندگیتان. ساخته‌شده توسط کسانی که باور دارند زندگی روزمره باید ساده باشد.',
 fProduct:'محصول',fCompany:'شرکت',fLegal:'حقوقی',fP1:'قابلیت‌ها',fP2:'پرداخت',fP3:'بازارها',fP4:'قیمت‌ها',fC1:'درباره',fC2:'فرصت‌های شغلی',fC3:'رسانه',fC4:'تماس',fL1:'حریم خصوصی',fL2:'شرایط',fL3:'امنیت',fL4:'کوکی‌ها',
-  cr:'تمام حقوق برای سایت جیب محفوظ می باشد'},
+  cr:'تمامی حقوق این وب‌سایت برای جیب محفوظ است'},
 ar:{
   sDash:'لوحة التحكم',sMarkets:'الأسواق الحية',sGold:'الذهب والعملات',sFx:'فوركس',sCrypto:'العملات الرقمية',sPay:'المدفوعات',sHealth:'الصحة',sSched:'الجدول',sRew:'المكافآت',sRep:'التقارير',sApp:'افتح التطبيق',
   testiH1:'أحبه أكثر من 100 ألف مستخدم',t1:'كل شيء - المال، الصحة، التقويم - أخيرًا في مكان واحد. أتحقق منه كل صباح.',n1:'سارة أ.',j1:'متعامل · دبي',t2:'أسعار الذهب والعملات الرقمية تتحدث فورًا. جيب حلّ محل ثلاثة تطبيقات.',n2:'رضا ك.',j2:'مؤسس · طهران',t3:'جميل وسريع وخاص. لوحة التحكم تمامًا كما أردت - نظيفة واحترافية.',n3:'منى ت.',j3:'مصممة · إسطنبول',tb1:'تشفير كامل',tb2:'خصوصية 100%',tb3:'10 لغات',tb4:'مجاني للأبد',navF:'المزايا',navS:'التطبيق',navM:'الأسواق',navP:'الأسعار',navQ:'الأسئلة',navOpen:'فتح التطبيق',ln:'اللغة',
@@ -952,7 +970,7 @@ ft2:'ادفع كل شيء',fs2:'الفوائد والشحن والرسوم وا�
 ft3:'أسواق حية',fs3:'الذهب والفضة والعملات والأسهم والفوركس والعملات الرقمية لحظياً مع تنبيهات ورسوم بيانية.',
 ft4:'الجدول والتذكيرات',fs4:'المهام والاجتماعات والأدوية والمواعيد المهمة مع تذكيرات ذكية لا تنساها أبداً.',
 ft5:'الصحة اليومية',fs5:'الخطوات والنوم والماء والتمارين — دفعة لطيفة نحو حياة أكثر صحة.',
-ft6:'مغذى الأخبار',fs6:'أخبار محلية وعالمية منسقة حسب اهتماماتك، بلغتك.',
+ft6:'تغذية الأخبار',fs6:'أخبار محلية وعالمية منسقة حسب اهتماماتك، بلغتك.',
 ft7:'المكافآت',fs7:'اكسب نقاطاً مقابل كل إجراء. حوّلها إلى استرداد نقدي وهدايا وعروض.',
 ft8:'المساعد الذكي',fs8:'اسأل أي شيء ويردّ جيب بالإجابات والإجراءات والنصائح في ثوانٍ.',
 ft9:'أمان مصرفي',fs9:'بيانات مشفرة وتسجيل دخول بيومتري وتحكم كامل فيما تشاركه.',
@@ -1020,8 +1038,8 @@ footDesc:'یەک سوپر ئەپ بۆ هەموو ژیانت. دروستکراو 
 fProduct:'بەرهەم',fCompany:'کۆمپانیا',fLegal:'یاسایی',fP1:'قابلیەتەکان',fP2:'پارەدان',fP3:'بازارەکان',fP4:'نرخەکان',fC1:'دەربارە',fC2:'کار',fC3:'ڕاگەیاندن',fC4:'پەیوەندی',fL1:'تایبەتمەندی',fL2:'مەرجەکان',fL3:'ئاسایش',fL4:'کووکیەکان',
 cr:'هەموو مافەکان بۆ سایت جیب پارێزراون'},
 kmr:{
-  sDash:'Aheng',sMarkets:'Bazara Zindî',sGold:'Zêr û Pere',sFx:'Forex',sCrypto:'Krîpto',sPay:'Derdanan',sHealth:'Tenduristî',sSched:'Bername',sRew:'Xelat',sRep:'Rapor',sApp:'Veke App',
-  testiH1:'Ji hêla 100k+ bikarhêneran ve tê hezkirin',t1:'Her tişt — pere, tenduristî, salname — di dawiyê de li cihekî. Her sibeh kontrol dikim.',n1:'Sara A.',j1:'Bazirgan · Dubai',t2:'Birayên zêr û krîptoyê yên zindî zû nû dibin. JIB li şûna sê sepanan bû.',n2:'Reza K.',j2:'Bingehdar · Tehran',t3:'Bedew, zû û taybet. Sernav bi tevahî ya ku min dixwest — paqij û profesyonel.',n3:'Mona T.',j3:'Sêwiraner · Stenbol',tb1:'Şîfrekirina dawî',tb2:'100% kesayet',tb3:'10 ziman',tb4:'Belaş hertim',navF:'Taybetmendî',navS:'Super-App',navM:'Bazar',navP:'Biha',navQ:'Pirs',navOpen:'Vekirina Appê',ln:'Ziman',
+  sDash:'Panel',sMarkets:'Bazara Zindî',sGold:'Zêr û Pere',sFx:'Forex',sCrypto:'Krîpto',sPay:'Derdanan',sHealth:'Tenduristî',sSched:'Bername',sRew:'Xelat',sRep:'Rapor',sApp:'Veke App',
+  testiH1:'Ji hêla 100k+ bikarhêneran ve tê hezkirin',t1:'Her tişt — pere, tenduristî, salname — di dawiyê de li cihekî. Her sibeh kontrol dikim.',n1:'Sara A.',j1:'Bazirgan · Dubai',t2:'Bihayên zêr û krîptoyê yên zindî zû nû dibin. JIB li şûna sê sepanan bû.',n2:'Reza K.',j2:'Bingehdar · Tehran',t3:'Bedew, zû û taybet. Sernav bi tevahî ya ku min dixwest — paqij û profesyonel.',n3:'Mona T.',j3:'Sêwiraner · Stenbol',tb1:'Şîfrekirina dawî',tb2:'100% kesayet',tb3:'10 ziman',tb4:'Belaş hertim',navF:'Taybetmendî',navS:'Super-App',navM:'Bazar',navP:'Biha',navQ:'Pirs',navOpen:'Vekirina Appê',ln:'Ziman',
 chip1:'✦ Yek hesab, her tişt',chip2:'🌍 Zêdetirî 190 welat',chip3:'🗣 10 ziman',
 h1:'Teva jiyana te di <span class="g">yek berîkê</span> de',
 sub:'JIB pere, berdêl, bazarên zindî, bername, tenduristî, nûçe û xelatên di yek dashboarda rojane ya xweşik de kom dike. Ji bo her kesî têra xwe sade, ji bo her tiştî têra xwe bi hêz.',
@@ -1040,8 +1058,8 @@ ft6:'Nûçeyên Te',fs6:'Nûçeyên herêmî û cîhanî li gor berjewendiyên t
 ft7:'Xelat',fs7:'Ji bo her kirinê xal bi dest bixe. Wê bikin kashbek, diyarî û danûstandin.',
 ft8:'Alîkarê AI',fs8:'Her tiştî bipirse û JIB di çirkan de bi bersiv, kiryar û şîret bersiv dide.',
 ft9:'Ewlehiya Bankî',fs9:'Daneyên şîfrekirî, têketina biyometrîk û kontrola tevahî li ser tiştê ku te parve dike.',
-ssTag:'Berdêl',ssH:'Fature, ceza, bac û dagirtinan di çirkan de bide',ssP:'Ne rêz, ne appên cihê, ne dîroka derbasbûyî. Her fatureyê bi hejmarê bibîne an skan bike, pêşniyar bike û qediya — bi xelat li ser her berdêlê.',
-ssl1b:'Karûbar',ssl1s:'Elektrîk, av, gaz, telefon, înternet',ssl2b:'Veguhestin',ssl2s:'Bacê rêya bilez, parkkirin, cezayê trafîkê',ssl3b:'Dagirtin',ssl3s:'Krediya mobîl û pakêtên înternetê dêstûr',ssl4b:'Dîroka berdêlê',ssl4s:'Her tişt tê şopandin, lêgerîn û eksport',ssCta:'Niha dest bi berdêlê bike ←',
+ssTag:'Berdêl',ssH:'Fature, ceza, bac û dagirtinan di çirkan de bide',ssP:'Ne rêz, ne appên cihê, ne dîroka derbasbûyî. Her fatureyê bi hejmarê bibîne an skan bike, bipejirîne û qediya — bi xelat li ser her berdêlê.',
+ssl1b:'Karûbar',ssl1s:'Elektrîk, av, gaz, telefon, înternet',ssl2b:'Veguhestin',ssl2s:'Bacê rêya bilez, parkkirin, cezayê trafîkê',ssl3b:'Dagirtin',ssl3s:'Krediya mobîl û pakêtên înternetê yekser',ssl4b:'Dîroka berdêlê',ssl4s:'Her tişt tê şopandin, lêgerîn û eksport',ssCta:'Niha dest bi berdêlê bike ←',
 recent:'Berdêlên dawî',today:'Îro',elec:'Fatureya elektrîkê',elec2:'Fature #8472591',mobile:'Dagirtina mobîl',mobile2:'IR-MCI +2GB',hway:'Bacê rêya bilez',hway2:'Berdêla otomatîk herêma A',traffic:'Cezayê trafîkê',traffic2:'Hat dayîn û hate girtin',rewEarned:'⭐ Xelatên wergirtî','pts':'+75 xal',
 mkEyebrow:'Bazarên zindî',mkH:'Zêr, Forex, krîpto û endeks bi awayê zindî',mkP:'Bihayên cîhanê bi awayê zindî bi nexşe, alert û şopandina portfolio bibîne.',mkLive:'Daneyên bazara zindî · her 60 çirke tê nûkirin',mkGGold:'Zêr',mkGGoldSub:'Metalên hêja · zindî',mkGFx:'Pere',mkGFxSub:'Borsa biyanî · zindî',mkGCrypto:'Krîpto',mkGCryptoSub:'Malên dîjîtal · zindî',mkGCoin:'Pere',mkGCoinSub:'Pereyên Îranê · zindî',mGold18:'Zêrê 18 ayar / gr',mCoinEmami:'Pereyê Emamî',mCoinNim:'Nîv pere',mCoinRob:'Çaryek pere',mCoinGram:'Pereyê 1g',mkToman:'Toman',
 statLang:'Ziman',statCount:'Welat',statUsers:'Bikarhênerên aktîf',statUptime:'Amadebûn',
@@ -1051,12 +1069,12 @@ stDesc:'Her tiştê bingehîn ji bo jiyana rojane.',st1:'Şopandina pere û bud�
 proDesc:'Ji bo kesên ku hêz û têgihiştinek bêtir dixwazin.',pro1:'Her tişt di Destpêkê de',pro2:'Alert û nexşeyên pêşketî yên bazarê',pro3:'Alîkarê AI û têgihiştinên jîr',pro4:'Hesab û amûrên bêsînor',pro5:'Piştgiriya pêşîn',pro6:'3× xalên xelatê',startPro:'Dest bi Profesyonel bike ←',
 famDesc:'Yek plan ji bo teva malbatê.',fam1:'Her tişt di Profesyonel de ×5 endam',fam2:'Budçe û fatureyên parvekirî',fam3:'Kontrolên ewlehiya zarokan',fam4:'Xizmeta malbatê ya taybet',startFam:'Dest bi Malbatê bike ←',
 fqEyebrow:'Pirs',fqH:'Pirs, hat bersivdan',
-fq1q:'Ma JIB bi rastî belaş e?',fq1a:'Erê. Plana Destpêk 100% belaş e heta hetayê bi hemû taybetmendiyên bingehîn. Em tenê ji bo taybetmendiyên hêzdar ên Profesyonel mesrefek piçûk a vebijarkî digirin — û tu carî reklam, tu planan de.',
+fq1q:'Ma JIB bi rastî belaş e?',fq1a:'Erê. Plana Destpêk 100% belaş e heta hetayê bi hemû taybetmendiyên bingehîn. Em tenê ji bo taybetmendiyên hêzdar ên Profesyonel mesrefek piçûk a vebijarkî digirin — û reklam li tu planan nîn e.',
 fq2q:'Ji kîjan welatan JIB piştgirî dike?',fq2a:'JIB di 190+ welatan de bi piştgiriya pirzimanî û rêbazên dayîna herêmî dixebite. Em bi berdewamî herêmên nû zêde dikin.',
 fq3q:'Ma daneyên min ên darayî ewle ne?',fq3a:'Daneyên te bi ewlehiya bankî ya dawî-bi-dawî tê şîfrekirin. Tu her dem kontrol dikî tiştê ku te parve dike û dikarî her dem her tiştî eksport an jê bibe.',
 fq4q:'Ma ez dikarim hem li têlefon hem jî li kompîturê bikar bînim?',fq4a:'Erê. Daneyên te bi awayê otomatîk û zindî di nav hemû amûran de hevdeng dibin. Li têlefonê dest pê bike, li laptopê bidomîne.',
 fq5q:'Ez çawa xelat qezenc dikim?',fq5a:'Ji bo têketina rojane, dayîna fatureyan, qedandina karan û zêdetir xal bi dest bixe. Xalan ji bo kashbek, daxistin, diyarî û danûstandinan bikar bîne.',
-ctaH:'Jiyana te niha <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">mal</span>ek heye.',ctaP:'Beşdarî milyonan bibe yên ku teva roja xwe di yek berîkê de datînin. Îro JIB bi belaş hişyar bike.',
+ctaH:'Jiyana te niha <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">mal</span>ek heye.',ctaP:'Beşdarî milyonan bibe yên ku teva roja xwe di yek berîkê de datînin. Îro JIB bi belaş daxîne.',
 dl:'Daxistin ji',as:'App Store',gi:'Bistîne ji',gp:'Google Play',oi:'Vekirina di',wa:'Appa Webê',
 footDesc:'Yek super-app ji bo teva jiyana te. Ji hêla kesên ku bawer dikin jiyana rojane divê sade be hate çêkirin.',
 fProduct:'Berhem',fCompany:'Şirket',fLegal:'Qanûnî',fP1:'Taybetmendî',fP2:'Berdêl',fP3:'Bazar',fP4:'Biha',fC1:'Derbar',fC2:'Kar',fC3:'Çapemenî',fC4:'Têkilî',fL1:'Nepenî',fL2:'Merc',fL3:'Ewlehî',fL4:'Kûkî',
@@ -1080,7 +1098,7 @@ ft4:'Расписание и напоминания',fs4:'Задачи, встр
 ft5:'Ежедневное здоровье',fs5:'Шаги, сон, вода и тренировки — мягкий толчок к более здоровой жизни.',
 ft6:'Ваша лента новостей',fs6:'Местные и мировые новости по вашим интересам, на вашем языке.',
 ft7:'Награды',fs7:'Получайте очки за каждое действие. Превращайте их в кэшбэк, подарки и скидки.',
-ft8:'ИИ-ассистент',fs8:'Спросите что угодно, и JIB ответит советом, действием и рекомендацией за секунды.',
+ft8:'ИИ-ассистент',fs8:'Спросите что угодно, и JIB за секунды даст ответ, выполнит действие и даст совет.',
 ft9:'Безопасность банковского уровня',fs9:'Зашифрованные данные, биометрический вход и полный контроль над тем, что вы публикуете.',
 ssTag:'Платежи',ssH:'Платите счета, штрафы, сборы и пополнения за секунды',ssP:'Больше никаких очередей, отдельных приложений и пропущенных сроков. Найдите любой счёт по номеру или сканируйте, подтвердите — и готово, с наградами за каждый платёж.',
 ssl1b:'Коммунальные',ssl1s:'Электричество, вода, газ, телефон, интернет',ssl2b:'Транспорт',ssl2s:'Дорожные сборы, парковка, штрафы',ssl3b:'Пополнения',ssl3s:'Кредит и пакеты данных мгновенно',ssl4b:'История платежей',ssl4s:'Всё отслеживается, ищется и экспортируется',ssCta:'Начать платить →',
@@ -1326,7 +1344,6 @@ loadMarkets();setInterval(loadMarkets,60000);
   tog.className='lsb-toggle';tog.innerHTML='☰';tog.setAttribute('aria-label','Menu');
   tog.onclick=()=>{lsb.classList.add('open');ov.classList.add('show')};
   document.body.appendChild(tog);
-  document.getElementById('burger')&&document.getElementById('burger').addEventListener('click',()=>{lsb.classList.add('open');ov.classList.add('show')});
 })();
 
 </script>
