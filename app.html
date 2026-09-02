@@ -137,6 +137,24 @@ body::after{width:460px;height:460px;background:radial-gradient(circle,#ec4899,t
 .tk .s{font-size:12px;color:var(--muted);display:flex;justify-content:space-between}.tk .s .upd{color:var(--accent)}
 .tk b{font-size:19px;display:block;margin:6px 0;font-family:'Sora',sans-serif}
 .tk .chg{font-size:12px;font-weight:700}
+.mk-group{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:22px;padding:18px;margin-bottom:16px}
+.mk-group-head{display:flex;align-items:center;gap:11px;margin-bottom:14px}
+.mk-group-ic{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;font-size:20px;flex-shrink:0;border:1px solid var(--line);background:var(--grad-soft)}
+.mk-group-name{font-family:'Sora';font-size:15px;font-weight:800;color:var(--text)}
+.mk-group-sub{font-size:11px;color:var(--muted);display:block;margin-top:1px}
+.mk-group-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:11px}
+.mk-card{background:linear-gradient(170deg,rgba(14,23,44,.7),rgba(10,15,30,.7));border:1px solid var(--line);border-radius:15px;padding:13px 15px;transition:.2s;min-width:0}
+.mk-card:hover{border-color:var(--primary2);transform:translateY(-2px)}
+.mk-card .mk-t{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden}
+.mk-card .mk-t .mk-em{font-style:normal;font-size:15px}
+.mk-card b{font-size:18px;display:block;margin:5px 0 2px;font-family:'Sora',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mk-card .mk-row{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.mk-card .mk-uni{font-size:11px;color:var(--muted2)}
+.mk-hero{background:var(--grad);border-radius:22px;padding:20px 18px;margin-bottom:16px;color:#fff;position:relative;overflow:hidden}
+.mk-hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 0%,rgba(255,255,255,.25),transparent 55%)}
+.mk-hero .e{font-size:26px}
+.mk-hero b{font-size:20px;font-family:'Sora',sans-serif;display:block}
+.mk-hero small{opacity:.9}
 .row{display:flex;align-items:center;gap:12px;background:linear-gradient(170deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:9px;transition:.2s;animation:fade .35s ease both}
 .row:hover{border-color:var(--line2);transform:translateX(2px)}
 [dir=rtl] .row:hover{transform:translateX(-2px)}
@@ -454,7 +472,8 @@ en:{
   notifOn:"Notifications on",notifOff:"Notifications off",remDue:"Reminder:",backup:"Backup",
   export:"Export data",import:"Import data",importBtn:"Choose file",backupDone:"Backup saved",restored:"Data restored",
   jalali:"Persian date",aiTitle:"JIB Assistant",aiOff:"AI works offline too",goldLive:"Gold (live)",offline:"offline",
-  lang:"Language",settings:"Settings",notifications:"Notifications",permissions:"Allow notifications",install:"Install JIB app 🔽",rateNote:"Toman prices are estimated from the live free-market Tether rate when reachable; otherwise gold/FX use international USD rates. Iranian coins may have a market premium over their gold content."
+  lang:"Language",settings:"Settings",notifications:"Notifications",permissions:"Allow notifications",install:"Install JIB app 🔽",rateNote:"Toman prices are estimated from the live free-market Tether rate when reachable; otherwise gold/FX use international USD rates. Iranian coins may have a market premium over their gold content.",
+  grpFx:"Currencies (FX)",grpFxSub:"Foreign exchange · live",grpCoin:"Gold & Coins",grpCoinSub:"Iranian coins · live",grpCrypto:"Crypto",grpCryptoSub:"Digital assets · live",
 },
 fa:{
   dashTitle:"داشبورد",reports:"گزارش‌ها",transactions:"تراکنش‌ها",net:"خالص",overview:"نمای کلی",
@@ -476,7 +495,8 @@ fa:{
   notifOn:"اعلان روشن",notifOff:"اعلان خاموش",remDue:"یادآور:",backup:"پشتیبان‌گیری",
   export:"خروجی داده",import:"ورود داده",importBtn:"انتخاب فایل",backupDone:"پشتیبان ذخیره شد",restored:"داده بازیابی شد",
   jalali:"تقویم شمسی",aiTitle:"دستیار جیب",aiOff:"AI آفلاین هم جواب می‌دهد",goldLive:"طلا (زنده)",offline:"آفلاین",
-  lang:"زبان",settings:"تنظیمات",notifications:"اعلان‌ها",permissions:"اجازه اعلان",install:"نصب اپ جیب 🔽",rateNote:"قیمت‌های تومانی از نرخ زنده تتر بازار آزاد (وقتی در دسترس باشد) تخمین زده می‌شود؛ در غیر این صورت طلا و ارز با نرخ بین‌المللی دلار است. سکه‌های ایرانی ممکن است حباب/پیش‌مایه‌ی بیش از وزن طلا داشته باشند."
+  lang:"زبان",settings:"تنظیمات",notifications:"اعلان‌ها",permissions:"اجازه اعلان",install:"نصب اپ جیب 🔽",rateNote:"قیمت‌های تومانی از نرخ زنده تتر بازار آزاد (وقتی در دسترس باشد) تخمین زده می‌شود؛ در غیر این صورت طلا و ارز با نرخ بین‌المللی دلار است. سکه‌های ایرانی ممکن است حباب/پیش‌مایه‌ی بیش از وزن طلا داشته باشند.",
+  grpFx:"ارزها",grpFxSub:"تبدیل ارز · زنده",grpCoin:"طلا و سکه",grpCoinSub:"سکه‌های ایران · زنده",grpCrypto:"کریپتو",grpCryptoSub:"دارایی دیجیتال · زنده",
 },
 ar:{
   dashTitle:"لوحة التحكم",reports:"التقارير",transactions:"المعاملات",net:"الصافي",overview:"نظرة عامة",
@@ -497,7 +517,8 @@ ar:{
   notifOn:"التنبيهات مفعلة",notifOff:"التنبيهات مطفأة",remDue:"تذكير:",backup:"نسخ احتياطي",
   export:"تصدير البيانات",import:"استيراد البيانات",importBtn:"اختر ملف",backupDone:"تم حفظ النسخة",restored:"تمت الاستعادة",
   jalali:"التقويم الفارسي",aiTitle:"مساعد جيب",aiOff:"يعمل AI في وضع عدم الاتصال أيضًا",goldLive:"الذهب (مباشر)",offline:"غير متصل",
-  lang:"اللغة",settings:"الإعدادات",notifications:"التنبيهات",permissions:"السماح بالتنبيهات",install:"ثبّت تطبيق جيب 🔽",rateNote:"تُقدَّر الأسعار بالتومان من سعر تتر الحرّ الفوري (عند توفره)؛ وإلا يُعرض الذهب والعملات بالدولار الدولي. قد تحمل العملات الإيرانية علاوة سوقية فوق وزن الذهب."
+  lang:"اللغة",settings:"الإعدادات",notifications:"التنبيهات",permissions:"السماح بالتنبيهات",install:"ثبّت تطبيق جيب 🔽",rateNote:"تُقدَّر الأسعار بالتومان من سعر تتر الحرّ الفوري (عند توفره)؛ وإلا يُعرض الذهب والعملات بالدولار الدولي. قد تحمل العملات الإيرانية علاوة سوقية فوق وزن الذهب.",
+  grpFx:"العملات",grpFxSub:"صرف العملات · مباشر",grpCoin:"الذهب والقطع",grpCoinSub:"قطع إيران · مباشر",grpCrypto:"الكريبتو",grpCryptoSub:"الأصول الرقمية · مباشر",
 },
 ckb:{
   dashTitle:"داشبۆرد",reports:"ڕاپۆرتەکان",transactions:"مامەڵەکان",net:"خاوێن",overview:"بینینی گشتی",
@@ -518,7 +539,8 @@ ckb:{
   notifOn:"ئاگاداری کراوە",notifOff:"ئاگاداری کوژاوە",remDue:"بیرخستنەوە:",backup:"پاشەکەوت",
   export:"هەناردەی داتا",import:"هاوردەی داتا",importBtn:"هەڵبژاردنی فایل",backupDone:"پاشەکەوت کرا",restored:"داتا گەڕایەوە",
   jalali:"ڕۆژژمێری شمسی",aiTitle:"یارمەتیدەری جیب",aiOff:"AI ئۆفلاینیش وەڵام دەدات",goldLive:"زێڕ (ڕاستەوخۆ)",offline:"ئۆفلاین",
-  lang:"زمان",settings:"ڕێکخستنەکان",notifications:"ئاگادارییەکان",permissions:"ڕێگەدان بە ئاگاداری",install:"دامەزراندنی ئەپی جیب 🔽",rateNote:"نرخی تۆمار لە نرخی ڕاستەوخۆی تێتهەری بازاری ئازاد خەمڵێنراوە (کاتێک بەردەست بێت)؛ ئەگینا زێڕ و دراو بە نرخی دۆلاری نێونەتەوەیی. سکەکان ڕەنگە حەبابی لە نرخی زێڕەکەیان زیاتر هەبێت."
+  lang:"زمان",settings:"ڕێکخستنەکان",notifications:"ئاگادارییەکان",permissions:"ڕێگەدان بە ئاگاداری",install:"دامەزراندنی ئەپی جیب 🔽",rateNote:"نرخی تۆمار لە نرخی ڕاستەوخۆی تێتهەری بازاری ئازاد خەمڵێنراوە (کاتێک بەردەست بێت)؛ ئەگینا زێڕ و دراو بە نرخی دۆلاری نێونەتەوەیی. سکەکان ڕەنگە حەبابی لە نرخی زێڕەکەیان زیاتر هەبێت.",
+  grpFx:"دراوەکان",grpFxSub:"گۆڕینی دراو · ڕاستەوخۆ",grpCoin:"زێڕ و سکە",grpCoinSub:"سکەکانی ئێران · ڕاستەوخۆ",grpCrypto:"کرپتۆ",grpCryptoSub:"دارایی دیجیتاڵ · ڕاستەوخۆ",
 },
 kmr:{
   dashTitle:"Dashboard",reports:"Rapor",transactions:"Danûstandin",net:"Net",overview:"Nêrîna giştî",
@@ -539,7 +561,8 @@ kmr:{
   notifOn:"Agahdarî vekirî",notifOff:"Agahdarî girtî",remDue:"Bîrxistin:",backup:"Yedek",
   export:"Derxistina dane",import:"Anîna dane",importBtn:"Dosye hilbijêre",backupDone:"Yedek hat tomar kirin",restored:"Dane hatin vegerandin",
   jalali:"Salnameya farisî",aiTitle:"Alîkarê JIB",aiOff:"AI offline jî bersiv dide",goldLive:"Zêr (zindî)",offline:"offline",
-  lang:"Ziman",settings:"Mîhengan",notifications:"Agahdarî",permissions:"Destûra agahdariyê",install:"JIB saz bike 🔽",rateNote:"Nirxên bi Tomen ji nirxa zindî ya Tether a bazara azad tê jê nirxandin (gava bighin); wekî din zêr û drav bi nirxê dolarê navneteweyî ne. Pereyên Îranê dibe ku pêşbaziya bazara ji nirxa zêr zêdetir hebe."
+  lang:"Ziman",settings:"Mîhengan",notifications:"Agahdarî",permissions:"Destûra agahdariyê",install:"JIB saz bike 🔽",rateNote:"Nirxên bi Tomen ji nirxa zindî ya Tether a bazara azad tê jê nirxandin (gava bighin); wekî din zêr û drav bi nirxê dolarê navneteweyî ne. Pereyên Îranê dibe ku pêşbaziya bazara ji nirxa zêr zêdetir hebe.",
+  grpFx:"Pere",grpFxSub:"danûstandina pereyan · zindî",grpCoin:"Zêr û sikkan",grpCoinSub:"sikkên Îranê · zindî",grpCrypto:"Krîpto",grpCryptoSub:"malên dîjîtal · zindî",
 },
 ru:{
   dashTitle:"Панель",reports:"Отчёты",transactions:"Транзакции",net:"Итого",overview:"Обзор",
@@ -560,7 +583,8 @@ ru:{
   notifOn:"Уведомления вкл",notifOff:"Уведомления выкл",remDue:"Напоминание:",backup:"Резервная копия",
   export:"Экспорт данных",import:"Импорт данных",importBtn:"Выбрать файл",backupDone:"Копия сохранена",restored:"Данные восстановлены",
   jalali:"Персидская дата",aiTitle:"Помощник JIB",aiOff:"ИИ работает и офлайн",goldLive:"Золото (живое)",offline:"офлайн",
-  lang:"Язык",settings:"Настройки",notifications:"Уведомления",permissions:"Разрешить уведомления",install:"Установить приложение JIB 🔽",rateNote:"Цены в туманах оцениваются по живому курсу Tether свободного рынка (если доступен); иначе золото и валюта — по международному доллару. Иранские монеты могут иметь рыночную надбавку сверх золотого содержания."
+  lang:"Язык",settings:"Настройки",notifications:"Уведомления",permissions:"Разрешить уведомления",install:"Установить приложение JIB 🔽",rateNote:"Цены в туманах оцениваются по живому курсу Tether свободного рынка (если доступен); иначе золото и валюта — по международному доллару. Иранские монеты могут иметь рыночную надбавку сверх золотого содержания.",
+  grpFx:"Валюты",grpFxSub:"Обмен валют · вживую",grpCoin:"Золото и монеты",grpCoinSub:"Иранские монеты · вживую",grpCrypto:"Крипто",grpCryptoSub:"Цифровые активы · вживую",
 },
 es:{
   dashTitle:"Panel",reports:"Informes",transactions:"Transacciones",net:"Neto",overview:"Resumen",
@@ -581,7 +605,8 @@ es:{
   notifOn:"Notificaciones activas",notifOff:"Notificaciones inactivas",remDue:"Recordatorio:",backup:"Copia",
   export:"Exportar datos",import:"Importar datos",importBtn:"Elegir archivo",backupDone:"Copia guardada",restored:"Datos restaurados",
   jalali:"Fecha persa",aiTitle:"Asistente JIB",aiOff:"La IA funciona también sin conexión",goldLive:"Oro (vivo)",offline:"sin conexión",
-  lang:"Idioma",settings:"Ajustes",notifications:"Notificaciones",permissions:"Permitir notificaciones",install:"Instalar la aplicación JIB 🔽",rateNote:"Los precios en tumán se estiman desde la tasa de Tether del mercado libre (si está disponible); de lo contrario, el oro y la moneda usan tipos internacionales en USD. Las monedas iraníes pueden tener prima de mercado sobre su contenido de oro."
+  lang:"Idioma",settings:"Ajustes",notifications:"Notificaciones",permissions:"Permitir notificaciones",install:"Instalar la aplicación JIB 🔽",rateNote:"Los precios en tumán se estiman desde la tasa de Tether del mercado libre (si está disponible); de lo contrario, el oro y la moneda usan tipos internacionales en USD. Las monedas iraníes pueden tener prima de mercado sobre su contenido de oro.",
+  grpFx:"Monedas",grpFxSub:"Cambio de divisas · en vivo",grpCoin:"Oro y monedas",grpCoinSub:"Monedas iraníes · en vivo",grpCrypto:"Cripto",grpCryptoSub:"Activos digitales · en vivo",
 },
 fr:{
   dashTitle:"Tableau de bord",reports:"Rapports",transactions:"Transactions",net:"Net",overview:"Aperçu",
@@ -602,7 +627,8 @@ fr:{
   notifOn:"Notifications activées",notifOff:"Notifications désactivées",remDue:"Rappel :",backup:"Sauvegarde",
   export:"Exporter les données",import:"Importer les données",importBtn:"Choisir un fichier",backupDone:"Sauvegarde enregistrée",restored:"Données restaurées",
   jalali:"Date persane",aiTitle:"Assistant JIB",aiOff:"L'IA fonctionne aussi hors ligne",goldLive:"Or (en direct)",offline:"hors ligne",
-  lang:"Langue",settings:"Paramètres",notifications:"Notifications",permissions:"Autoriser les notifications",install:"Installer l'app JIB 🔽",rateNote:"Les prix en toman sont estimés d'après le taux Tether du marché libre (si disponible) ; sinon or et devises s'affichent en taux USD internationaux. Les pièces iraniennes peuvent avoir une prime de marché sur leur contenu d'or."
+  lang:"Langue",settings:"Paramètres",notifications:"Notifications",permissions:"Autoriser les notifications",install:"Installer l'app JIB 🔽",rateNote:"Les prix en toman sont estimés d'après le taux Tether du marché libre (si disponible) ; sinon or et devises s'affichent en taux USD internationaux. Les pièces iraniennes peuvent avoir une prime de marché sur leur contenu d'or.",
+  grpFx:"Devises",grpFxSub:"Change · en direct",grpCoin:"Or et pièces",grpCoinSub:"Pièces iraniennes · en direct",grpCrypto:"Crypto",grpCryptoSub:"Actifs numériques · en direct",
 },
 de:{
   dashTitle:"Übersicht",reports:"Berichte",transactions:"Transaktionen",net:"Netto",overview:"Überblick",
@@ -623,7 +649,8 @@ de:{
   notifOn:"Benachrichtigungen an",notifOff:"Benachrichtigungen aus",remDue:"Erinnerung:",backup:"Sicherung",
   export:"Daten exportieren",import:"Daten importieren",importBtn:"Datei wählen",backupDone:"Sicherung gespeichert",restored:"Daten wiederhergestellt",
   jalali:"Persisches Datum",aiTitle:"JIB Assistent",aiOff:"KI funktioniert auch offline",goldLive:"Gold (live)",offline:"offline",
-  lang:"Sprache",settings:"Einstellungen",notifications:"Benachrichtigungen",permissions:"Benachrichtigungen erlauben",install:"JIB-App installieren 🔽",rateNote:"Toman-Preise werden aus dem Tether-Kurs des freien Marktes geschätzt (wenn verfügbar); sonst zeigen Gold und Währung internationale USD-Kurse. Iranische Münzen können eine Marktprämie über ihrem Goldwert haben."
+  lang:"Sprache",settings:"Einstellungen",notifications:"Benachrichtigungen",permissions:"Benachrichtigungen erlauben",install:"JIB-App installieren 🔽",rateNote:"Toman-Preise werden aus dem Tether-Kurs des freien Marktes geschätzt (wenn verfügbar); sonst zeigen Gold und Währung internationale USD-Kurse. Iranische Münzen können eine Marktprämie über ihrem Goldwert haben.",
+  grpFx:"Währungen",grpFxSub:"Devisen · live",grpCoin:"Gold & Münzen",grpCoinSub:"Iranische Münzen · live",grpCrypto:"Krypto",grpCryptoSub:"Digitale Assets · live",
 },
 zh:{
   dashTitle:"仪表盘",reports:"报告",transactions:"交易",net:"净额",overview:"概览",
@@ -644,7 +671,8 @@ zh:{
   notifOn:"通知开启",notifOff:"通知关闭",remDue:"提醒：",backup:"备份",
   export:"导出数据",import:"导入数据",importBtn:"选择文件",backupDone:"备份已保存",restored:"数据已恢复",
   jalali:"波斯日期",aiTitle:"JIB 助手",aiOff:"AI 离线也能回答",goldLive:"黄金（实时）",offline:"离线",
-  lang:"语言",settings:"设置",notifications:"通知",permissions:"允许通知",install:"安装 JIB 应用 🔽",rateNote:"土曼价格由自由市场 Tether 汇率估算（如可用）；否则黄金和货币按国际美元汇率显示。伊朗硬币可能含有高于黄金价值的市场溢价。"
+  lang:"语言",settings:"设置",notifications:"通知",permissions:"允许通知",install:"安装 JIB 应用 🔽",rateNote:"土曼价格由自由市场 Tether 汇率估算（如可用）；否则黄金和货币按国际美元汇率显示。伊朗硬币可能含有高于黄金价值的市场溢价。",
+  grpFx:"货币",grpFxSub:"外汇兑换 · 实时",grpCoin:"黄金与硬币",grpCoinSub:"伊朗硬币 · 实时",grpCrypto:"加密货币",grpCryptoSub:"数字资产 · 实时",
 }
 };
 const RTL=['fa','ar','ckb'];
@@ -695,19 +723,20 @@ function checkReminders(){if(!notifEnabled()||!S.reminders)return;const now=Date
 
 /* ============ live data ============ */
 let fxCards='',goldCard='',goldDeep='',cryptoCard='',rateNote=false,fxPair=null,tomanRate=0,tomanLive=false;
+let fxData=[],goldUsd=0,usdPerGram=0,coinData=[],cryptoData=[];
 const FX_CURRENCIES=[['USD','💵'],['EUR','💶'],['GBP','💷'],['JPY','💴'],['AED','💱'],['TRY','🇹🇷'],['CHF','🇨🇭'],['CAD','🇨🇦'],['AUD','🇦🇺'],['CNY','🇨🇳']];
-async function fetchFX(){try{const d=await(await fetch('https://open.er-api.com/v6/latest/USD')).json();if(!d.rates)return;fxPair=d.rates;fxCards=FX_CURRENCIES.map(a=>{const c=a[0];const r=d.rates[c]||0;if(!r)return '';const display=c==='USD'?'1.0000':(1/r).toFixed(4);return `<div class="tk"><div class="s"><span>${a[1]} ${c}</span><span class="upd">●</span></div><b>${display}</b><span class="chg green">${c}/USD</span></div>`}).join('');rateNote=true;myMarkets();}catch(e){}}
+async function fetchFX(){try{const d=await(await fetch('https://open.er-api.com/v6/latest/USD')).json();if(!d.rates)return;fxPair=d.rates;fxData=[];fxCards=FX_CURRENCIES.map(a=>{const c=a[0];const r=d.rates[c]||0;if(!r)return '';const display=c==='USD'?'1.0000':(1/r).toFixed(4);fxData.push({ic:a[1],code:c,disp:display,unit:c+'/USD'});return `<div class="tk"><div class="s"><span>${a[1]} ${c}</span><span class="upd">●</span></div><b>${display}</b><span class="chg green">${c}/USD</span></div>`}).join('');rateNote=true;myMarkets();}catch(e){}}
 async function fetchToman(){try{const url='https://api.nobitex.ir/v2/market/stats?srcCurrency=usdt&dstCurrency=rls';const d=await(await fetch(url)).json();const s=d&&d.stats&&d.stats['usdt-rls'];if(!s||!s.latest)return;tomanRate=Math.round((+s.latest)/10);tomanLive=true;fetchGold();}catch(e){}}
 function goldTomanRows(usdPerGram){const tr=tomanRate;if(!tr)return '';const show=(n,w,p)=>{if(w===0)return '';return `<div class="row fade-in"><div class="ic">🪙</div><div class="t"><b>${n}</b><small>${w}g · ${Math.round(p*100)}%</small></div><div class="val gold">${fmt(Math.round(usdPerGram*w*p*tr))} ${t('toman')}</div></div>`};return `${show('🪙 18k gram',1,0.75)}${show('🪙 Emami / Bahar Azadi',8.133,0.917)}${show('Half (Nim)',4.068,0.917)}${show('Quarter (Rob)',2.033,0.917)}`}
-async function fetchGold(){try{const g=await(await fetch('https://api.gold-api.com/price/XAU')).json();const gUsd=g.price||0;const usdPerGram=gUsd/31.1035;goldCard=`<div class="tk"><div class="s"><span>🥇 ${t('gold')}</span><span class="upd">●</span></div><b style="color:var(--gold)">$${gUsd.toLocaleString('en-US',{maximumFractionDigits:0})} / oz</b><span class="chg green">${t('goldLive')}</span></div>`;
-  const mk=(name,wt,pur)=>{const val=(usdPerGram*wt*pur);return `<div class="row fade-in"><div class="ic">🪙</div><div class="t"><b>${name}</b><small>${wt}g · ${Math.round(pur*100)}%</small></div><div class="val gold">$${Math.round(val).toLocaleString('en-US')}</div></div>`};
+async function fetchGold(){try{const g=await(await fetch('https://api.gold-api.com/price/XAU')).json();const gUsd=g.price||0;goldUsd=gUsd;usdPerGram=gUsd/31.1035;goldCard=`<div class="tk"><div class="s"><span>🥇 ${t('gold')}</span><span class="upd">●</span></div><b style="color:var(--gold)">$${gUsd.toLocaleString('en-US',{maximumFractionDigits:0})} / oz</b><span class="chg green">${t('goldLive')}</span></div>`;
+  coinData=[];const addCoin=(name,wt,pur)=>{const val=(usdPerGram*wt*pur);coinData.push({name,wt,pur,usd:Math.round(val),toman:Math.round(val*tomanRate)});return `<div class="row fade-in"><div class="ic">🪙</div><div class="t"><b>${name}</b><small>${wt}g · ${Math.round(pur*100)}%</small></div><div class="val gold">$${Math.round(val).toLocaleString('en-US')}</div></div>`};
   goldDeep=`${tomanLive?`<div class="kpi" style="grid-column:1/-1"><small>💵 ${t('dollar')} (${t('freeMarket')})</small><b style="color:var(--accent)">${fmt(tomanRate)} ${t('toman')}</b></div>`:''}
   <div class="stitle"><span>🪙 ${t('goldToman')}</span></div>
   ${tomanLive?goldTomanRows(usdPerGram)+`<div style="font-size:11px;color:var(--muted2)">* ${t('estNote')}</div>`:''}
   <div class="stitle"><span>🥇 ${t('gold')} (USD)</span></div>
-  ${mk('🪙 24k gram',1,1)}${mk('18k gram',1,0.75)}${mk('🪙 Emami / Bahar Azadi',8.133,0.917)}${mk('Half (Nim)',4.068,0.917)}${mk('Quarter (Rob)',2.033,0.917)}`;
+  ${addCoin('🪙 24k gram',1,1)}${addCoin('18k gram',1,0.75)}${addCoin('🪙 Emami / Bahar Azadi',8.133,0.917)}${addCoin('Half (Nim)',4.068,0.917)}${addCoin('Quarter (Rob)',2.033,0.917)}`;
   myMarkets();}catch(e){}}
-async function fetchCrypto(){try{const ids='bitcoin,ethereum,tether,binancecoin,solana,ripple,dogecoin,cardano';const c=await(await fetch('https://api.coingecko.com/api/v3/simple/price?ids='+ids+'&vs_currencies=usd',{headers:{'User-Agent':'Mozilla/5.0'}})).json();const names=[['bitcoin','BTC','₿'],['ethereum','ETH','Ξ'],['tether','USDT','₮'],['binancecoin','BNB','🟡'],['solana','SOL','◎'],['ripple','XRP','✕'],['dogecoin','DOGE','🐕'],['cardano','ADA','🪙']];cryptoCard=names.map(n=>{const p=c[n[0]]&&c[n[0]].usd;if(!p)return '';return `<div class="tk"><div class="s"><span>${n[2]} ${n[1]}</span><span class="upd">●</span></div><b>$${fmt(p)}</b><span class="chg green">${t('goldLive')}</span></div>`}).join('');myMarkets();}catch(e){}}
+async function fetchCrypto(){try{const ids='bitcoin,ethereum,tether,binancecoin,solana,ripple,dogecoin,cardano';const c=await(await fetch('https://api.coingecko.com/api/v3/simple/price?ids='+ids+'&vs_currencies=usd',{headers:{'User-Agent':'Mozilla/5.0'}})).json();const names=[['bitcoin','BTC','₿'],['ethereum','ETH','Ξ'],['tether','USDT','₮'],['binancecoin','BNB','🟡'],['solana','SOL','◎'],['ripple','XRP','✕'],['dogecoin','DOGE','🐕'],['cardano','ADA','🪙']];cryptoData=[];cryptoCard=names.map(n=>{const p=c[n[0]]&&c[n[0]].usd;if(!p)return '';cryptoData.push({ic:n[2],code:n[1],price:p});return `<div class="tk"><div class="s"><span>${n[2]} ${n[1]}</span><span class="upd">●</span></div><b>$${fmt(p)}</b><span class="chg green">${t('goldLive')}</span></div>`}).join('');myMarkets();}catch(e){}}
 function myMarkets(){if(cur==='markets')renderMarkets()}
 
 /* ============ AI ============ */
@@ -981,16 +1010,18 @@ function renderMoney(){
   const hcSend=document.getElementById('hcSend');if(hcSend)hcSend.onclick=()=>openSheet(`<h3>⇄ ${t('transfer')}</h3><div class="field"><label>${t('amount')}</label><input type="number" id="trAmt2"></div><button class="btn" id="trSv2">${t('save')}</button><button class="btn btn-ghost" onclick="closeModal()">${t('cancel')}</button>`);if(document.getElementById('trSv2'))document.getElementById('trSv2').onclick=()=>{const amt=+document.getElementById('trAmt2').value||0;if(amt){S.money.balance-=amt;S.txn.push({ic:'⇄',amt,exp:true,trans:true,label:t('transfer'),desc:t('transfer'),ts:Date.now(),mt:new Date().getMonth()});addPts(3);save();closeModal();render();toast(t('saved')+' ⭐+3')}}
 }
 function renderPayments(){let hist=S.payments.slice().reverse().slice(0,10).map(p=>`<div class="row fade-in"><div class="ic">${p.ic||'🧾'}</div><div class="t"><b>${esc(p.label)}</b><small>${esc(p.desc||'')} · ${p.time||''}</small></div><div class="val" style="color:var(--accent)">− ${fmt(p.amt)}</div></div>`).join('')||`<div class="empty">${t('emptyHistory')}</div>`;const a=[['bill','🧾',t('bills')],['charge','📶',t('charge')],['toll','🛣️',t('tollW')],['fine','👮',t('fineW')]];VIEWS.innerHTML=`<div class="quick fade-in" id="q2">${a.map(x=>`<div class="qa" data-a="${x[0]}"><div class="e">${x[1]}</div><small>${x[2]}</small></div>`).join('')}</div><div class="stitle"><span>${t('payments')}</span></div>${hist}`;$('#q2').querySelectorAll('.qa').forEach(q=>q.onclick=()=>openPay(q.dataset.a))}
-function renderMarkets(){const fb=`<div class="tk"><div class="s"><span>💱 ${t('markets')}</span></div><b>…</b></div>`;
-VIEWS.innerHTML=`<div class="stitle"><span>📈 ${t('markets')} · ${t('refresh')}</span></div>
-<div class="ticker fade-in">${cryptoCard||goldCard||fxCards||fb}</div>
-<div class="stitle"><span>💱 FX (USD)</span></div>
-<div class="ticker fade-in">${fxCards||fb}</div>
-${goldCard?`<div class="stitle"><span>🥇 ${t('gold')}</span></div><div class="ticker fade-in">${goldCard}</div>`:''}
-${goldDeep||''}
-<div class="stitle"><span>₿ Crypto · USD</span></div>
-<div class="ticker fade-in">${cryptoCard||fb}</div>
-${rateNote?`<div style="font-size:11px;color:var(--muted2);margin-top:8px">${t('rateNote')}</div>`:''}`;fetchFX();fetchGold();fetchCrypto();}
+function renderMarkets(){const fb=(ic,na,un)=>`<div class="mk-card"><span class="mk-t"><span class="mk-em">${ic}</span>${na}</span><b>…</b><div class="mk-row"><span class="mk-uni">${un}</span></div></div>`;
+const grp=(ic,title,sub,grid)=>`<div class="mk-group fade-in"><div class="mk-group-head"><div class="mk-group-ic">${ic}</div><div><div class="mk-group-name">${title}</div><span class="mk-group-sub">${sub}</span></div></div><div class="mk-group-grid">${grid}</div></div>`;
+const fxGrid=fxData.length?fxData.map(f=>`<div class="mk-card"><span class="mk-t"><span class="mk-em">${f.ic}</span>${f.code}</span><b>${f.disp}</b><div class="mk-row"><span class="mk-uni">${f.unit}</span><span class="chg green">${t('goldLive')}</span></div></div>`).join(''):(fxCards||fb('💱',t('markets'),t('refresh')));
+const ozCard=goldUsd?`<div class="mk-card"><span class="mk-t"><span class="mk-em">🥇</span>${t('gold')}</span><b style="color:var(--gold)">$${goldUsd.toLocaleString('en-US',{maximumFractionDigits:0})}</b><div class="mk-row"><span class="mk-uni">/ oz · ${t('goldLive')}</span></div></div>`:fb('🥇',t('gold'),t('goldLive'));
+const usdCard=tomanLive&&tomanRate?`<div class="mk-card"><span class="mk-t"><span class="mk-em">💵</span>USDT</span><b style="color:var(--accent)">${fmt(tomanRate)} ${t('toman')}</b><div class="mk-row"><span class="mk-uni">${t('dollar')} · ${t('freeMarket')}</span></div></div>`:'';
+const coinGrid=coinData.length?coinData.map(c=>`<div class="mk-card"><span class="mk-t"><span class="mk-em">🪙</span>${c.name.replace(/🪙 /,'')}</span><b>${c.toman?fmt(c.toman)+' '+t('toman'):'$'+fmt(c.usd)}</b><div class="mk-row"><span class="mk-uni">${c.wt}g · ${Math.round(c.pur*100)}%</span></div></div>`).join(''):(goldCard||fb('🪙',t('goldToman'),t('refresh')));
+const cryptoGrid=cryptoData.length?cryptoData.map(c=>`<div class="mk-card"><span class="mk-t"><span class="mk-em">${c.ic}</span>${c.code}</span><b>$${fmt(c.price)}</b><div class="mk-row"><span class="mk-uni">USD</span><span class="chg green">${t('goldLive')}</span></div></div>`).join(''):(cryptoCard||fb('₿','Crypto','USD'));
+VIEWS.innerHTML=`<div class="mk-hero fade-in"><div class="e">📈</div><b>${t('markets')}</b><small>${t('refresh')}</small></div>
+${grp('💱',t('grpFx'),t('grpFxSub'),fxGrid)}
+${grp('🥇',t('grpCoin'),t('grpCoinSub'),ozCard+usdCard+coinGrid)}
+${grp('₿',t('grpCrypto'),t('grpCryptoSub'),cryptoGrid)}
+${rateNote?`<div style="font-size:11px;color:var(--muted2);margin-top:6px">${t('rateNote')}</div>`:''}`;fetchFX();fetchGold();fetchCrypto();}
 function renderSchedule(){
   const j=new Date();let tasks=S.tasks.map((x,i)=>`<div class="task ${x.done?'done':''}"><input type="checkbox" ${x.done?'checked':''} data-i="${i}"><div class="t"><b>${esc(x.desc)}</b><small>${esc(x.time||'')}</small></div><button class="del" data-i="${i}">✕</button></div>`).join('')||`<div class="empty">${t('noTasks')}</div>`;
   let rems=S.reminders.map((x,i)=>`<div class="task ${x.done?'done':''}"><input type="checkbox" ${x.done?'checked':''} data-r="${i}"><div class="t"><b>⏰ ${esc(x.desc)}</b><small>${x.time||''}</small></div><button class="del" data-r="${i}">✕</button></div>`).join('')||`<div class="empty">${t('noRem')}</div>`;
