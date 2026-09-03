@@ -442,7 +442,7 @@ body{
 <div class="drawer-overlay" id="drawerOv"></div>
 <aside class="drawer" id="drawer">
   <div class="drawer-head">
-    <div class="drawer-av"><span class="pp">${typeof t==='function'?'ج':'ج'}</span><span class="pts-badge">⭐ <b id="dvPts">0</b></span></div>
+    <div class="drawer-av"><span class="pp">ج</span><span class="pts-badge">⭐ <b id="dvPts">0</b></span></div>
     <div class="drawer-user"><b id="dvGreet">JIB</b><small id="dvLvl">·</small></div>
     <button class="drawer-close" id="drawerClose" aria-label="Close">✕</button>
   </div>
@@ -723,18 +723,19 @@ function checkReminders(){if(!notifEnabled()||!S.reminders)return;const now=Date
 
 /* ============ live data ============ */
 let fxCards='',goldCard='',goldDeep='',cryptoCard='',rateNote=false,fxPair=null,tomanRate=0,tomanLive=false;
-let fxData=[],goldUsd=0,usdPerGram=0,coinData=[],cryptoData=[];
+let fxData=[],goldUsd=0,usdPerGram=0,coinData=[],cryptoData=[];let bazaarLive=false,bazaarGold18=0;
 const FX_CURRENCIES=[['USD','💵'],['EUR','💶'],['GBP','💷'],['JPY','💴'],['AED','💱'],['TRY','🇹🇷'],['CHF','🇨🇭'],['CAD','🇨🇦'],['AUD','🇦🇺'],['CNY','🇨🇳']];
 async function fetchFX(){try{const d=await(await fetch('https://open.er-api.com/v6/latest/USD')).json();if(!d.rates)return;fxPair=d.rates;fxData=[];fxCards=FX_CURRENCIES.map(a=>{const c=a[0];const r=d.rates[c]||0;if(!r)return '';const display=c==='USD'?'1.0000':(1/r).toFixed(4);fxData.push({ic:a[1],code:c,disp:display,unit:c+'/USD'});return `<div class="tk"><div class="s"><span>${a[1]} ${c}</span><span class="upd">●</span></div><b>${display}</b><span class="chg green">${c}/USD</span></div>`}).join('');rateNote=true;myMarkets();}catch(e){}}
 async function fetchToman(){try{const url='https://api.nobitex.ir/v2/market/stats?srcCurrency=usdt&dstCurrency=rls';const d=await(await fetch(url)).json();const s=d&&d.stats&&d.stats['usdt-rls'];if(!s||!s.latest)return;tomanRate=Math.round((+s.latest)/10);tomanLive=true;fetchGold();}catch(e){}}
+async function fetchBazaar(){try{const p=await(await fetch('/api/price',{headers:{'Accept':'application/json'}})).json();if(!p||!p.coins)return;const c=p.coins,g=p.gold||{},f=p.fx||{};tomanRate=Math.round((Number(f.usd)||0));tomanLive=tomanRate>0;bazaarLive=true;bazaarGold18=Number(g.g18)||0;coinData=[{name:'🪙 Emami / Bahar Azadi',toman:Math.round(Number(c.emami)||0),note:t('grpCoin')},{name:'Half (Nim)',toman:Math.round(Number(c.nim)||0),note:'1/2'},{name:'Quarter (Rob)',toman:Math.round(Number(c.rob)||0),note:'1/4'},{name:'18k gram',toman:Math.round(Number(g.g18)||0),note:'18k'}].filter(x=>x.toman>0);goldDeep=`<div class="kpi" style="grid-column:1/-1"><small>💵 ${t('dollar')} (${t('freeMarket')})</small><b style="color:var(--accent)">${fmt(tomanRate)} ${t('toman')}</b></div>`;rateNote=true;myMarkets();if(cur==='home')renderHome();}catch(e){}}
 function goldTomanRows(usdPerGram){const tr=tomanRate;if(!tr)return '';const show=(n,w,p)=>{if(w===0)return '';return `<div class="row fade-in"><div class="ic">🪙</div><div class="t"><b>${n}</b><small>${w}g · ${Math.round(p*100)}%</small></div><div class="val gold">${fmt(Math.round(usdPerGram*w*p*tr))} ${t('toman')}</div></div>`};return `${show('🪙 18k gram',1,0.75)}${show('🪙 Emami / Bahar Azadi',8.133,0.917)}${show('Half (Nim)',4.068,0.917)}${show('Quarter (Rob)',2.033,0.917)}`}
 async function fetchGold(){try{const g=await(await fetch('https://api.gold-api.com/price/XAU')).json();const gUsd=g.price||0;goldUsd=gUsd;usdPerGram=gUsd/31.1035;goldCard=`<div class="tk"><div class="s"><span>🥇 ${t('gold')}</span><span class="upd">●</span></div><b style="color:var(--gold)">$${gUsd.toLocaleString('en-US',{maximumFractionDigits:0})} / oz</b><span class="chg green">${t('goldLive')}</span></div>`;
-  coinData=[];const addCoin=(name,wt,pur)=>{const val=(usdPerGram*wt*pur);coinData.push({name,wt,pur,usd:Math.round(val),toman:Math.round(val*tomanRate)});return `<div class="row fade-in"><div class="ic">🪙</div><div class="t"><b>${name}</b><small>${wt}g · ${Math.round(pur*100)}%</small></div><div class="val gold">$${Math.round(val).toLocaleString('en-US')}</div></div>`};
+  if(!bazaarLive){coinData=[];const addCoin=(name,wt,pur)=>{const val=(usdPerGram*wt*pur);coinData.push({name,wt,pur,usd:Math.round(val),toman:Math.round(val*tomanRate)});return `<div class="row fade-in"><div class="ic">🪙</div><div class="t"><b>${name}</b><small>${wt}g · ${Math.round(pur*100)}%</small></div><div class="val gold">$${Math.round(val).toLocaleString('en-US')}</div></div>`};
   goldDeep=`${tomanLive?`<div class="kpi" style="grid-column:1/-1"><small>💵 ${t('dollar')} (${t('freeMarket')})</small><b style="color:var(--accent)">${fmt(tomanRate)} ${t('toman')}</b></div>`:''}
   <div class="stitle"><span>🪙 ${t('goldToman')}</span></div>
   ${tomanLive?goldTomanRows(usdPerGram)+`<div style="font-size:11px;color:var(--muted2)">* ${t('estNote')}</div>`:''}
   <div class="stitle"><span>🥇 ${t('gold')} (USD)</span></div>
-  ${addCoin('🪙 24k gram',1,1)}${addCoin('18k gram',1,0.75)}${addCoin('🪙 Emami / Bahar Azadi',8.133,0.917)}${addCoin('Half (Nim)',4.068,0.917)}${addCoin('Quarter (Rob)',2.033,0.917)}`;
+  ${addCoin('🪙 24k gram',1,1)}${addCoin('18k gram',1,0.75)}${addCoin('🪙 Emami / Bahar Azadi',8.133,0.917)}${addCoin('Half (Nim)',4.068,0.917)}${addCoin('Quarter (Rob)',2.033,0.917)}`;}
   myMarkets();}catch(e){}}
 async function fetchCrypto(){try{const ids='bitcoin,ethereum,tether,binancecoin,solana,ripple,dogecoin,cardano';const c=await(await fetch('https://api.coingecko.com/api/v3/simple/price?ids='+ids+'&vs_currencies=usd',{headers:{'User-Agent':'Mozilla/5.0'}})).json();const names=[['bitcoin','BTC','₿'],['ethereum','ETH','Ξ'],['tether','USDT','₮'],['binancecoin','BNB','🟡'],['solana','SOL','◎'],['ripple','XRP','✕'],['dogecoin','DOGE','🐕'],['cardano','ADA','🪙']];cryptoData=[];cryptoCard=names.map(n=>{const p=c[n[0]]&&c[n[0]].usd;if(!p)return '';cryptoData.push({ic:n[2],code:n[1],price:p});return `<div class="tk"><div class="s"><span>${n[2]} ${n[1]}</span><span class="upd">●</span></div><b>$${fmt(p)}</b><span class="chg green">${t('goldLive')}</span></div>`}).join('');myMarkets();}catch(e){}}
 function myMarkets(){if(cur==='markets')renderMarkets()}
@@ -1014,7 +1015,7 @@ function renderMarkets(){const fb=(ic,na,un)=>`<div class="mk-card"><span class=
 const fxGrid=fxData.length?fxData.map(f=>`<div class="mk-card"><span class="mk-t"><span class="mk-em">${f.ic}</span>${f.code}</span><b>${f.disp}</b><div class="mk-row"><span class="mk-uni">${f.unit}<span class="chg green">${t('goldLive')}</span></span></div></div>`).join(''):(fxCards||fb('💱',t('markets'),t('refresh')));
 const ozCard=goldUsd?`<div class="mk-card"><span class="mk-t"><span class="mk-em">🥇</span>${t('gold')}</span><b style="color:var(--gold)">$${goldUsd.toLocaleString('en-US',{maximumFractionDigits:0})}</b><div class="mk-row"><span class="mk-uni">/ oz · ${t('goldLive')}</span></div></div>`:fb('🥇',t('gold'),t('goldLive'));
 const usdCard=tomanLive&&tomanRate?`<div class="mk-card"><span class="mk-t"><span class="mk-em">💵</span>USDT</span><b style="color:var(--accent)">${fmt(tomanRate)} ${t('toman')}</b><div class="mk-row"><span class="mk-uni">${t('dollar')} · ${t('freeMarket')}</span></div></div>`:'';
-const coinGrid=coinData.length?coinData.map(c=>`<div class="mk-card"><span class="mk-t"><span class="mk-em">🪙</span>${c.name.replace(/🪙 /,'')}</span><b>${c.toman?fmt(c.toman)+' '+t('toman'):'$'+fmt(c.usd)}</b><div class="mk-row"><span class="mk-uni">${c.wt}g · ${Math.round(c.pur*100)}%</span></div></div>`).join(''):(goldCard||fb('🪙',t('goldToman'),t('refresh')));
+const coinGrid=coinData.length?coinData.map(c=>`<div class="mk-card"><span class="mk-t"><span class="mk-em">🪙</span>${c.name.replace(/🪙 /,'')}</span><b>${c.toman?fmt(c.toman)+' '+t('toman'):'$'+fmt(c.usd)}</b><div class="mk-row"><span class="mk-uni">${c.note?c.note+' · '+t('goldLive'):c.wt+'g · '+Math.round(c.pur*100)+'%'}</span></div></div>`).join(''):(goldCard||fb('🪙',t('goldToman'),t('refresh')));
 const cryptoGrid=cryptoData.length?cryptoData.map(c=>`<div class="mk-card"><span class="mk-t"><span class="mk-em">${c.ic}</span>${c.code}</span><b>$${fmt(c.price)}</b><div class="mk-row"><span class="mk-uni">USD<span class="chg green">${t('goldLive')}</span></span></div></div>`).join(''):(cryptoCard||fb('₿','Crypto','USD'));
 const allCards=[fxGrid,ozCard,usdCard,coinGrid,cryptoGrid].filter(Boolean).join('');
 VIEWS.innerHTML=`<div class="mk-hero fade-in"><div class="e">📈</div><b>${t('markets')}</b><small>${t('refresh')}</small></div>
@@ -1166,7 +1167,7 @@ document.getElementById('drawerOv').onclick=closeDrawer;
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
 $('#aiFab').onclick=openAI;
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
-function loadApp(){daily();setGreet();render();fetchFX();fetchGold();fetchCrypto();fetchToman();setInterval(()=>{fetchFX();fetchGold();fetchCrypto();fetchToman()},300000);setInterval(checkReminders,30000)}
+function loadApp(){daily();setGreet();render();fetchBazaar();fetchFX();fetchGold();fetchCrypto();fetchToman();setInterval(()=>{fetchBazaar();fetchFX();fetchGold();fetchCrypto();fetchToman()},300000);setInterval(checkReminders,30000)}
 function setGreet(){const gd=new Date();const j=toJalali(gd.getFullYear(),gd.getMonth()+1,gd.getDate());let dateStr=(L==='fa'||L==='ckb'||L==='ar')?(MONTHS_FA[j.m-1]+' '+j.d+'، '+j.j):gd.toLocaleDateString(LOCALE[L]||'en-US',{weekday:'long',day:'numeric',month:'long'});$('#greetDate').textContent=dateStr}
 if('serviceWorker' in navigator&&location.protocol.indexOf('http')===0){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})})}
 let beforeInstallPrompt=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();beforeInstallPrompt=e;toast(t('install'))});
