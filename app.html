@@ -393,6 +393,10 @@ body{
   [dir=rtl] .fab{left:auto;right:calc(250px + 50%);transform:translateX(50%)}
 }
 </style>
+<link rel="preconnect" href="https://open.er-api.com" crossorigin>
+<link rel="preconnect" href="https://api.gold-api.com" crossorigin>
+<link rel="preconnect" href="https://api.coingecko.com" crossorigin>
+<link rel="preconnect" href="https://api.nobitex.ir" crossorigin>
 </head>
 <body>
 
@@ -1172,7 +1176,7 @@ function setGreet(){const gd=new Date();const j=toJalali(gd.getFullYear(),gd.get
 if('serviceWorker' in navigator&&location.protocol.indexOf('http')===0){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})})}
 let beforeInstallPrompt=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();beforeInstallPrompt=e;toast(t('install'))});
 $('#langFlag').innerHTML=flagHTML(L);$('#langCode').textContent=L.toUpperCase();$('#lblLang').textContent=t('lang');
-loadApp();
+if('requestIdleCallback' in window){requestIdleCallback(loadApp)}else{setTimeout(loadApp,0)}
 </script>
 </body>
 </html>

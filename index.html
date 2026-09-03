@@ -19,6 +19,7 @@
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>JIB — The Super-App for Modern Life</title>
+<link rel="preconnect" href="https://api.gold-api.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -1341,7 +1342,7 @@ async function loadMarkets(){try{const gold=await(await fetch('https://api.gold-
 try{const sv=await(await fetch('https://api.gold-api.com/price/XAG')).json();if(sv.price)setMk('mkSilver',sv.price,'silver','#c0c7d6',v=>'$'+v.toFixed(2));}catch(e){}
 try{const p=await(await fetch('/api/price',{headers:{'Accept':'application/json'}})).json();if(p&&p.coins){setMk('mkCoin',p.coins.emami,'coin','#ffb95a',TMNfmt);setMk('mkNim',p.coins.nim,'nim','#ffb95a',TMNfmt);setMk('mkRob',p.coins.rob,'rob','#ffb95a',TMNfmt);setMk('mkGram',p.coins.gram,'gram','#ffb95a',TMNfmt);if(p.gold&&p.gold.g18)setMk('mkGold18',p.gold.g18,'gold18','#ffc94d',TMNfmt);if(p.fx){setMk('mkUsd2',p.fx.usd,'usd2','#4da3ff',TMNfmt);setMk('mkEur',p.fx.eur,'eur','#4da3ff',TMNfmt);setMk('mkGbp',p.fx.gbp,'gbp','#4da3ff',TMNfmt);setMk('mkAed',p.fx.aed,'aed','#4da3ff',TMNfmt)}}}catch(e){}
 try{const c=await(await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd',{headers:{'User-Agent':'Mozilla/5.0'}})).json();if(c.bitcoin)setMk('mkBtc',c.bitcoin.usd,'btc','#6c5cff',v=>'$'+Math.round(v).toLocaleString('en-US'));if(c.ethereum)setMk('mkEth',c.ethereum.usd,'eth','#8b7bff',v=>'$'+Math.round(v).toLocaleString('en-US'));if(c.solana)setMk('mkSol',c.solana.usd,'sol','#00d4a0',v=>'$'+v.toFixed(2));}catch(e){}}
-loadMarkets();setInterval(loadMarkets,60000);
+if('requestIdleCallback' in window){requestIdleCallback(()=>{loadMarkets();setInterval(loadMarkets,60000)})}else{setTimeout(()=>{loadMarkets();setInterval(loadMarkets,60000)},0)}
 
 /* ===== LSB sidebar luxe ===== */
 (function(){
